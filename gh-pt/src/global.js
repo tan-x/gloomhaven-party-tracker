@@ -21,27 +21,44 @@ export const GlobalStyles = createGlobalStyle`
   header {
     background: url(./assets/woodgrain.jpg);
   background-repeat: none;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 70px;
   color: whitesmoke;
   letter-spacing: 6px;
-  text-shadow: 0 1px 5px black;
+  text-shadow: 0 5px 14px black;
   box-shadow: 0 1px 5px black;
+  -webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+-webkit-text-stroke: .1px rgb(80, 80, 80);
+  }
+
+  .dimmer {
+    display: flex;
+  justify-content: space-around;
+  align-items: center;
+    flex: 1;
+    background-color: rgba(240, 240, 240, .3);
   }
 
   .logo {
-    margin-top: 20px;
+    // margin-top: 20px;
+    height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
+  align-self: center;
+}
+
+.header-class-logo {
+  width: 8vh;
+  filter: opacity(50%)
 }
   
-  .App-logo {
-    // height: 4vh;
-    pointer-events: none;
-  }
+.App-logo {
+  width: 8vh;
+  pointer-events: none;
+  filter: invert(100%) sepia(100%) saturate(1822%) hue-rotate(290deg)
+    brightness(80%) contrast(119%);
+}
   
   @media (prefers-reduced-motion: no-preference) {
     .App-logo {
@@ -59,7 +76,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   
   h1 {
-    font-size: 10vh;
+    font-size: 4rem;
     text-align: center;
     text-transform: uppercase;
   }
