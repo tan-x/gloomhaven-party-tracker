@@ -8,25 +8,38 @@ export const GlobalStyles = createGlobalStyle`
   *, *::after, *::before {
     box-sizing: border-box;
   }
-//   body {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     background: ${({ theme }) => theme.primaryDark};
-//     color: ${({ theme }) => theme.primaryLight};
-//     height: 100vh;
-//     text-rendering: optimizeLegibility;
-//   }
-  header {
-    background-color: white;
-    height: 10vh;
+  .body {
     display: flex;
+    flex: 1;
     justify-content: center;
     align-items: center;
+    background: url(https://i.pinimg.com/originals/6b/72/23/6b7223d0def9fb19401c5758808f4178.jpg) no-repeat fixed center;
+    color: ${({ theme }) => theme.primaryLight};
+    height: 100vh;
+    text-rendering: optimizeLegibility;
   }
+  header {
+    background: url(./assets/woodgrain.jpg);
+  background-repeat: none;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: whitesmoke;
+  letter-spacing: 6px;
+  text-shadow: 0 1px 5px black;
+  box-shadow: 0 1px 5px black;
+  }
+
+  .logo {
+    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
   
   .App-logo {
-    width: 4vw;
+    // height: 4vh;
     pointer-events: none;
   }
   
@@ -46,7 +59,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   
   h1 {
-    font-size: 3rem;
+    font-size: 10vh;
     text-align: center;
     text-transform: uppercase;
   }
@@ -65,4 +78,4 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.primaryHover};
     text-decoration: none;
   }
-`
+`;

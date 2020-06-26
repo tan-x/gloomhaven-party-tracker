@@ -13,6 +13,12 @@
   color: white;
 }
 
+/* .body {
+  background: url(./assets/scrollbkground.jpg);
+  display: flex;
+  flex: 1;
+} */
+
 .App-link {
   color: #61dafb;
 }

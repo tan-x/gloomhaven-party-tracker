@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import ghfont from './style/PirataOne-Gloomhaven.ttf';
+// import ghfont from './style/PirataOne-Gloomhaven.ttf';
 
 ReactDOM.render(
   <React.StrictMode>

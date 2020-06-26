@@ -3,7 +3,6 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './global';
 import { theme } from './theme';
 import Header from './components/Header';
-import ghfont from './style/PirataOne-Gloomhaven.ttf';
 import './App.css';
 
 function App() {
@@ -11,6 +10,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Header/>
+      <div className="body">
+
+      </div>
       {/* <div className="App-header">
         <p>
           Edit <code>src/App.js</code> and save to reload.

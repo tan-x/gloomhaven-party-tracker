@@ -1,5 +1,6 @@
-header {
+.header {
   background: url(../assets/woodgrain.jpg);
+  background-repeat: none;
   height: 10vh;
   display: flex;
   justify-content: center;
@@ -7,12 +8,16 @@ header {
   color: whitesmoke;
   letter-spacing: 6px;
   text-shadow: 0 1px 5px black;
+  box-shadow: 0 1px 5px black;
 }
 
+
+
 .App-logo {
-  width: 4vw;
+  width: 5vh;
   pointer-events: none;
-  filter: invert(100%) sepia(100%) saturate(1822%) hue-rotate(290deg) brightness(80%) contrast(119%);
+  filter: invert(100%) sepia(100%) saturate(1822%) hue-rotate(290deg)
+    brightness(80%) contrast(119%);
 }
 
 @media (prefers-reduced-motion: no-preference) {
