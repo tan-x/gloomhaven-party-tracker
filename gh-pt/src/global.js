@@ -212,7 +212,7 @@ export const GlobalStyles = createGlobalStyle`
     text-decoration: none;
   }
 
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 550px) {
     h1 {
       font-size: 26px;
     }
