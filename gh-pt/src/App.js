@@ -3,31 +3,46 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './global';
 import { theme } from './theme';
 import Header from './components/Header';
+import Card from './components/Card';
+import Modal from './components/Modal';
 import './App.css';
 
-function App() {
-  return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <Header/>
-      <div className="body">
-
-      </div>
-      {/* <div className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        </div> */}
-    </ThemeProvider>
-  );
+class App extends React.Component {
+  state = {show: false, modalRoute: ''};
+  showModal = e => {
+    this.setState({show: !this.state.show, modalRoute: e});
+  };
+  // const [perkVisible, setPerkVisible] = useState({visible: false});
+  render() {
+    return (
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <Header/>
+        <div className="body">
+          <Card name="Tormir" level="3" class="Red Guard" classimg="redGuard" onclick={e => {this.showModal(e.target.name)}}></Card>
+          <Card name="Malek" level="3" class="Hatchet" classimg="hatchet" onclick={e => {this.showModal(e.target.name)}}></Card>
+          <Modal show={this.state.show} onclose={e => {this.showModal()}}>
+            {this.state.modalRoute === 'items' ? 
+            <h3>Items</h3> : 
+            <h3>Perks</h3>}
+          </Modal>
+        </div>
+        {/* <div className="App-header">
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
+          </p>
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </a>
+          </div> */}
+      </ThemeProvider>
+    );
+  }
 }
 
 export default App;
