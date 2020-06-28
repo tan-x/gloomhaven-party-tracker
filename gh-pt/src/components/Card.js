@@ -15,8 +15,8 @@ export default function(props) {
                     <h3>Gold: 26</h3>
                 </div>
                 <div className="options">
-                    <button onClick={props.onclick} name="items">Items</button>
-                    <button onClick={props.onclick} name="perks">Perks</button>
+                    <button onClick={props.onclick} name="items" id={props.classimg}>Items</button>
+                    <button onClick={props.onclick} name="perks" id={props.classimg}>Perks</button>
                 </div>
             </div>
         </div>

@@ -148,8 +148,8 @@ export const GlobalStyles = createGlobalStyle`
 
   .modal {
     background-position: center center;
-    width: 60vw;
-    height: 50vh;
+    width: 70vw;
+    height: fit-content;
     position: absolute;
     border: 1px outset;
     border-radius: 6px;
@@ -157,9 +157,9 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .modal-dimmer {
-    position: relative;
     background: rgba(245, 245, 245, .6);
     height: 100%;
+    min-height: 35vh;
     width: 100%;
     color: black;
     border-radius: 6px;
@@ -174,6 +174,30 @@ export const GlobalStyles = createGlobalStyle`
     border: none;
     border-radius: 5px;
     background: rgba(210, 0, 0, .2)
+  }
+
+  .modal-header {
+    margin: 0 0 15px;
+  }
+
+  .perk-row {
+    display: flex;
+    align-items: center
+  }
+
+  .perk-text {
+    width: 74%;
+    text-align: left;
+  }
+
+  .checkboxes {
+    width: 26%;
+    text-align: right;
+    padding: 4px;
+  }
+
+  input {
+    margin: 2px;
   }
   
   @media (prefers-reduced-motion: no-preference) {
@@ -196,6 +220,7 @@ export const GlobalStyles = createGlobalStyle`
     text-align: center;
     text-transform: uppercase;
   }
+
   // img {
   //   border-radius: 5px;
   //   height: auto;
@@ -210,6 +235,10 @@ export const GlobalStyles = createGlobalStyle`
   a {
     color: ${({ theme }) => theme.primaryHover};
     text-decoration: none;
+  }
+
+  p {
+    margin: 3px;
   }
 
   @media screen and (max-width: 550px) {
