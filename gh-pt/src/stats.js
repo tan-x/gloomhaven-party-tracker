@@ -61,7 +61,7 @@ const stats = {
                 type: 'legs',
             },
             {
-                name: ['Heater Sheild'],
+                name: ['Heater Shield'],
                 type: 'hand',
             },
             {
@@ -111,7 +111,7 @@ const stats = {
 			},
 			{
 				text: 'Add one +2 Wind card',
-				checked: [false, false, false],
+				checked: [true, false, false],
 			},
 			{
 				text: 'Replace one +1 card with one +3 card',
