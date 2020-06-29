@@ -203,19 +203,6 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0 0 15px;
   }
 
-  .ReactModal__Overlay {
-    opacity: 0;
-    transition: opacity 2000ms ease-in-out;
-  }
-
-  .ReactModal__Overlay--after-open{
-      opacity: 1;
-  }
-
-  .ReactModal__Overlay--before-close{
-      opacity: 0;
-  }
-
   .perk-row {
     display: flex;
     align-items: center
@@ -227,9 +214,34 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .checkboxes {
-    width: 26%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
     text-align: right;
     padding: 4px;
+  }
+
+  .checkbox {
+    -webkit-appearance: none;
+    background-color: #fafafa;
+    border: 1px solid #cacece;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.5), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+    padding: 5.5px;
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+  }
+
+  .checkbox:active, .checkbox:checked:active {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .checkbox:checked {
+    background-color: #be2727;
+    border: 1px solid #adb8c0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+    color: #99a1a7;
   }
 
   input {
