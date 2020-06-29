@@ -23,7 +23,7 @@ export const GlobalStyles = createGlobalStyle`
     height: 100%;
     width: 100%;
     text-rendering: optimizeLegibility;
-    overflow: hidden;
+    overflow: auto;
   }
 
   .scrollview {
@@ -95,9 +95,10 @@ export const GlobalStyles = createGlobalStyle`
     border-radius: 6px;
     box-shadow: 0 2px 15px gray;
     min-width: 200px;
+    min-height: 235px;
     max-width 400px;
     width: 20vw;
-    height: 40vh;
+    height: 35vh;
     margin: 30px;
   }
 
@@ -327,6 +328,14 @@ export const GlobalStyles = createGlobalStyle`
   @media screen and (min-width: 856px) {
     p {
       font-size: 25px;
+    }
+  }
+  @media screen and (max-height: 650px) {
+    .scrollview {
+      flex-direction: row;
+      align-items: center;
+      justify-content center;
+      padding: 50px;
     }
   }
 `;
