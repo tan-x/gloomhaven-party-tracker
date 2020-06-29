@@ -19,12 +19,5 @@ const icons = [
     { id: 16, src: '../assets/class-icons/16 Triangles.png', title: 'Triangles'},
     { id: 17, src: '../assets/class-icons/17 Two-mini.png', title: 'Two-mini'},
   ];
-
-  function Icons() {
-
-      return (
-        <img src={icons[Math.floor(Math.random() * icons.length)].src} className="header-class-logo"/>
-      )
-  }
   
-  export default icons;
+export default icons;

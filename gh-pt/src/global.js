@@ -4,23 +4,41 @@ export const GlobalStyles = createGlobalStyle`
   html, body {
     margin: 0;
     padding: 0;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
+    scroll-behavior: smooth;
   }
   *, *::after, *::before {
     box-sizing: border-box;
   }
   .body {
-    display: flex;
-    flex: 1;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
     background: url(https://i.pinimg.com/originals/6b/72/23/6b7223d0def9fb19401c5758808f4178.jpg) no-repeat fixed center;
     background-size: cover;
     color: ${({ theme }) => theme.primaryLight};
-    height: 100vh;
+    height: 100%;
+    width: 100%;
     text-rendering: optimizeLegibility;
+    overflow: hidden;
   }
+
+  .scrollview {
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    margin-top: 70px;
+    height: auto;
+    width: 100%;
+  }
+
   header {
     background: url(./assets/woodgrain.jpg);
     background-repeat: no-repeat;
@@ -148,18 +166,23 @@ export const GlobalStyles = createGlobalStyle`
 
   .modal {
     background-position: center center;
-    width: 60vw;
-    height: 50vh;
+    width: 70vw;
+    max-width: 600px;
+    height: fit-content;
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 101;
     border: 1px outset;
     border-radius: 6px;
     box-shadow: 0 2px 15px gray;
   }
 
   .modal-dimmer {
-    position: relative;
     background: rgba(245, 245, 245, .6);
     height: 100%;
+    min-height: 35vh;
     width: 100%;
     color: black;
     border-radius: 6px;
@@ -173,7 +196,44 @@ export const GlobalStyles = createGlobalStyle`
     right: 10px;
     border: none;
     border-radius: 5px;
-    background: rgba(210, 0, 0, .2)
+    background: transparent;
+  }
+
+  .modal-header {
+    margin: 0 0 15px;
+  }
+
+  .ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 2000ms ease-in-out;
+  }
+
+  .ReactModal__Overlay--after-open{
+      opacity: 1;
+  }
+
+  .ReactModal__Overlay--before-close{
+      opacity: 0;
+  }
+
+  .perk-row {
+    display: flex;
+    align-items: center
+  }
+
+  .perk-text {
+    width: 74%;
+    text-align: left;
+  }
+
+  .checkboxes {
+    width: 26%;
+    text-align: right;
+    padding: 4px;
+  }
+
+  input {
+    margin: 2px;
   }
   
   @media (prefers-reduced-motion: no-preference) {
@@ -196,6 +256,7 @@ export const GlobalStyles = createGlobalStyle`
     text-align: center;
     text-transform: uppercase;
   }
+
   // img {
   //   border-radius: 5px;
   //   height: auto;
@@ -212,9 +273,13 @@ export const GlobalStyles = createGlobalStyle`
     text-decoration: none;
   }
 
+  p {
+    margin: 3px;
+  }
+
   @media screen and (max-width: 550px) {
     h1 {
-      font-size: 26px;
+      font-size: 28px;
     }
     h2 {
       font-size: 1.8rem;
@@ -235,6 +300,21 @@ export const GlobalStyles = createGlobalStyle`
     }
     .body {
       flex-direction: column;
+    }
+    p {
+      font-size: 16px;
+    }
+  }
+
+  @media screen and (min-width: 693px) {
+    p {
+      font-size: 20px;
+    }
+  }
+
+  @media screen and (min-width: 856px) {
+    p {
+      font-size: 25px;
     }
   }
 `;
