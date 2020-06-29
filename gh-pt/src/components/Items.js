@@ -85,7 +85,6 @@ export default function Items(props) {
                             </>
                         );
                     })}
-                {smallItems.length > 0 && <hr />}
 			</div>
 		</>
 	);
