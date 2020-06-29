@@ -1,10 +1,10 @@
 const stats = {
 	redGuard: {
         name: 'Tormir',
-		level: 3,
-		xp: 97,
-        gold: 29,
-        checks: 5,
+		level: 1,
+		xp: 145,
+        gold: 0,
+        checks: 6,
 		perks: [
 			{
 				text: 'Remove four +0 cards',
@@ -20,7 +20,7 @@ const stats = {
 			},
 			{
 				text: 'Replace one -1 card with one +1 card',
-				checked: [true, false],
+				checked: [true, true],
 			},
 			{
 				text: 'Replace one +1 card with one +2 Fire card',
@@ -49,11 +49,11 @@ const stats = {
         ],
         items: [
             {
-                name: [],
+                name: ['Eagle-Eyed Goggles'],
                 type: 'head',
             },
             {
-                name: [],
+                name: ['Studded Leather'],
                 type: 'body',
             },
             {
@@ -72,9 +72,9 @@ const stats = {
 	},
 	hatchet: {
         name: 'Malek',
-		level: 3,
-		xp: 101,
-        gold: 27,
+		level: 1,
+		xp: 133,
+        gold: 5,
         checks: 2,
 		perks: [
 			{
@@ -124,7 +124,7 @@ const stats = {
                 type: 'head',
             },
             {
-                name: [],
+                name: ['Studded Leather'],
                 type: 'body',
             },
             {
@@ -142,5 +142,69 @@ const stats = {
         ],
 	},
 };
+
+switch (true) {
+    case (stats.hatchet.xp < 45) :
+        stats.hatchet.level = 1;
+        break;
+    case (stats.hatchet.xp >= 45 && stats.hatchet.xp < 95):
+        stats.hatchet.level = 2;
+        break;
+    case (stats.hatchet.xp >= 95 && stats.hatchet.xp < 150):
+        stats.hatchet.level = 3;
+        break;
+    case (stats.hatchet.xp >= 150 && stats.hatchet.xp < 210):
+        stats.hatchet.level = 4;
+        break;
+    case (stats.hatchet.xp >= 210 && stats.hatchet.xp < 275):
+        stats.hatchet.level = 5;
+        break;
+    case (stats.hatchet.xp >= 275 && stats.hatchet.xp < 345):
+        stats.hatchet.level = 6;
+        break;
+    case (stats.hatchet.xp >= 345 && stats.hatchet.xp < 420):
+        stats.hatchet.level = 7;
+        break;
+    case (stats.hatchet.xp >= 420 && stats.hatchet.xp < 500):
+        stats.hatchet.level = 8;
+        break;
+    case (stats.hatchet.xp >= 500):
+        stats.hatchet.level = 9;
+        break;
+    default:
+        stats.hatchet.level = 1;
+}
+
+switch (true) {
+    case (stats.redGuard.xp < 45) :
+        stats.redGuard.level = 1;
+        break;
+    case (stats.redGuard.xp >= 45 && stats.redGuard.xp < 95):
+        stats.redGuard.level = 2;
+        break;
+    case (stats.redGuard.xp >= 95 && stats.redGuard.xp < 150):
+        stats.redGuard.level = 3;
+        break;
+    case (stats.redGuard.xp >= 150 && stats.redGuard.xp < 210):
+        stats.redGuard.level = 4;
+        break;
+    case (stats.redGuard.xp >= 210 && stats.redGuard.xp < 275):
+        stats.redGuard.level = 5;
+        break;
+    case (stats.redGuard.xp >= 275 && stats.redGuard.xp < 345):
+        stats.redGuard.level = 6;
+        break;
+    case (stats.redGuard.xp >= 345 && stats.redGuard.xp < 420):
+        stats.redGuard.level = 7;
+        break;
+    case (stats.redGuard.xp >= 420 && stats.redGuard.xp < 500):
+        stats.redGuard.level = 8;
+        break;
+    case (stats.redGuard.xp >= 500):
+        stats.redGuard.level = 9;
+        break;
+    default:
+        stats.hatchet.level = 1;
+}
 
 export default stats;

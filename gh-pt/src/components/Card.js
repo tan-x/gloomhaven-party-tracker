@@ -10,7 +10,7 @@ export default function(props) {
             <div className="card-dimmer">
                 <img src={props.classimg === 'redGuard' ? rgicon : hatchicon} className="card-class-logo"/>
                 <h2>{props.name}</h2>
-                <h4>Lvl. {props.level} {props.class}</h4>
+                <h4>Lvl. {stats[props.classimg].level} {props.class}</h4>
                 <div className="stats">
                     <h3>XP: {stats[props.classimg].xp}</h3>
                     <h3>Gold: {stats[props.classimg].gold}</h3>

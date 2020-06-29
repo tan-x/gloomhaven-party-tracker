@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import stats from '../stats';
+import icon from '../assets/class-icons/07 Sun.png'
 
 export default function Items(props) {
 	const [items, setitems] = useState(stats[props.route].items);
@@ -15,9 +16,9 @@ export default function Items(props) {
 				{itemNames.map((item, key) => {
                         return (
                             <>
-                            <p key={key}>{item}</p>
-                            {key < itemNames.length -1 && <hr />}
-                            
+                                <img src={icon} className="header-class-logo"/>
+                                <p key={key}>{item}</p>
+                                {key < itemNames.length -1 && <hr />}
                             </>
                         );
                     })}

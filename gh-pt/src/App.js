@@ -16,7 +16,7 @@ class App extends React.Component {
     this.setState({show: !this.state.show, modalRoute: e.name, charRoute: e.id});
   };
   hideModal = e => {
-    this.setState({show: !this.state.show})
+    this.state.show && this.setState({show: !this.state.show});    
   }
   // const [perkVisible, setPerkVisible] = useState({visible: false});
   render() {
@@ -24,9 +24,11 @@ class App extends React.Component {
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <Header/>
-        <div className="body" onClick={() => {this.hideModal()}}>
-          <Card name="Tormir" level="3" class="Red Guard" classimg="redGuard" onclick={e => {this.showModal(e.target)}}></Card>
-          <Card name="Malek" level="3" class="Hatchet" classimg="hatchet" onclick={e => {this.showModal(e.target)}}></Card>
+        <div className="body">
+          <div className="scrollview" onClick={() => {this.hideModal()}}>
+            <Card name="Tormir" class="Red Guard" classimg="redGuard" onclick={e => {this.showModal(e.target)}}></Card>
+            <Card name="Malek" class="Hatchet" classimg="hatchet" onclick={e => {this.showModal(e.target)}}></Card>
+          </div>
         </div>
         <Modal show={this.state.show} onclose={e => {this.hideModal()}}>
             {this.state.modalRoute === 'items' ? 
