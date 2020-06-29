@@ -24,15 +24,15 @@ class App extends React.Component {
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <Header/>
-        <div className="body">
+        <div className="body" onClick={() => {this.hideModal()}}>
           <Card name="Tormir" level="3" class="Red Guard" classimg="redGuard" onclick={e => {this.showModal(e.target)}}></Card>
           <Card name="Malek" level="3" class="Hatchet" classimg="hatchet" onclick={e => {this.showModal(e.target)}}></Card>
-          <Modal show={this.state.show} onclose={e => {this.hideModal()}}>
+        </div>
+        <Modal show={this.state.show} onclose={e => {this.hideModal()}}>
             {this.state.modalRoute === 'items' ? 
             <Items route={this.state.charRoute}/> : 
             <Perks route={this.state.charRoute}/>}
-          </Modal>
-        </div>
+        </Modal>
         {/* <div className="App-header">
           <p>
             Edit <code>src/App.js</code> and save to reload.

@@ -151,6 +151,10 @@ export const GlobalStyles = createGlobalStyle`
     width: 70vw;
     height: fit-content;
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 101;
     border: 1px outset;
     border-radius: 6px;
     box-shadow: 0 2px 15px gray;
@@ -173,7 +177,7 @@ export const GlobalStyles = createGlobalStyle`
     right: 10px;
     border: none;
     border-radius: 5px;
-    background: rgba(210, 0, 0, .2)
+    background: transparent;
   }
 
   .modal-header {
