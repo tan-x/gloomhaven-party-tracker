@@ -253,6 +253,12 @@ export const GlobalStyles = createGlobalStyle`
     font-size: calc(12px + 1.5vw)
   }
 
+  .shop-row {
+    display: flex;
+    align-items: center;
+    justify-content: center
+  }
+
   .perk-row {
     display: flex;
     align-items: center

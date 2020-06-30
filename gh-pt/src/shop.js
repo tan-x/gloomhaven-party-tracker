@@ -42,7 +42,7 @@ const shop = [
         cost: 15,
     },
     {
-        name: 'Heater Sheild',
+        name: 'Heater Shield',
         type: 'hand',
         available: 1,
         total: 2,
