@@ -14,7 +14,8 @@ export default function Perks(props) {
                                 if (box) {
                                     return (
                                         <input 
-                                            type="checkbox" 
+                                            type="checkbox"
+                                            className="checkbox"
                                             perk={`${key}`}
                                             key={id}
                                             id={id}
@@ -31,6 +32,7 @@ export default function Perks(props) {
                                     return (
                                         <input 
                                             type="checkbox" 
+                                            className="checkbox"
                                             perk={`${key}`}
                                             key={id}
                                             id={id}

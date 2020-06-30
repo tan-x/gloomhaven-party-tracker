@@ -23,7 +23,7 @@ export const GlobalStyles = createGlobalStyle`
     height: 100%;
     width: 100%;
     text-rendering: optimizeLegibility;
-    overflow: hidden;
+    overflow: auto;
   }
 
   .scrollview {
@@ -95,9 +95,10 @@ export const GlobalStyles = createGlobalStyle`
     border-radius: 6px;
     box-shadow: 0 2px 15px gray;
     min-width: 200px;
+    min-height: 235px;
     max-width 400px;
     width: 20vw;
-    height: 40vh;
+    height: 35vh;
     margin: 30px;
   }
 
@@ -132,6 +133,12 @@ export const GlobalStyles = createGlobalStyle`
     max-height: 50px;
   }
 
+  .item-logo {
+    height: calc(8px + 2vh);
+    max-height: 50px;
+    filter: opacity(65%)
+  }
+
   .stats  {
     display: flex;
     flex-direction: column;
@@ -164,10 +171,52 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 1.2rem;
   }
 
+  .stats > button {
+    margin: 4px;
+    border: 1px solid gray;
+    border-radius: 2px;
+    background: rgba(245, 245, 245, .4);
+    font-family: inherit;
+    font-size: calc(1.3rem + 1vw);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-stroke: .1px rgb(140, 140, 140);
+  }
+
+  #gold {
+    width: 50px;
+  }
+
+  .goldSubmit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .goldSubmit > button {
+    margin: 10px;
+    border: 1px solid gray;
+    border-radius: 2px;
+    background: rgba(245, 245, 245, .6);
+    font-family: inherit;
+    
+    font-size: 1.2rem;
+  }
+
+  .additem {
+    margin: 4px;
+    border: 1px solid gray;
+    border-radius: 2px;
+    background: rgba(245, 245, 245, .6);
+    font-family: inherit;
+    font-size: 1.1rem;
+  }
+
   .modal {
     background-position: center center;
-    width: 70vw;
-    max-width: 600px;
+    width: fit-content;
+    min-width: 250px;
+    max-width: 650px;
     height: fit-content;
     position: absolute;
     top: 50%;
@@ -200,20 +249,14 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .modal-header {
-    margin: 0 0 15px;
+    margin: 0 0 10px;
+    font-size: calc(12px + 1.5vw)
   }
 
-  .ReactModal__Overlay {
-    opacity: 0;
-    transition: opacity 2000ms ease-in-out;
-  }
-
-  .ReactModal__Overlay--after-open{
-      opacity: 1;
-  }
-
-  .ReactModal__Overlay--before-close{
-      opacity: 0;
+  .shop-row {
+    display: flex;
+    align-items: center;
+    justify-content: center
   }
 
   .perk-row {
@@ -227,9 +270,34 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .checkboxes {
-    width: 26%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
     text-align: right;
     padding: 4px;
+  }
+
+  .checkbox {
+    -webkit-appearance: none;
+    background-color: #fafafa;
+    border: 1px solid #cacece;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.5), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+    padding: 5.5px;
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+  }
+
+  .checkbox:active, .checkbox:checked:active {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .checkbox:checked {
+    background-color: #be2727;
+    border: 1px solid #adb8c0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+    color: #99a1a7;
   }
 
   input {
@@ -315,6 +383,46 @@ export const GlobalStyles = createGlobalStyle`
   @media screen and (min-width: 856px) {
     p {
       font-size: 25px;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    
+    .scrollview {
+      flex-direction: row;
+      align-items: center;
+      justify-content center;
+      padding: 50px;
+    }
+    .playerCard {
+      height: 55vh;
+    }
+    .stats > h3 {
+      font-size: 2.6vw;
+    }
+    .card-dimmer > h2 {
+      font-size: 3vw;
+    }
+    .card-dimmer > h4 {
+      font-size: 1.5vw;
+    }
+    .modal-header {
+      font-size: calc(12px + 1.5vw);
+    }
+    p {
+      font-size: calc(10px + 1vw);
+    }
+  }
+
+  @media screen and (max-height: 660px) {
+    .scrollview {
+      flex-direction: row;
+      align-items: center;
+      justify-content center;
+      padding: 50px;
+    }
+    .playerCard {
+      height: 55vh;
     }
   }
 `;
