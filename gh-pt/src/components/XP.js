@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import stats from '../stats';
+import xpicon from '../xpicon.svg';
 
 export default class Perks extends React.Component{
     constructor(props) {
@@ -19,10 +20,13 @@ export default class Perks extends React.Component{
         return (
             <>
                 <h2 className='modal-header'>XP</h2>
-                <h3>Level {this.state.level}</h3>
-                <h3>{this.state.xp}</h3>
+                <h3 className='modal-modalLvl'>Level {this.state.level}</h3>
+                <div className='xpdiv'>
+                    <img src={xpicon} className="xpicon" alt="xp" />
+                    <h2 className='xpnum'>{this.state.xp}</h2>
+                </div>
                 <div className='goldSubmit'>
-                    <input type="number" id="goldAdd" name="goldAdd" ref={this.inputRef}/>
+                    <input type="number" id="gold" name="goldAdd" ref={this.inputRef}/>
                     <button onClick={() => {this.changeXP()}}>XP</button>
                 </div>
                 

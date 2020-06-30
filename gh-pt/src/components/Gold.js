@@ -6,27 +6,38 @@ export default class Perks extends React.Component {
         super();
         this.state = {gold: stats[props.route].gold};
         this.inputRef = React.createRef();
-        this.changeGold = this.changeGold.bind(this);
+        this.addGold = this.addGold.bind(this);
+        this.subGold = this.subGold.bind(this);
     }
-    // const [gold, setGold] = useState(stats[props.route].gold);
-    changeGold() {
+
+    addGold() {
         if (this.inputRef.current.value) {
             let newGold = this.state.gold + parseInt(this.inputRef.current.value);
             this.setState({gold: newGold});
         }
-        console.log('test');
-        // let newGold = this.state.gold + this.inputRef.current.value;
-        // this.state = {gold: newGold}
+    }
+
+    subGold() {
+        if (this.inputRef.current.value) {
+            let newGold = this.state.gold - parseInt(this.inputRef.current.value);
+            if (newGold < 0) {
+                newGold = 0;
+            }
+            this.setState({gold: newGold});
+        }
     }
 
     render() {
         return (
             <>
                 <h2 className='modal-header'>Gold</h2>
-                <h3>{this.state.gold}</h3>
+                <h2>{this.state.gold}</h2>
                 <div className='goldSubmit'>
-                    <input type="number" id="goldAdd" name="goldAdd" ref={this.inputRef}/>
-                    <button className="addGold" name="addGold" onClick={() => {this.changeGold()}}>Add Gold</button>
+                    <input type="number" id="gold" name="goldAdd" ref={this.inputRef}/>
+                    <div className='perk-row gold-row'>
+                        <button className="addGold" name="addGold" onClick={() => {this.subGold()}}>-</button>
+                        <button className="addGold" name="subGold" onClick={() => {this.addGold()}}>+</button>
+                    </div>
                 </div>
             </>
         )

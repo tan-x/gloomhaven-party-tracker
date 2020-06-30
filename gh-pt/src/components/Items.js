@@ -79,7 +79,7 @@ export default function Items(props) {
 	if (!shopVisible.visible) {
 		return (
 			<>
-				<h3 className='modal-header'>Items</h3>
+				<h2 className='modal-header'>Items</h2>
 				<div>
 					{headItems.length > 0 && <img src={head} className='item-logo' />}
 					{headItems.map((item, key) => {
@@ -146,7 +146,7 @@ export default function Items(props) {
 		console.log(shopItems);
 		return (
 			<>
-				<h3 className='modal-header'>Items</h3>
+				<h2 className='modal-header'>Items</h2>
 				<div>
 					{headItemsShop.length > 0 && <img src={head} className='item-logo' />}
 					{headItemsShop.map((item, key) => {
