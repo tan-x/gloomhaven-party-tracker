@@ -133,6 +133,12 @@ export const GlobalStyles = createGlobalStyle`
     max-height: 50px;
   }
 
+  .item-logo {
+    height: calc(8px + 2vh);
+    max-height: 50px;
+    filter: opacity(65%)
+  }
+
   .stats  {
     display: flex;
     flex-direction: column;
@@ -165,10 +171,52 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 1.2rem;
   }
 
+  .stats > button {
+    margin: 4px;
+    border: 1px solid gray;
+    border-radius: 2px;
+    background: rgba(245, 245, 245, .4);
+    font-family: inherit;
+    font-size: calc(1.3rem + 1vw);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-stroke: .1px rgb(140, 140, 140);
+  }
+
+  #gold {
+    width: 50px;
+  }
+
+  .goldSubmit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .goldSubmit > button {
+    margin: 10px;
+    border: 1px solid gray;
+    border-radius: 2px;
+    background: rgba(245, 245, 245, .6);
+    font-family: inherit;
+    
+    font-size: 1.2rem;
+  }
+
+  .additem {
+    margin: 4px;
+    border: 1px solid gray;
+    border-radius: 2px;
+    background: rgba(245, 245, 245, .6);
+    font-family: inherit;
+    font-size: 1.1rem;
+  }
+
   .modal {
     background-position: center center;
-    width: 70vw;
-    max-width: 600px;
+    width: fit-content;
+    min-width: 250px;
+    max-width: 650px;
     height: fit-content;
     position: absolute;
     top: 50%;
@@ -201,7 +249,8 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .modal-header {
-    margin: 0 0 15px;
+    margin: 0 0 10px;
+    font-size: calc(12px + 1.5vw)
   }
 
   .perk-row {
@@ -330,12 +379,44 @@ export const GlobalStyles = createGlobalStyle`
       font-size: 25px;
     }
   }
-  @media screen and (max-height: 650px) {
+
+  @media screen and (min-width: 1200px) {
+    
     .scrollview {
       flex-direction: row;
       align-items: center;
       justify-content center;
       padding: 50px;
+    }
+    .playerCard {
+      height: 55vh;
+    }
+    .stats > h3 {
+      font-size: 2.6vw;
+    }
+    .card-dimmer > h2 {
+      font-size: 3vw;
+    }
+    .card-dimmer > h4 {
+      font-size: 1.5vw;
+    }
+    .modal-header {
+      font-size: calc(12px + 1.5vw);
+    }
+    p {
+      font-size: calc(10px + 1vw);
+    }
+  }
+
+  @media screen and (max-height: 660px) {
+    .scrollview {
+      flex-direction: row;
+      align-items: center;
+      justify-content center;
+      padding: 50px;
+    }
+    .playerCard {
+      height: 55vh;
     }
   }
 `;
