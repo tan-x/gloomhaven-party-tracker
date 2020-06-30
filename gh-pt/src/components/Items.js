@@ -11,6 +11,7 @@ export default function Items(props) {
 	const [items, setItems] = useState(stats[props.route].items);
 	const [shop, setShop] = useState(shopItems);
 	const [shopVisible, setShopVisible] = useState({ visible: false });
+	const [itemType, setItemType] = useState({ selectValue: 'head' });
 	let headItems = [],
 		bodyItems = [],
 		legItems = [],
@@ -45,36 +46,39 @@ export default function Items(props) {
 		}
 	}
 
-    console.log(headItems.find(name => name !== shop[0].name));
 	for (let i = 0; i < shop.length; i++) {
 		switch (shop[i].type) {
 			case 'head':
-                if(!headItems.some(item => item === shop[i].name) && shop[i].available > 0){
-                    headItemsShop.push(shop[i]);
-                }
+				if (!headItems.some((item) => item === shop[i].name) && shop[i].available > 0) {
+					headItemsShop.push(shop[i]);
+				}
 				break;
 			case 'body':
-                if(!bodyItems.some(item => item === shop[i].name) && shop[i].available > 0){
-                    bodyItemsShop.push(shop[i]);
-                }
+				if (!bodyItems.some((item) => item === shop[i].name) && shop[i].available > 0) {
+					bodyItemsShop.push(shop[i]);
+				}
 				break;
 			case 'legs':
-                if(!legItems.some(item => item === shop[i].name) && shop[i].available > 0){
-                    legItemsShop.push(shop[i]);
-                }
+				if (!legItems.some((item) => item === shop[i].name) && shop[i].available > 0) {
+					legItemsShop.push(shop[i]);
+				}
 				break;
 			case 'hand':
-                if(!handItems.some(item => item === shop[i].name) && shop[i].available > 0){
-                    handItemsShop.push(shop[i]);
-                }
+				if (!handItems.some((item) => item === shop[i].name) && shop[i].available > 0) {
+					handItemsShop.push(shop[i]);
+				}
 				break;
 			case 'small':
-                if(!smallItems.some(item => item === shop[i].name) && shop[i].available > 0){
-                    smallItemsShop.push(shop[i]);
-                }
+				if (!smallItems.some((item) => item === shop[i].name) && shop[i].available > 0) {
+					smallItemsShop.push(shop[i]);
+				}
 				break;
 		}
-    }
+	}
+
+	switch (itemType) {
+		case head:
+	}
 
 	if (!shopVisible.visible) {
 		return (
@@ -143,38 +147,45 @@ export default function Items(props) {
 			</>
 		);
 	} else {
-		console.log(shopItems);
 		return (
 			<>
 				<h2 className='modal-header'>Items</h2>
+				<select
+					name='type'
+					id='shop-type'
+					onChange={(e) => {
+						setItemType({ ...itemType, selectValue: e.target.value });
+					}}
+				>
+					<option value='head'>Head Items</option>
+					<option value='body'>Body Items</option>
+					<option value='legs'>Legs Items</option>
+					<option value='hand'>Hand Items</option>
+					<option value='small'>Small Items</option>
+				</select>
 				<div>
 					{headItemsShop.length > 0 && <img src={head} className='item-logo' />}
 					{headItemsShop.map((item, key) => {
 						return (
 							<div className='shop-row'>
-									<input
-										type='checkbox'
-										className='checkbox'
-										perk={`${key}`}
-										key={key}
-									/>
-									<p key={key}>{item.name} - {item.cost} Gold</p>
-								</div>
+								<input type='checkbox' className='checkbox' />
+								<p key={key}>
+									{item.name} - {item.cost} Gold
+								</p>
+							</div>
 						);
 					})}
 					{headItemsShop.length > 0 && <hr />}
+
 					{bodyItemsShop.length > 0 && <img src={body} className='item-logo' />}
 					{bodyItemsShop.map((item, key) => {
 						return (
 							<div className='shop-row'>
-									<input
-										type='checkbox'
-										className='checkbox'
-										perk={`${key}`}
-										key={key}
-									/>
-									<p key={key}>{item.name} - {item.cost} Gold</p>
-								</div>
+								<input type='checkbox' className='checkbox' />
+								<p key={key}>
+									{item.name} - {item.cost} Gold
+								</p>
+							</div>
 						);
 					})}
 					{bodyItemsShop.length > 0 && <hr />}
@@ -183,13 +194,10 @@ export default function Items(props) {
 						return (
 							<>
 								<div className='shop-row'>
-									<input
-										type='checkbox'
-										className='checkbox'
-										perk={`${key}`}
-										key={key}
-									/>
-									<p key={key}>{item.name} - {item.cost} Gold</p>
+									<input type='checkbox' className='checkbox' />
+									<p key={key}>
+										{item.name} - {item.cost} Gold
+									</p>
 								</div>
 							</>
 						);
@@ -199,14 +207,11 @@ export default function Items(props) {
 					{handItemsShop.map((item, key) => {
 						return (
 							<div className='shop-row'>
-									<input
-										type='checkbox'
-										className='checkbox'
-										perk={`${key}`}
-										key={key}
-									/>
-									<p key={key}>{item.name} - {item.cost} Gold</p>
-								</div>
+								<input type='checkbox' className='checkbox' />
+								<p key={key}>
+									{item.name} - {item.cost} Gold
+								</p>
+							</div>
 						);
 					})}
 					{handItemsShop.length > 0 && <hr />}
@@ -214,14 +219,11 @@ export default function Items(props) {
 					{smallItemsShop.map((item, key) => {
 						return (
 							<div className='shop-row'>
-									<input
-										type='checkbox'
-										className='checkbox'
-										perk={`${key}`}
-										key={key}
-									/>
-									<p key={key}>{item.name} - {item.cost} Gold</p>
-								</div>
+								<input type='checkbox' className='checkbox' />
+								<p key={key}>
+									{item.name} - {item.cost} Gold
+								</p>
+							</div>
 						);
 					})}
 					<button
