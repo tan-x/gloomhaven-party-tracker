@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import StatContext from '../Context'
 
 export default class Perks extends React.Component {

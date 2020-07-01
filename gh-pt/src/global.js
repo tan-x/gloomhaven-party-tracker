@@ -17,7 +17,7 @@ export const GlobalStyles = createGlobalStyle`
     left: 0;
     width: 100%;
     height: 100vh;
-    background: url(https://i.pinimg.com/originals/6b/72/23/6b7223d0def9fb19401c5758808f4178.jpg) no-repeat fixed center;
+    // background: url(https://i.pinimg.com/originals/6b/72/23/6b7223d0def9fb19401c5758808f4178.jpg) no-repeat fixed center;
     background-size: cover;
     height: 100%;
     width: 100%;

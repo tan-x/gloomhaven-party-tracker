@@ -3,7 +3,7 @@ const stats = {
         name: 'Tormir',
 		level: 1,
 		xp: 145,
-        gold: 0,
+        gold: 30,
         checks: 6,
 		perks: [
 			{
@@ -47,28 +47,13 @@ const stats = {
 				checked: [true],
 			},
         ],
-        items: [
-            {
-                name: ['Eagle-Eyed Goggles'],
-                type: 'head',
-            },
-            {
-                name: ['Studded Leather'],
-                type: 'body',
-            },
-            {
-                name: ['Weathered Boots'],
-                type: 'legs',
-            },
-            {
-                name: ['Heater Shield'],
-                type: 'hand',
-            },
-            {
-                name: ['Fateful Compass', 'Mana Potion'],
-                type: 'small',
-            },
-        ],
+        items: {
+            head: ['Eagle-Eyed Goggles'],
+            body: ['Studded Leather'],
+            legs: ['Weathered Boots'],
+            hand: ['Heater Shield'],
+            small: ['Fateful Compass', 'Mana Potion']
+        }
 	},
 	hatchet: {
         name: 'Malek',
@@ -118,28 +103,13 @@ const stats = {
 				checked: [false, false, false],
 			},
 		],
-		items: [
-            {
-                name: ['Eagle-Eyed Goggles'],
-                type: 'head',
-            },
-            {
-                name: ['Studded Leather'],
-                type: 'body',
-            },
-            {
-                name: ['Winged Shoes'],
-                type: 'legs',
-            },
-            {
-                name: [],
-                type: 'hand',
-            },
-            {
-                name: ['Mana Potion'],
-                type: 'small',
-            },
-        ],
+        items: {
+            head: ['Eagle-Eyed Goggles'],
+            body: ['Studded Leather'],
+            legs: ['Winged Shoes'],
+            hand: [],
+            small: ['Mana Potion']
+        }
 	},
 };
 

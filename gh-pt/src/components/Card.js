@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import rgicon from '../assets/class-icons/rgicon.png';
 import hatchicon from '../assets/class-icons/hatcheticon.png';
-import stats from '../stats';
 import '../style/Card.css';
 
 export default function(props) {

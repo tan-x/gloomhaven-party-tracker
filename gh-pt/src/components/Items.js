@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import StatContext from '../Context'
 import stats from '../stats';
 import shopItems from '../shop';
 import head from '../assets/equip-slots/head.png';
@@ -8,8 +9,11 @@ import hand from '../assets/equip-slots/hand.png';
 import small from '../assets/equip-slots/small.png';
 
 export default function Items(props) {
-	const [items, setItems] = useState(stats[props.route].items);
-	const [shop, setShop] = useState(shopItems);
+	const statContext = useContext(StatContext);
+	const [items] = useState(statContext[0][props.route].items);
+	const [shop] = useState(shopItems);
+	const [total, setTotal] = useState({total: 0})
+	const [cart, setCart] = useState({myCart: []})
 	const [shopVisible, setShopVisible] = useState({ visible: false });
 	const [itemType, setItemType] = useState({ selectValue: 'head' });
 	let headItems = [],
@@ -24,25 +28,25 @@ export default function Items(props) {
 		handItemsShop = [],
 		smallItemsShop = [];
 
-	for (let i = 0; i < items.length; i++) {
-		for (const item of items[i].name) {
-			switch (items[i].type) {
-				case 'head':
-					headItems.push(item);
-					break;
-				case 'body':
-					bodyItems.push(item);
-					break;
-				case 'legs':
-					legItems.push(item);
-					break;
-				case 'hand':
-					handItems.push(item);
-					break;
-				case 'small':
-					smallItems.push(item);
-					break;
-			}
+	for (const item in items) {
+		switch (item) {
+			case 'head':
+				headItems = headItems.concat(items[item]);
+				break;
+			case 'body':
+				bodyItems = bodyItems.concat(items[item]);
+				break;
+			case 'legs':
+				legItems = legItems.concat(items[item]);
+				break;
+			case 'hand':
+				handItems = handItems.concat(items[item]);
+				break;
+			case 'small':
+				smallItems = smallItems.concat(items[item]);
+				break;
+			default:
+				console.log('uh oh');
 		}
 	}
 
@@ -73,11 +77,40 @@ export default function Items(props) {
 					smallItemsShop.push(shop[i]);
 				}
 				break;
+			default:
+				console.log('uh oh');
 		}
 	}
 
-	switch (itemType) {
-		case head:
+	function addItem(e) {
+		if (e.target.checked) {
+			setTotal({total: total.total += shop[e.target.id].cost});
+			let newItem = cart.myCart;
+			newItem.push(shop[e.target.id]);
+			newItem[newItem.length - 1] = {...newItem[newItem.length - 1], id: newItem[newItem.length - 1].id};
+			setCart({myCart: newItem});
+			console.log(cart.myCart);
+		} else {
+			setTotal({total: total.total -= shop[e.target.id].cost});
+			let deleteItem = cart.myCart;
+			console.log(deleteItem);
+			let spliceIndex = deleteItem.findIndex(el => shop[e.target.id].name == el.name);
+			deleteItem.splice(spliceIndex, 1);
+			console.log(cart.myCart);
+		}
+	}
+
+	function buyItems() {
+		if (total.total <= statContext[0][props.route].gold) {
+			const newStats = Object.assign({}, stats);
+			cart.myCart.forEach(item => newStats[props.route].items[item.type].push(item.name));
+			newStats[props.route].gold -= total.total;
+			statContext[1](newStats);
+			setCart({myCart: []});
+			setShopVisible({ visible: false })
+		} else {
+			console.log('NSF')
+		}
 	}
 
 	if (!shopVisible.visible) {
@@ -168,7 +201,7 @@ export default function Items(props) {
 					{headItemsShop.map((item, key) => {
 						return (
 							<div className='shop-row'>
-								<input type='checkbox' className='checkbox' />
+								<input type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
 								<p key={key}>
 									{item.name} - {item.cost} Gold
 								</p>
@@ -177,11 +210,11 @@ export default function Items(props) {
 					})}
 					{headItemsShop.length > 0 && <hr />}
 
-					{bodyItemsShop.length > 0 && <img src={body} className='item-logo' />}
+					{bodyItemsShop.length > 0 && <img src={body} className='item-logo'/>}
 					{bodyItemsShop.map((item, key) => {
 						return (
 							<div className='shop-row'>
-								<input type='checkbox' className='checkbox' />
+								<input type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
 								<p key={key}>
 									{item.name} - {item.cost} Gold
 								</p>
@@ -192,14 +225,12 @@ export default function Items(props) {
 					{legItemsShop.length > 0 && <img src={legs} className='item-logo' />}
 					{legItemsShop.map((item, key) => {
 						return (
-							<>
-								<div className='shop-row'>
-									<input type='checkbox' className='checkbox' />
-									<p key={key}>
-										{item.name} - {item.cost} Gold
-									</p>
-								</div>
-							</>
+							<div className='shop-row'>
+								<input type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
+								<p key={key}>
+									{item.name} - {item.cost} Gold
+								</p>
+							</div>
 						);
 					})}
 					{legItemsShop.length > 0 && <hr />}
@@ -207,7 +238,7 @@ export default function Items(props) {
 					{handItemsShop.map((item, key) => {
 						return (
 							<div className='shop-row'>
-								<input type='checkbox' className='checkbox' />
+								<input type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
 								<p key={key}>
 									{item.name} - {item.cost} Gold
 								</p>
@@ -219,7 +250,7 @@ export default function Items(props) {
 					{smallItemsShop.map((item, key) => {
 						return (
 							<div className='shop-row'>
-								<input type='checkbox' className='checkbox' />
+								<input type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
 								<p key={key}>
 									{item.name} - {item.cost} Gold
 								</p>
@@ -229,7 +260,7 @@ export default function Items(props) {
 					<button
 						className='additem'
 						onClick={() => {
-							setShopVisible({ visible: false });
+							buyItems();
 						}}
 					>
 						Add Items

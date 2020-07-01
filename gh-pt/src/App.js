@@ -1,14 +1,9 @@
 import React from 'react';
 import StatContext from './Context';
 import { GlobalStyles } from './global';
-import { theme } from './theme';
 import Header from './components/Header';
 import Card from './components/Card';
 import Modal from './components/Modal';
-import Perks from './components/Perks';
-import Items from './components/Items';
-import XP from './components/XP';
-import Gold from './components/Gold';
 import stats from './stats';
 import './App.css';
 
