@@ -13,11 +13,9 @@
   color: white;
 }
 
-/* .body {
-  background: url(./assets/scrollbkground.jpg);
-  display: flex;
-  flex: 1;
-} */
+.body {
+  background: url(./assets/scrollbkground.jpg) no-repeat fixed center;
+}
 
 .App-link {
   color: #61dafb;

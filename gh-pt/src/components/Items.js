@@ -10,8 +10,8 @@ import small from '../assets/equip-slots/small.png';
 
 export default function Items(props) {
 	const statContext = useContext(StatContext);
-	const [items, setItems] = useState(statContext[0][props.route].items);
-	const [shop, setShop] = useState(shopItems);
+	const [items] = useState(statContext[0][props.route].items);
+	const [shop] = useState(shopItems);
 	const [total, setTotal] = useState({total: 0})
 	const [cart, setCart] = useState({myCart: []})
 	const [shopVisible, setShopVisible] = useState({ visible: false });
@@ -28,25 +28,25 @@ export default function Items(props) {
 		handItemsShop = [],
 		smallItemsShop = [];
 
-	for (let i = 0; i < items.length; i++) {
-		for (const item of items[i].name) {
-			switch (items[i].type) {
-				case 'head':
-					headItems.push(item);
-					break;
-				case 'body':
-					bodyItems.push(item);
-					break;
-				case 'legs':
-					legItems.push(item);
-					break;
-				case 'hand':
-					handItems.push(item);
-					break;
-				case 'small':
-					smallItems.push(item);
-					break;
-			}
+	for (const item in items) {
+		switch (item) {
+			case 'head':
+				headItems = headItems.concat(items[item]);
+				break;
+			case 'body':
+				bodyItems = bodyItems.concat(items[item]);
+				break;
+			case 'legs':
+				legItems = legItems.concat(items[item]);
+				break;
+			case 'hand':
+				handItems = handItems.concat(items[item]);
+				break;
+			case 'small':
+				smallItems = smallItems.concat(items[item]);
+				break;
+			default:
+				console.log('uh oh');
 		}
 	}
 
@@ -77,6 +77,8 @@ export default function Items(props) {
 					smallItemsShop.push(shop[i]);
 				}
 				break;
+			default:
+				console.log('uh oh');
 		}
 	}
 
@@ -87,22 +89,22 @@ export default function Items(props) {
 			newItem.push(shop[e.target.id]);
 			newItem[newItem.length - 1] = {...newItem[newItem.length - 1], id: newItem[newItem.length - 1].id};
 			setCart({myCart: newItem});
-			console.log(cart);
+			console.log(cart.myCart);
 		} else {
 			setTotal({total: total.total -= shop[e.target.id].cost});
 			let deleteItem = cart.myCart;
 			console.log(deleteItem);
 			let spliceIndex = deleteItem.findIndex(el => shop[e.target.id].name == el.name);
-			console.log(spliceIndex);
 			deleteItem.splice(spliceIndex, 1);
-			console.log(cart);
+			console.log(cart.myCart);
 		}
 	}
 
 	function buyItems() {
 		if (total.total <= statContext[0][props.route].gold) {
 			const newStats = Object.assign({}, stats);
-			newStats[props.route].gold -= total.total; 
+			cart.myCart.forEach(item => newStats[props.route].items[item.type].push(item.name));
+			newStats[props.route].gold -= total.total;
 			statContext[1](newStats);
 			setCart({myCart: []});
 			setShopVisible({ visible: false })
