@@ -1,29 +1,38 @@
 import React from 'react';
-import stats from '../stats';
+import StatContext from '../Context'
 
 export default class Checks extends React.Component {
 	constructor(props) {
-		super(props);
+        super(props);
+        const statContext = this.context;
 		this.state = { checks: props.checks };
-		this.checks = this.state.checks % 3;
+		this.checkRem = this.state.checks % 3;
 		console.log(this.state.checks);
         this.iterator = 0;
         this.addCheck = this.addCheck.bind(this)
-	}
+    }
+    
+    static contextType = StatContext;
 
 	renderPlayerChecks() {
-        console.log(this.state.checks);
+        const statContext = this.context;
+        let checks = statContext[0][this.props.route].checks;
+        let checkRem = checks % 3;
+        console.log(checks);
+        // const checkRem = checks % 3;
 		const checkarray = [];
-		for (let i = 0; i < 19; i+=3) {
-            if (i < (this.state.checks) && this.checks === 0) {
+		for (let i = 0; i < 18; i+=3) {
+            if (checks >= 3) {
                 checkarray.push(
                     <div>
                         <input type='checkbox' className='checkbox checks' id={i} onChange={(e) => this.addCheck(e)} defaultChecked="true"/>
                         <input type='checkbox' className='checkbox checks' id={i+1} onChange={(e) => this.addCheck(e)} defaultChecked="true"/>
                         <input type='checkbox' className='checkbox checks' id={i+2} onChange={(e) => this.addCheck(e)} defaultChecked="true"/>
                     </div>
+                
                 );
-            } else if (i <= (this.state.checks) && this.checks === 1) {
+                checks -= 3;
+            } else if (checks > 0 && checkRem === 1) {
                 checkarray.push(
                     <div>
                         <input type='checkbox' className='checkbox checks' id={i} onChange={(e) => this.addCheck(e)} defaultChecked="true"/>
@@ -31,7 +40,8 @@ export default class Checks extends React.Component {
                         <input type='checkbox' className='checkbox checks' id={i+2} onChange={(e) => this.addCheck(e)} />
                     </div>
                 );
-            } else if (i <= (this.state.checks) && this.checks === 2) {
+                checks -= 1;
+            } else if (checks > 0 && checkRem === 2) {
                 checkarray.push(
                     <div>
                         <input type='checkbox' className='checkbox checks' id={i} onChange={(e) => this.addCheck(e)} defaultChecked="true"/>
@@ -39,6 +49,7 @@ export default class Checks extends React.Component {
                         <input type='checkbox' className='checkbox checks' id={i+2} onChange={(e) => this.addCheck(e)} />
                     </div>
                 );
+                checks -= 2;
             } else {
                 checkarray.push(
                     <div>
@@ -51,52 +62,22 @@ export default class Checks extends React.Component {
 			
 		}
 		return <>{checkarray}</>;
-		// let checks = this.state.checks % 3;
-		// switch (checks) {
-		//     case 0:
-		//         return(
-		//             <div>
-		//                 <input type='checkbox' className='checkbox checks' onChange={() => this.addCheck()}/>
-		//                 <input type='checkbox' className='checkbox checks'/>
-		//                 <input type='checkbox' className='checkbox checks'/>
-		//             </div>
-		//         )
-		//     case 1:
-		//         return(
-		//             <div>
-		//                 <input type='checkbox' className='checkbox checks' checked/>
-		//                 <input type='checkbox' className='checkbox checks' onChange={() => this.addCheck()}/>
-		//                 <input type='checkbox' className='checkbox checks'/>
-		//             </div>
-		//         )
-		//     case 2:
-		//         return(
-		//             <div>
-		//                 <input type='checkbox' className='checkbox checks' checked/>
-		//                 <input type='checkbox' className='checkbox checks' checked onChange={() => this.addCheck()}/>
-		//                 <input type='checkbox' className='checkbox checks' onChange={() => this.addCheck()}/>
-		//             </div>
-		//         )
-		//     case 3:
-		//         return(
-		//             <div>
-		//                 <input type='checkbox' className='checkbox checks' checked/>
-		//                 <input type='checkbox' className='checkbox checks' checked/>
-		//                 <input type='checkbox' className='checkbox checks' checked/>
-		//             </div>
-		//         )
-		// }
 	}
 
 	addCheck(e) {
-        // console.log(e.target.checked);
-        // console.log(e.target.id);
-        // console.log(this.state.checks);
-        if (e.target.checked && e.target.id == this.state.checks) {
-            this.checks = (this.state.checks + 1) % 3;
-            this.setState({...this.previousState, checks: this.state.checks + 1 });
-        } else if (!e.target.checked && e.target.id == this.state.checks - 1) {
-            this.setState({ checks: this.state.checks - 1 });
+        const statContext = this.context;
+        const checks = statContext[0][this.props.route].checks;
+        if (e.target.checked && e.target.id == checks) {
+            this.checkRem = (checks + 1) % 3;
+            const newStats = Object.assign({}, statContext[0]);
+            newStats[this.props.route].checks = checks + 1;
+            statContext[1](newStats);
+            console.log(statContext[0][this.props.route].checks)
+        } else if (!e.target.checked && e.target.id == checks - 1) {
+            this.checkRem = (checks - 1) % 3;
+            const newStats = Object.assign({}, statContext[0]);
+            newStats[this.props.route].checks = checks - 1;
+            statContext[1](newStats);
         }
 	}
 
