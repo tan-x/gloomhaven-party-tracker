@@ -19,7 +19,6 @@ export const GlobalStyles = createGlobalStyle`
     height: 100vh;
     background: url(https://i.pinimg.com/originals/6b/72/23/6b7223d0def9fb19401c5758808f4178.jpg) no-repeat fixed center;
     background-size: cover;
-    color: ${({ theme }) => theme.primaryLight};
     height: 100%;
     width: 100%;
     text-rendering: optimizeLegibility;
@@ -86,6 +85,32 @@ export const GlobalStyles = createGlobalStyle`
     max-height: 50px;
     filter: invert(100%) sepia(100%) saturate(2022%) hue-rotate(287deg)
       brightness(72%) contrast(189%);
+  }
+
+  .xpicon {
+    width: 80px;
+    pointer-events: none;
+    max-height: 80px;
+    filter: invert(100%) sepia(100%) saturate(2022%) hue-rotate(287deg)
+      brightness(72%) contrast(189%);
+    position: absolute;
+    top: 44%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .xpnum {
+    font-size: 33px;
+    position: absolute;
+    top: 18%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+  }
+
+  .xpdiv {
+    position: relative;
+    height: 100px;
   }
 
   .playerCard {
@@ -177,7 +202,7 @@ export const GlobalStyles = createGlobalStyle`
     border-radius: 2px;
     background: rgba(245, 245, 245, .4);
     font-family: inherit;
-    font-size: calc(1.3rem + 1vw);
+    font-size: calc(1.1rem + 1vw);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-stroke: .1px rgb(140, 140, 140);
@@ -185,6 +210,18 @@ export const GlobalStyles = createGlobalStyle`
 
   #gold {
     width: 50px;
+    font-family: inherit;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .gold-row > button {
+    margin: 8px;
+    border: 1px solid gray;
+    border-radius: 2px;
+    background: rgba(245, 245, 245, .6);
+    font-family: inherit;
+    font-size: 1.8rem;
   }
 
   .goldSubmit {
@@ -199,7 +236,6 @@ export const GlobalStyles = createGlobalStyle`
     border-radius: 2px;
     background: rgba(245, 245, 245, .6);
     font-family: inherit;
-    
     font-size: 1.2rem;
   }
 
@@ -250,7 +286,11 @@ export const GlobalStyles = createGlobalStyle`
 
   .modal-header {
     margin: 0 0 10px;
-    font-size: calc(12px + 1.5vw)
+    font-size: calc(18px + 1.5vw)
+  }
+
+  h3 {
+    margin: -10px;
   }
 
   .shop-row {
@@ -289,6 +329,11 @@ export const GlobalStyles = createGlobalStyle`
     position: relative;
   }
 
+  .checks {
+    padding: 9px;
+    margin: 3px;
+  }
+
   .checkbox:active, .checkbox:checked:active {
     box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
   }
@@ -298,6 +343,11 @@ export const GlobalStyles = createGlobalStyle`
     border: 1px solid #adb8c0;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
     color: #99a1a7;
+  }
+
+  .checks:checked {
+    padding: 9px;
+    margin: 3px;
   }
 
   input {
@@ -337,7 +387,6 @@ export const GlobalStyles = createGlobalStyle`
     display: block;
   }
   a {
-    color: ${({ theme }) => theme.primaryHover};
     text-decoration: none;
   }
 
@@ -405,6 +454,9 @@ export const GlobalStyles = createGlobalStyle`
     }
     .card-dimmer > h4 {
       font-size: 1.5vw;
+    }
+    .modal {
+      min-width: 380px
     }
     .modal-header {
       font-size: calc(12px + 1.5vw);

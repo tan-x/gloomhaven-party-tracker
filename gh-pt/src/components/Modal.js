@@ -12,13 +12,13 @@ export default class Modal extends React.Component {
 	renderSwitch(route) {
 		switch (route) {
 			case 'items':
-				return <Items route={this.props.charRoute} />;
+				return <Items stats={this.props.stats} route={this.props.charRoute} />;
 			case 'perks':
-				return <Perks route={this.props.charRoute} />;
+				return <Perks stats={this.props.stats} route={this.props.charRoute} />;
 			case 'xp':
-				return <XP route={this.props.charRoute} />;
+				return <XP stats={this.props.stats} route={this.props.charRoute} />;
 			case 'gold':
-				return <Gold route={this.props.charRoute} />;
+				return <Gold stats={this.props.stats} route={this.props.charRoute} />;
 		}
 	}
 	render() {
