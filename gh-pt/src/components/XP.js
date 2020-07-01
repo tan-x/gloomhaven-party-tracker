@@ -4,7 +4,7 @@ import xpicon from '../xpicon.svg';
 
 export default class Perks extends React.Component{
     constructor(props) {
-        super()
+        super(props)
         this.state = {xp: stats[props.route].xp, level:stats[props.route].level};
         this.inputRef = React.createRef();
         this.changeXP = this.changeXP.bind(this);
@@ -20,10 +20,10 @@ export default class Perks extends React.Component{
         return (
             <>
                 <h2 className='modal-header'>XP</h2>
-                <h3 className='modal-modalLvl'>Level {this.state.level}</h3>
+                <h3 className='modal-modalLvl'>Level {this.props.stats[this.props.route].level}</h3>
                 <div className='xpdiv'>
                     <img src={xpicon} className="xpicon" alt="xp" />
-                    <h2 className='xpnum'>{this.state.xp}</h2>
+                    <h2 className='xpnum'>{this.props.stats[this.props.route].xp}</h2>
                 </div>
                 <div className='goldSubmit'>
                     <input type="number" id="gold" name="goldAdd" ref={this.inputRef}/>

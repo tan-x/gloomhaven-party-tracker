@@ -15,10 +15,9 @@ import './App.css';
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {show: false, modalRoute: ''};
+    this.state = {show: false, modalRoute: '', stats: stats};
   }
   
-
   showModal = e => {
     this.setState({show: !this.state.show, modalRoute: e.name, charRoute: e.id});
     console.log(e);
@@ -34,11 +33,11 @@ class App extends React.Component {
         <Header/>
         <div className="body">
           <div className="scrollview" onClick={() => {this.hideModal()}}>
-            <Card name="Tormir" class="Red Guard" classimg="redGuard" onclick={e => {this.showModal(e.target)}}></Card>
-            <Card name="Malek" class="Hatchet" classimg="hatchet" onclick={e => {this.showModal(e.target)}}></Card>
+            <Card stats={this.state.stats} name="Tormir" class="Red Guard" classimg="redGuard" onclick={e => {this.showModal(e.target)}}></Card>
+            <Card stats={this.state.stats} name="Malek" class="Hatchet" classimg="hatchet" onclick={e => {this.showModal(e.target)}}></Card>
           </div>
         </div>
-        <Modal show={this.state.show} onclose={e => {this.hideModal()}} modalRoute={this.state.modalRoute} charRoute={this.state.charRoute}/>
+        <Modal stats={this.state.stats} show={this.state.show} onclose={e => {this.hideModal()}} modalRoute={this.state.modalRoute} charRoute={this.state.charRoute}/>
       </ThemeProvider>
     );
   }
