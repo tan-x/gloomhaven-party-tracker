@@ -141,24 +141,6 @@ export const GlobalStyles = createGlobalStyle`
     transistion: all 1s ease-in-out;
   }
 
-  alert-enter {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  .alert-enter-active {
-    opacity: 1;
-    transform: translateX(0);
-    transition: opacity 300ms, transform 300ms;
-  }
-  .alert-exit {
-    opacity: 1;
-  }
-  .alert-exit-active {
-    opacity: 0;
-    transform: scale(0.9);
-    transition: opacity 300ms, transform 300ms;
-  }
-
   .playerCard {
     background-position: center center;
     background-size: cover;
@@ -166,7 +148,7 @@ export const GlobalStyles = createGlobalStyle`
     border-radius: 6px;
     box-shadow: 0 2px 15px gray;
     min-width: 200px;
-    min-height: 235px;
+    min-height: 255px;
     max-width 400px;
     width: 20vw;
     height: 35vh;
@@ -238,27 +220,40 @@ export const GlobalStyles = createGlobalStyle`
     border: 1px solid gray;
     border-radius: 2px;
     background: rgba(245, 245, 245, .6);
+    box-shadow: 0 0 10px rgba(115, 115, 115, .5);
     font-family: inherit;
     font-size: 1.2rem;
+  }
+
+  #xpbutton {
+    box-shadow: 0 0 10px rgba(115, 115, 115, .5);
   }
 
   .stats > button {
     margin: 4px;
     border: 1px solid gray;
     border-radius: 2px;
-    background: rgba(245, 245, 245, .4);
+    background: rgba(245, 245, 245, .5);
     font-family: inherit;
     font-size: calc(1.1rem + 1vw);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-stroke: .1px rgb(140, 140, 140);
+    box-shadow: 0 0 10px rgba(115, 115, 115, .5);
   }
 
   #gold {
     width: 50px;
+    height: 2rem;
     font-family: inherit;
     font-size: 1.2rem;
     text-align: center;
+    box-shadow: 0 0 10px rgb(215, 215, 215);
+  }
+
+  .gold-row {
+    min-width: 90%;
+    justify-content: center;
   }
 
   .gold-row > button {
@@ -267,7 +262,11 @@ export const GlobalStyles = createGlobalStyle`
     border-radius: 2px;
     background: rgba(245, 245, 245, .6);
     font-family: inherit;
-    font-size: 1.8rem;
+    font-size: 1.4rem;
+    min-width: fit-content;
+    width: 1.9rem;
+    height: 1.9rem;
+    box-shadow: 0 0 10px rgb(215, 215, 215);
   }
 
   .goldSubmit {
@@ -285,6 +284,10 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 1.2rem;
   }
 
+  #updateGold {
+    height: 2.2rem;
+  }
+
   .additem {
     margin: 4px;
     border: 1px solid gray;
@@ -298,7 +301,7 @@ export const GlobalStyles = createGlobalStyle`
     background-position: center center;
     width: fit-content;
     min-width: 250px;
-    max-width: 650px;
+    max-width: calc(92vw);
     height: fit-content;
     position: absolute;
     top: 50%;
@@ -398,6 +401,19 @@ export const GlobalStyles = createGlobalStyle`
 
   input {
     margin: 2px;
+  }
+
+  input, button {
+    outline: none;
+  }
+
+  input:focus {
+    border-color: black;
+  }
+
+  input:hover {
+    
+    border-color: black;
   }
   
   @media (prefers-reduced-motion: no-preference) {
@@ -512,13 +528,13 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
-  @media screen and (max-height: 660px) {
-    .scrollview {
-      flex-direction: row;
-      align-items: center;
-      justify-content center;
-      padding: 50px;
-    }
+  @media screen and (max-height: 560px) {
+    // .scrollview {
+    //   flex-direction: row;
+    //   align-items: center;
+    //   justify-content center;
+    //   padding: 50px;
+    // }
     .playerCard {
       height: 55vh;
     }
