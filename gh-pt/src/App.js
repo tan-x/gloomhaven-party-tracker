@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
+import StatContext from './Context';
 import { GlobalStyles } from './global';
 import { theme } from './theme';
 import Header from './components/Header';
@@ -15,9 +15,13 @@ import './App.css';
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {show: false, modalRoute: '', stats: stats};
+    this.state = {show: false, modalRoute: '', stats: stats, setStats: this.setStats};
   }
   
+  setStats = (newStats) => {
+    this.setState({...this.state, stats: newStats});
+  }
+
   showModal = e => {
     this.setState({show: !this.state.show, modalRoute: e.name, charRoute: e.id});
     console.log(e);
@@ -28,7 +32,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <ThemeProvider theme={theme}>
+      <StatContext.Provider value={[this.state.stats, this.setStats]}>
         <GlobalStyles />
         <Header/>
         <div className="body">
@@ -38,7 +42,7 @@ class App extends React.Component {
           </div>
         </div>
         <Modal stats={this.state.stats} show={this.state.show} onclose={e => {this.hideModal()}} modalRoute={this.state.modalRoute} charRoute={this.state.charRoute}/>
-      </ThemeProvider>
+      </StatContext.Provider>
     );
   }
 }

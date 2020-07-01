@@ -19,7 +19,6 @@ export const GlobalStyles = createGlobalStyle`
     height: 100vh;
     background: url(https://i.pinimg.com/originals/6b/72/23/6b7223d0def9fb19401c5758808f4178.jpg) no-repeat fixed center;
     background-size: cover;
-    color: ${({ theme }) => theme.primaryLight};
     height: 100%;
     width: 100%;
     text-rendering: optimizeLegibility;
@@ -388,7 +387,6 @@ export const GlobalStyles = createGlobalStyle`
     display: block;
   }
   a {
-    color: ${({ theme }) => theme.primaryHover};
     text-decoration: none;
   }
 
