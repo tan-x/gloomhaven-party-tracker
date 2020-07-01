@@ -35,7 +35,7 @@ export default class Perks extends React.Component{
                                 if (this.inputRef.current.value) {
                                     let newXP = stats[this.props.route].xp + parseInt(this.inputRef.current.value);
                                     let lvlIndex = stats[this.props.route].level - 1;
-                                    let newLvl = this.lvlArray.findIndex((lvl, i) => newXP > lvl && i > lvlIndex) + 1;
+                                    let newLvl = this.lvlArray.findIndex((lvl, i) => newXP >= lvl && i > lvlIndex) + 1;
                                     const newStats = Object.assign({}, stats);
                                     newStats[this.props.route].xp = newXP;
                                     if (stats[this.props.route].level < newLvl) {
