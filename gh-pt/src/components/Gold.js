@@ -9,6 +9,19 @@ export default class Perks extends React.Component {
 
     static contextType = StatContext;
 
+    updateGold() {
+        const statContext = this.context;
+        if (this.inputRef.current.value) {
+            let newGold = statContext[0][this.props.route].gold + parseInt(this.inputRef.current.value);
+            if (newGold < 0) {
+                newGold = 0;
+            }
+            const newStats = Object.assign({}, statContext[0]);
+            newStats[this.props.route].gold = newGold;
+            statContext[1](newStats);
+        }
+    }
+
     render() {
         return (
             <StatContext.Consumer>
@@ -18,27 +31,13 @@ export default class Perks extends React.Component {
                         <h2 className='modal-header'>Gold</h2>
                         <h2>{stats[this.props.route].gold}</h2>
                         <div className='goldSubmit'>
-                            <input type="number" id="gold" name="goldAdd" ref={this.inputRef}/>
                             <div className='perk-row gold-row'>
-                                <button className="addGold" name="subGold" onClick={() => {
-                                    if (this.inputRef.current.value) {
-                                        let newGold = stats[this.props.route].gold - parseInt(this.inputRef.current.value);
-                                        if (newGold < 0) {
-                                            newGold = 0;
-                                        }
-                                        const newStats = Object.assign({}, stats);
-                                        newStats[this.props.route].gold = newGold;
-                                        setStats(newStats);
-                                    }
-                                }}>-</button>
-                                <button className="addGold" name="addGold" onClick={() => {
-                                    if (this.inputRef.current.value) {
-                                        let newGold = stats[this.props.route].gold + parseInt(this.inputRef.current.value);
-                                        const newStats = Object.assign({}, stats);
-                                        newStats[this.props.route].gold = newGold;
-                                        setStats(newStats);
-                                    }
-                                }}>+</button>
+                                <button name="subGold" onClick={() => this.inputRef.current.value++}>-</button>
+                                <input type="number" id="gold" name="goldAdd" ref={this.inputRef}/>
+                                <button name="addGold" onClick={() => this.inputRef.current.value++}>+</button>
+                            </div>
+                            <div className='perk-row gold-row'>
+                                <button id="updateGold" name="update" onClick={() => this.updateGold()}>Update</button>
                             </div>
                         </div>
                         </>

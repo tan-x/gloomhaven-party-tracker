@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import StatContext from '../Context'
 import stats from '../stats';
-import shopItems from '../shop';
+import shopJSON from '../shop.json'
 import head from '../assets/equip-slots/head.png';
 import body from '../assets/equip-slots/body.png';
 import legs from '../assets/equip-slots/legs.png';
@@ -11,7 +11,7 @@ import small from '../assets/equip-slots/small.png';
 export default function Items(props) {
 	const statContext = useContext(StatContext);
 	const [items] = useState(statContext[0][props.route].items);
-	const [shop] = useState(shopItems);
+	const [shop] = useState(shopJSON);
 	const [total, setTotal] = useState({total: 0})
 	const [cart, setCart] = useState({myCart: []})
 	const [shopVisible, setShopVisible] = useState({ visible: false });
@@ -83,6 +83,7 @@ export default function Items(props) {
 	}
 
 	function addItem(e) {
+		console.log(e.target.id);
 		if (e.target.checked) {
 			setTotal({total: total.total += shop[e.target.id].cost});
 			let newItem = cart.myCart;

@@ -31,7 +31,7 @@ export default class Perks extends React.Component{
                         </div>
                         <div className='goldSubmit'>
                             <input type="number" id="gold" name="goldAdd" ref={this.inputRef}/>
-                            <button onClick={() => {
+                            <button id="xpbutton" onClick={() => {
                                 if (this.inputRef.current.value) {
                                     let newXP = stats[this.props.route].xp + parseInt(this.inputRef.current.value);
                                     let lvlIndex = stats[this.props.route].level - 1;
