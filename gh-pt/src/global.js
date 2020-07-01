@@ -113,6 +113,52 @@ export const GlobalStyles = createGlobalStyle`
     height: 100px;
   }
 
+  .lvlbox {
+    height: 80px;
+  }
+
+  .lvlup-exit {
+    opacity: 0;
+    margin: 0;
+    text-shadow: 0 0 14px white;
+  }
+
+  .lvlup-exit-active {
+    opacity: 0;
+    margin: 0;
+    text-shadow: 0 0 14px white;
+    transistion: all 1s;
+  }
+
+  .lvlup-enter {
+    margin: 0;
+    opacity: 1;
+  }
+
+  .lvlup-enter-active {
+    margin: 0;
+    opacity: 1;
+    transistion: all 1s ease-in-out;
+  }
+
+  alert-enter {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  .alert-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 300ms, transform 300ms;
+  }
+  .alert-exit {
+    opacity: 1;
+  }
+  .alert-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 300ms, transform 300ms;
+  }
+
   .playerCard {
     background-position: center center;
     background-size: cover;
