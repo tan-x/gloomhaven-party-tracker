@@ -5,6 +5,7 @@ const shop = [
         available: 0,
         total: 2,
         cost: 30,
+        id: 0
     },
     {
         name: 'Iron Helmet',
@@ -12,6 +13,7 @@ const shop = [
         available: 2,
         total: 2,
         cost: 20,
+        id: 1
     },
     {
         name: 'Chain Armor',
@@ -19,6 +21,7 @@ const shop = [
         available: 2,
         total: 2,
         cost: 30,
+        id: 2
     },
     {
         name: 'Studded Leather',
@@ -26,6 +29,7 @@ const shop = [
         available: 0,
         total: 2,
         cost: 25,
+        id: 3
     },
     {
         name: 'Weathered Boots',
@@ -33,6 +37,7 @@ const shop = [
         available: 1,
         total: 2,
         cost: 15,
+        id: 4
     },
     {
         name: 'Winged Shoes',
@@ -40,6 +45,7 @@ const shop = [
         available: 1,
         total: 2,
         cost: 15,
+        id: 5
     },
     {
         name: 'Heater Shield',
@@ -47,6 +53,7 @@ const shop = [
         available: 1,
         total: 2,
         cost: 20,
+        id: 6
     },
     {
         name: 'Throwing Hammer',
@@ -54,6 +61,7 @@ const shop = [
         available: 2,
         total: 2,
         cost: 30,
+        id: 7
     },
     {
         name: 'Poison Dagger',
@@ -61,6 +69,7 @@ const shop = [
         available: 2,
         total: 2,
         cost: 20,
+        id: 8
     },
     {
         name: 'Iron Spear',
@@ -68,6 +77,7 @@ const shop = [
         available: 2,
         total: 2,
         cost: 20,
+        id: 9
     },
     {
         name: 'Healing Potion',
@@ -75,6 +85,7 @@ const shop = [
         available: 2,
         total: 2,
         cost: 10,
+        id: 10
     },
     {
         name: 'Stamina Potion',
@@ -82,6 +93,7 @@ const shop = [
         available: 2,
         total: 2,
         cost: 10,
+        id: 11
     },
     {
         name: 'Power Potion',
@@ -89,6 +101,7 @@ const shop = [
         available: 2,
         total: 2,
         cost: 10,
+        id: 12
     },
     {
         name: 'Mana Potion',
@@ -96,6 +109,7 @@ const shop = [
         available: 0,
         total: 2,
         cost: 10,
+        id: 13
     },
     {
         name: 'Amulet of Life',
@@ -103,6 +117,7 @@ const shop = [
         available: 1,
         total: 1,
         cost: 20,
+        id: 14
     },
     {
         name: 'Robes of Evocation',
@@ -110,6 +125,7 @@ const shop = [
         available: 1,
         total: 1,
         cost: 40,
+        id: 15
     },
     {
         name: 'Comfortable Shoes',
@@ -117,6 +133,7 @@ const shop = [
         available: 1,
         total: 1,
         cost: 30,
+        id: 16
     },
     {
         name: 'Battle-Axe',
@@ -124,6 +141,7 @@ const shop = [
         available: 1,
         total: 1,
         cost: 25,
+        id: 17
     },
     {
         name: 'Black Candle',
@@ -131,6 +149,7 @@ const shop = [
         available: 1,
         total: 1,
         cost: 40,
+        id: 18
     },
     {
         name: 'Stun Powder',
@@ -138,6 +157,7 @@ const shop = [
         available: 2,
         total: 2,
         cost: 20,
+        id: 19
     },
 ]
 

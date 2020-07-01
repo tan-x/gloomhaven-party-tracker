@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import StatContext from '../Context'
 import stats from '../stats';
 import shopItems from '../shop';
 import head from '../assets/equip-slots/head.png';
@@ -8,8 +9,11 @@ import hand from '../assets/equip-slots/hand.png';
 import small from '../assets/equip-slots/small.png';
 
 export default function Items(props) {
-	const [items, setItems] = useState(stats[props.route].items);
+	const statContext = useContext(StatContext);
+	const [items, setItems] = useState(statContext[0][props.route].items);
 	const [shop, setShop] = useState(shopItems);
+	const [total, setTotal] = useState({total: 0})
+	const [cart, setCart] = useState({myCart: []})
 	const [shopVisible, setShopVisible] = useState({ visible: false });
 	const [itemType, setItemType] = useState({ selectValue: 'head' });
 	let headItems = [],
@@ -76,8 +80,35 @@ export default function Items(props) {
 		}
 	}
 
-	switch (itemType) {
-		case head:
+	function addItem(e) {
+		if (e.target.checked) {
+			setTotal({total: total.total += shop[e.target.id].cost});
+			let newItem = cart.myCart;
+			newItem.push(shop[e.target.id]);
+			newItem[newItem.length - 1] = {...newItem[newItem.length - 1], id: newItem[newItem.length - 1].id};
+			setCart({myCart: newItem});
+			console.log(cart);
+		} else {
+			setTotal({total: total.total -= shop[e.target.id].cost});
+			let deleteItem = cart.myCart;
+			console.log(deleteItem);
+			let spliceIndex = deleteItem.findIndex(el => shop[e.target.id].name == el.name);
+			console.log(spliceIndex);
+			deleteItem.splice(spliceIndex, 1);
+			console.log(cart);
+		}
+	}
+
+	function buyItems() {
+		if (total.total <= statContext[0][props.route].gold) {
+			const newStats = Object.assign({}, stats);
+			newStats[props.route].gold -= total.total; 
+			statContext[1](newStats);
+			setCart({myCart: []});
+			setShopVisible({ visible: false })
+		} else {
+			console.log('NSF')
+		}
 	}
 
 	if (!shopVisible.visible) {
@@ -168,7 +199,7 @@ export default function Items(props) {
 					{headItemsShop.map((item, key) => {
 						return (
 							<div className='shop-row'>
-								<input type='checkbox' className='checkbox' />
+								<input type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
 								<p key={key}>
 									{item.name} - {item.cost} Gold
 								</p>
@@ -177,11 +208,11 @@ export default function Items(props) {
 					})}
 					{headItemsShop.length > 0 && <hr />}
 
-					{bodyItemsShop.length > 0 && <img src={body} className='item-logo' />}
+					{bodyItemsShop.length > 0 && <img src={body} className='item-logo'/>}
 					{bodyItemsShop.map((item, key) => {
 						return (
 							<div className='shop-row'>
-								<input type='checkbox' className='checkbox' />
+								<input type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
 								<p key={key}>
 									{item.name} - {item.cost} Gold
 								</p>
@@ -192,14 +223,12 @@ export default function Items(props) {
 					{legItemsShop.length > 0 && <img src={legs} className='item-logo' />}
 					{legItemsShop.map((item, key) => {
 						return (
-							<>
-								<div className='shop-row'>
-									<input type='checkbox' className='checkbox' />
-									<p key={key}>
-										{item.name} - {item.cost} Gold
-									</p>
-								</div>
-							</>
+							<div className='shop-row'>
+								<input type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
+								<p key={key}>
+									{item.name} - {item.cost} Gold
+								</p>
+							</div>
 						);
 					})}
 					{legItemsShop.length > 0 && <hr />}
@@ -207,7 +236,7 @@ export default function Items(props) {
 					{handItemsShop.map((item, key) => {
 						return (
 							<div className='shop-row'>
-								<input type='checkbox' className='checkbox' />
+								<input type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
 								<p key={key}>
 									{item.name} - {item.cost} Gold
 								</p>
@@ -219,7 +248,7 @@ export default function Items(props) {
 					{smallItemsShop.map((item, key) => {
 						return (
 							<div className='shop-row'>
-								<input type='checkbox' className='checkbox' />
+								<input type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
 								<p key={key}>
 									{item.name} - {item.cost} Gold
 								</p>
@@ -229,7 +258,7 @@ export default function Items(props) {
 					<button
 						className='additem'
 						onClick={() => {
-							setShopVisible({ visible: false });
+							buyItems();
 						}}
 					>
 						Add Items
