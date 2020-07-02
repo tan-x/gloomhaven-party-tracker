@@ -14,7 +14,7 @@ export default function Items(props) {
 	const [shop] = useState(shopJSON);
 	const [total, setTotal] = useState({total: 0})
 	const [cart, setCart] = useState({myCart: []})
-	const [shopVisible, setShopVisible] = useState({ visible: false });
+	const [shopVisible, setShopVisible] = useState({ visible: false, nsf: false });
 	const [itemType, setItemType] = useState({ selectValue: 'head' });
 	let headItems = [],
 		bodyItems = [],
@@ -110,7 +110,8 @@ export default function Items(props) {
 			setCart({myCart: []});
 			setShopVisible({ visible: false })
 		} else {
-			console.log('NSF')
+			setItemType({...itemType, nsf: true});
+			setTimeout(() => setItemType({...itemType, nsf: false}), 2000);
 		}
 	}
 
@@ -254,6 +255,10 @@ export default function Items(props) {
 							</div>
 						);
 					})}
+					<div className="lvlbox">
+						{itemType.nsf === true && <h3>Not enough gold!</h3>}
+					</div>
+					<h3>{statContext[0][props.route].gold} Gold</h3>
 					<button
 						className='additem'
 						onClick={() => {
