@@ -29,7 +29,9 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .scrollview {
-
+    position: relative;
+    top: 0;
+    left: 0;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -100,6 +102,40 @@ export const GlobalStyles = createGlobalStyle`
     max-height: 50px;
     // filter: invert(100%) sepia(100%) saturate(2022%) hue-rotate(287deg)
     //   brightness(72%) contrast(189%);
+  }
+
+  .addChar {
+    position: absolute;
+    top: 20px;
+    left: 3%;
+    height: fit-content;
+    width: calc(35px + 3vw);
+    padding: 2px;
+    background: rgba(245, 245, 245, .6);
+    border: 1px outset gray;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 90;
+  }
+
+  .addChar > h2 {
+    margin: -5px;
+  }
+
+  .addChar > p {
+    font-size: 1.4vh;
+    margin: 0;
+  }
+
+  #addChar-name {
+    height: 1.6rem;
+    font-family: inherit;
+    font-size: 1.2rem;
+    text-align: center;
+    box-shadow: 0 0 10px rgb(215, 215, 215);
   }
 
   .xpicon {
@@ -261,7 +297,7 @@ export const GlobalStyles = createGlobalStyle`
     box-shadow: 0 0 10px rgba(115, 115, 115, .5);
   }
 
-  #gold {
+  #goldIn {
     width: 50px;
     height: 2rem;
     font-family: inherit;
@@ -288,14 +324,14 @@ export const GlobalStyles = createGlobalStyle`
     box-shadow: 0 0 10px rgb(215, 215, 215);
   }
 
-  .goldSubmit {
+  .columnFlex {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
 
-  .goldSubmit > button {
+  .columnFlex > button {
     margin: 10px;
     border: 1px solid gray;
     border-radius: 2px;

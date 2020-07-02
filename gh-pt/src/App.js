@@ -11,7 +11,7 @@ import './App.css';
 class App extends React.Component {
 	constructor() {
 		super();
-    this.state = { show: false, modalRoute: '', stats: stats, setStats: this.setStats };
+	this.state = { show: false, modalRoute: '', stats: stats, setStats: this.setStats };
   }
   
   componentDidMount() {
@@ -20,7 +20,7 @@ class App extends React.Component {
     statsRef.get().then((querySnapshot) => {
       let fireStats = {};
       querySnapshot.forEach(function (doc) {
-        if (doc.data().name) {
+        if (doc.data().class) {
           let docId = doc.id;
           let docData = doc.data();
           fireStats = {...fireStats, [docId]: docData};
@@ -40,11 +40,35 @@ class App extends React.Component {
 	};
 
 	showModal = (e) => {
-		this.setState({ show: !this.state.show, modalRoute: e.name, charRoute: e.id });
+		console.log(e.name);
+		this.setState({ show: !this.state.show, modalRoute: e.id, charRoute: e.name });
 	};
 	hideModal = (e) => {
 		this.state.show && this.setState({ show: !this.state.show });
 	};
+
+	renderChars = () => {
+		const charCards = [];
+		const statsRef = this.state.stats;
+		// console.log(this.state.stats);
+		for (const char in statsRef) {
+			if (statsRef[char].name) {
+				console.log(statsRef[char]);
+				charCards.push(
+					<Card
+						stats={statsRef}
+						name={statsRef[char].name}
+						class={statsRef[char].class}
+						classimg={char}
+						onclick={(e) => {
+							this.showModal(e.target);
+						}}
+					></Card>
+				)
+			}
+		}
+		return charCards;
+	}
 
 	render() {
 		return (
@@ -58,7 +82,12 @@ class App extends React.Component {
 								this.hideModal();
 							}}
 						>
-							<Card
+							<div id="addChar" className="addChar" onClick={(e) => {this.showModal(e.target)}}>
+								<h2 id="addChar">+</h2>
+								<p id="addChar">Add<br/> Character</p>
+							</div>
+							{this.renderChars()}
+							{/* <Card
 								stats={this.state.stats}
 								name='Tormir'
 								class='Red Guard'
@@ -75,7 +104,7 @@ class App extends React.Component {
 								onclick={(e) => {
 									this.showModal(e.target);
 								}}
-							></Card>
+							></Card> */}
 						</div>
 					</div>
 					<Modal

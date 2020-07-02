@@ -73,7 +73,7 @@ export default function Perks(props) {
 		);
 	} else {
 		return (
-			<div className='goldSubmit'>
+			<div className='columnFlex'>
 				<Checks
 					checks={stats[props.route].checks}
 					route={props.route}

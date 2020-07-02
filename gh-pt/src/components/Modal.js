@@ -3,6 +3,7 @@ import Perks from './Perks';
 import Items from './Items';
 import XP from './XP';
 import Gold from './Gold';
+import AddChar from './AddChar';
 import '../style/Card.css';
 
 export default class Modal extends React.Component {
@@ -17,6 +18,8 @@ export default class Modal extends React.Component {
 				return <XP stats={this.props.stats} route={this.props.charRoute} />;
 			case 'gold':
 				return <Gold stats={this.props.stats} route={this.props.charRoute} />;
+			case 'addChar':
+				return <AddChar onclose={this.props.onclose}/>;
 		}
 	}
 	render() {

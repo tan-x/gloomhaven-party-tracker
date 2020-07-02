@@ -34,12 +34,12 @@ export default class Perks extends React.Component {
 						<>
 							<h2 className='modal-header'>Gold</h2>
 							<h2>{stats[this.props.route].gold}</h2>
-							<div className='goldSubmit'>
+							<div className='columnFlex'>
 								<div className='perk-row gold-row'>
 									<button name='subGold' onClick={() => this.inputRef.current.value--}>
 										-
 									</button>
-									<input type='number' id='gold' name='goldAdd' ref={this.inputRef} />
+									<input type='number' id='goldIn' name='goldAdd' ref={this.inputRef} />
 									<button name='addGold' onClick={() => this.inputRef.current.value++}>
 										+
 									</button>
