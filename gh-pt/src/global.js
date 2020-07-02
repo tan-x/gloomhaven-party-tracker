@@ -119,6 +119,11 @@ export const GlobalStyles = createGlobalStyle`
     justify-content: center;
     align-items: center;
     z-index: 90;
+    color: gray;
+  }
+
+  .addChar:hover {
+    color: black;
   }
 
   .addChar > h2 {
@@ -126,7 +131,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .addChar > p {
-    font-size: 1.4vh;
+    font-size: 1.8vh;
     margin: 0;
   }
 
@@ -226,6 +231,12 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-stroke: .1px rgb(140, 140, 140);
+    transition: background .6s ease-in-out;
+  }
+
+  .card-dimmer:hover {
+    background: rgba(245, 245, 245, .4);
+    transition: background .6s ease-in-out;
   }
 
   .card-dimmer > h2, h4 {

@@ -40,7 +40,6 @@ class App extends React.Component {
 	};
 
 	showModal = (e) => {
-		console.log(e.name);
 		this.setState({ show: !this.state.show, modalRoute: e.id, charRoute: e.name });
 	};
 	hideModal = (e) => {
@@ -50,10 +49,8 @@ class App extends React.Component {
 	renderChars = () => {
 		const charCards = [];
 		const statsRef = this.state.stats;
-		// console.log(this.state.stats);
 		for (const char in statsRef) {
-			if (statsRef[char].name) {
-				console.log(statsRef[char]);
+			if (statsRef[char].inParty) {
 				charCards.push(
 					<Card
 						stats={statsRef}
@@ -67,6 +64,7 @@ class App extends React.Component {
 				)
 			}
 		}
+		charCards.reverse();
 		return charCards;
 	}
 
