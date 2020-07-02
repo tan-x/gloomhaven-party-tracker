@@ -59,6 +59,17 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-text-stroke: .1px rgb(80, 80, 80);
   }
 
+  #subtitle > h2 {
+    letter-spacing: 4px;
+  }
+
+  h2 > span {
+    font-size: calc(14px + .8vw);
+    position: relative;
+    top: -3px;
+    letter-spacing: 2px;
+  }
+
   .dimmer {
     display: flex;
     justify-content: space-around;

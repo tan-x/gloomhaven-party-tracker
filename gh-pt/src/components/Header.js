@@ -21,7 +21,9 @@ export default function Header() {
                 <img src={icon3} className="header-class-logo" alt="sun"/>
                 <img src={icon4} className="header-class-logo" alt="spellweaver"/>
             </div>
-            <h2 style={{marginTop: '-25px', color: 'rgb(226, 201, 147)', textShadow: '0 0 2vw black'}}>Jaws of the Lion</h2>
+            <div id="subtitle">
+                <h2 style={{marginTop: '-25px', color: 'rgb(226, 201, 147)', textShadow: '0 0 2vw black'}}>Jaws <span>of the</span> Lion</h2>
+            </div>
         </header>
     )
 }
