@@ -289,7 +289,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .additem {
-    margin: 4px;
+    margin: 10px;
     border: 1px solid gray;
     border-radius: 2px;
     background: rgba(245, 245, 245, .6);
@@ -348,6 +348,12 @@ export const GlobalStyles = createGlobalStyle`
     justify-content: center
   }
 
+  #shop-filter {
+    margin-bottom: 10px;
+    font-family: inherit;
+    font-size: calc(12px + .6vw);
+  }
+
   .perk-row {
     display: flex;
     align-items: center
@@ -403,7 +409,7 @@ export const GlobalStyles = createGlobalStyle`
     margin: 2px;
   }
 
-  input, button {
+  input, button, select, option {
     outline: none;
   }
 
