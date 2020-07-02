@@ -2,7 +2,7 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDMP0FGRfMfSIQIYc0x1qlW1SSwKA_DRf4",
+    apiKey: "process.env.FIREBASE_KEY",
     authDomain: "ghpartytracker.firebaseapp.com",
     databaseURL: "https://ghpartytracker.firebaseio.com",
     projectId: "ghpartytracker",
