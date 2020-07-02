@@ -7,6 +7,9 @@ export const GlobalStyles = createGlobalStyle`
     height: 100%;
     width: 100%;
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-stroke: .1px rgb(140, 140, 140);
   }
   *, *::after, *::before {
     box-sizing: border-box;
@@ -114,7 +117,11 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .lvlbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 80px;
+    padding: 10px
   }
 
   .lvlup-exit {
