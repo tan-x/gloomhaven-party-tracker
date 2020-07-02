@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import firebase from "../Firebase";
 import StatContext from '../Context'
 import stats from '../stats';
 import shopJSON from '../shop.json'
@@ -83,21 +84,17 @@ export default function Items(props) {
 	}
 
 	function addItem(e) {
-		console.log(e.target.id);
 		if (e.target.checked) {
 			setTotal({total: total.total += shop[e.target.id].cost});
 			let newItem = cart.myCart;
 			newItem.push(shop[e.target.id]);
 			newItem[newItem.length - 1] = {...newItem[newItem.length - 1], id: newItem[newItem.length - 1].id};
 			setCart({myCart: newItem});
-			console.log(cart.myCart);
 		} else {
 			setTotal({total: total.total -= shop[e.target.id].cost});
 			let deleteItem = cart.myCart;
-			console.log(deleteItem);
 			let spliceIndex = deleteItem.findIndex(el => shop[e.target.id].name == el.name);
 			deleteItem.splice(spliceIndex, 1);
-			console.log(cart.myCart);
 		}
 	}
 
@@ -108,7 +105,8 @@ export default function Items(props) {
 			newStats[props.route].gold -= total.total;
 			statContext[1](newStats);
 			setCart({myCart: []});
-			setShopVisible({ visible: false })
+			firebase.firestore().collection('starstreak').doc(props.route).update(newStats[props.route]);
+			setShopVisible({ visible: false });
 		} else {
 			setItemType({...itemType, nsf: true});
 			setTimeout(() => setItemType({...itemType, nsf: false}), 2000);
@@ -189,7 +187,6 @@ export default function Items(props) {
 					name='type'
 					id='shop-filter'
 					onChange={(e) => {
-						console.log(e.target.value)
 						setItemType({ ...itemType, selectValue: e.target.value });
 					}}
 				>

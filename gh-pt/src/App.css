@@ -23,17 +23,17 @@
 
 .checkbox:checked:after {
   content: '\2713';
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bolder;
   position: absolute;
-  top: -7px;
+  top: -8px;
   left: 0px;
   color: rgb(255, 255, 255);
 }
 
 .checks:checked:after {
   content: '\2713';
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bolder;
   position: absolute;
   top: -7px;

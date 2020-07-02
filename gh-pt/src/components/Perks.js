@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import firebase from "../Firebase";
 import Checks from './Checks';
 import stats from '../stats';
 
@@ -30,9 +31,9 @@ export default function Perks(props) {
 														];
 														return previousState;
 													});
+													firebase.firestore().collection('starstreak').doc(props.route).update({perks: perks});
 												}}
 											/>
-											// setPerks([...perks, perks[key].checked[id] = !perks[key].checked[id]])
 										);
 									} else {
 										return (
@@ -49,13 +50,13 @@ export default function Perks(props) {
 														];
 														return previousState;
 													});
+													firebase.firestore().collection('starstreak').doc(props.route).update({perks: perks});
 												}}
 											/>
 										);
 									}
 								})}
 							</div>
-							{/* <input type="checkbox" id={`perk${key}`} checked={perks[key].checked}></input> */}
 							<p className='perk-text'>{perk.text}</p>
 						</div>
 					);

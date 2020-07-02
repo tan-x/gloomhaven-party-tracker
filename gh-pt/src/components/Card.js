@@ -4,7 +4,6 @@ import hatchicon from '../assets/class-icons/hatcheticon.png';
 import '../style/Card.css';
 
 export default function(props) {
-    // const [statData, setStatData] = useState(stats);
     return (
         <div className={`playerCard ${props.classimg}`}>
             <div className="card-dimmer">

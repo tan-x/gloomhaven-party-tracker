@@ -83,11 +83,12 @@ export const GlobalStyles = createGlobalStyle`
   }
     
   .App-logo {
+    display: none;
     width: 7vh;
     pointer-events: none;
     max-height: 50px;
-    filter: invert(100%) sepia(100%) saturate(2022%) hue-rotate(287deg)
-      brightness(72%) contrast(189%);
+    // filter: invert(100%) sepia(100%) saturate(2022%) hue-rotate(287deg)
+    //   brightness(72%) contrast(189%);
   }
 
   .xpicon {
@@ -205,7 +206,7 @@ export const GlobalStyles = createGlobalStyle`
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: 70%;
   }
 
   .stats > h3, h4 {
@@ -280,6 +281,7 @@ export const GlobalStyles = createGlobalStyle`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
 
   .goldSubmit > button {
@@ -310,6 +312,7 @@ export const GlobalStyles = createGlobalStyle`
     min-width: 250px;
     max-width: calc(92vw);
     height: fit-content;
+    min-height: fit-content;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -323,7 +326,7 @@ export const GlobalStyles = createGlobalStyle`
   .modal-dimmer {
     background: rgba(245, 245, 245, .6);
     height: 100%;
-    min-height: 35vh;
+    min-height: fit-content;
     width: 100%;
     color: black;
     border-radius: 6px;
@@ -384,7 +387,7 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-appearance: none;
     background-color: #fafafa;
     border: 1px solid #cacece;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.5), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+    // box-shadow: 0 1px 5px rgba(0,0,0,0.5), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
     padding: 5.5px;
     border-radius: 3px;
     display: inline-block;
@@ -485,10 +488,13 @@ export const GlobalStyles = createGlobalStyle`
       height: 32vh;
     }
     .card-dimmer {
-      padding: 10px;
+      padding: 5px;
+    }
+    .stats {
+      height: 50%;
     }
     .card-class-logo {
-      height: 3.5vh;
+      height: 4.5vh;
     }
     .body {
       flex-direction: column;
