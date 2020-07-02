@@ -16,8 +16,8 @@ export default class Perks extends React.Component {
         const statContext = this.context;
         const newStats = Object.assign({}, statContext[0]);
         newStats[this.state.selectValue].name = this.state.newName;
-        console.log(this.state.newName);
         statContext[1](newStats);
+        firebase.firestore().collection('template').doc(this.state.selectValue).update(newStats[this.state.selectValue]);
     }
 
 	render() {
@@ -41,7 +41,7 @@ export default class Perks extends React.Component {
 						onClick={() => {
                             this.addCharacter();
                         }}
-                        onMouseDown={this.props.onclose}
+                        // onMouse={this.props.onclose}
 					>
 						Add
 					</button>
