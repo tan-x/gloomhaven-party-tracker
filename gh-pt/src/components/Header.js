@@ -11,15 +11,15 @@ export default function Header() {
     return (
         <header className="header">
             <div className="dimmer">
-                <img src={icon1} className="header-class-logo"/>
-                <img src={icon2} className="header-class-logo"/>
+                <img src={icon1} className="header-class-logo" alt="brute"/>
+                <img src={icon2} className="header-class-logo" alt="scoundrel"/>
                 <div className="logo">
                     <h1 style={{fontFamily: ghfont}}>Party Tracker</h1>
-                    <img src={xp} className="App-logo" alt="xp" />
+                    <img src={xp} className="App-logo" alt="xp"/>
                     {/* <h1> the Lion</h1> */}
                 </div>
-                <img src={icon3} className="header-class-logo"/>
-                <img src={icon4} className="header-class-logo"/>
+                <img src={icon3} className="header-class-logo" alt="sun"/>
+                <img src={icon4} className="header-class-logo" alt="spellweaver"/>
             </div>
             <h2 style={{marginTop: '-25px', color: 'rgb(226, 201, 147)', textShadow: '0 0 2vw black'}}>Jaws of the Lion</h2>
         </header>

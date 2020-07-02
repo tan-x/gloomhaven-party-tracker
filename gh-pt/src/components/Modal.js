@@ -6,10 +6,7 @@ import Gold from './Gold';
 import '../style/Card.css';
 
 export default class Modal extends React.Component {
-    constructor(props) {
-        super(props);
-	}
-	
+
 	renderSwitch(route) {
 		switch (route) {
 			case 'items':

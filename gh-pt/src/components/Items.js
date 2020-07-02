@@ -118,7 +118,7 @@ export default function Items(props) {
 			<>
 				<h2 className='modal-header'>Items</h2>
 				<div>
-					{headItems.length > 0 && <img src={head} className='item-logo' />}
+					{headItems.length > 0 && <img src={head} className='item-logo' alt="head"/>}
 					{headItems.map((item, key) => {
 						return (
 							<>
@@ -128,7 +128,7 @@ export default function Items(props) {
 						);
 					})}
 					{headItems.length > 0 && <hr />}
-					{bodyItems.length > 0 && <img src={body} className='item-logo' />}
+					{bodyItems.length > 0 && <img src={body} className='item-logo' alt="body"/>}
 					{bodyItems.map((item, key) => {
 						return (
 							<>
@@ -138,7 +138,7 @@ export default function Items(props) {
 						);
 					})}
 					{bodyItems.length > 0 && <hr />}
-					{legItems.length > 0 && <img src={legs} className='item-logo' />}
+					{legItems.length > 0 && <img src={legs} className='item-logo' alt="legs"/>}
 					{legItems.map((item, key) => {
 						return (
 							<>
@@ -148,7 +148,7 @@ export default function Items(props) {
 						);
 					})}
 					{legItems.length > 0 && <hr />}
-					{handItems.length > 0 && <img src={hand} className='item-logo' />}
+					{handItems.length > 0 && <img src={hand} className='item-logo' alt="hand"/>}
 					{handItems.map((item, key) => {
 						return (
 							<>
@@ -158,7 +158,7 @@ export default function Items(props) {
 						);
 					})}
 					{handItems.length > 0 && <hr />}
-					{smallItems.length > 0 && <img src={small} className='item-logo' />}
+					{smallItems.length > 0 && <img src={small} className='item-logo' alt="small"/>}
 					{smallItems.map((item, key) => {
 						return (
 							<>
@@ -197,55 +197,55 @@ export default function Items(props) {
 					<option value='small'>Small Items</option>
 				</select>
 				<div>
-					{(itemType.selectValue === 'head' && headItemsShop.length > 0) && <img src={head} className='item-logo' />}
+					{(itemType.selectValue === 'head' && headItemsShop.length > 0) && <img src={head} className='item-logo' alt="head"/>}
 					{itemType.selectValue === 'head' && headItemsShop.map((item, key) => {
 						return (
-							<div className='shop-row'>
-								<input type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
+							<div key={key} className='shop-row'>
+								<input key={key} type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
 								<p key={key}>
 									{item.name} - {item.cost} Gold
 								</p>
 							</div>
 						);
 					})}
-					{(itemType.selectValue === 'body' && bodyItemsShop.length > 0) && <img src={body} className='item-logo'/>}
+					{(itemType.selectValue === 'body' && bodyItemsShop.length > 0) && <img src={body} className='item-logo' alt="body"/>}
 					{itemType.selectValue === 'body' && bodyItemsShop.map((item, key) => {
 						return (
-							<div className='shop-row'>
-								<input type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
+							<div key={key} className='shop-row'>
+								<input key={key} type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
 								<p key={key}>
 									{item.name} - {item.cost} Gold
 								</p>
 							</div>
 						);
 					})}
-					{(itemType.selectValue === 'legs' && legItemsShop.length > 0) && <img src={legs} className='item-logo' />}
+					{(itemType.selectValue === 'legs' && legItemsShop.length > 0) && <img src={legs} className='item-logo' alt="legs"/>}
 					{itemType.selectValue === 'legs' && legItemsShop.map((item, key) => {
 						return (
-							<div className='shop-row'>
-								<input type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
+							<div key={key} className='shop-row'>
+								<input key={key} type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
 								<p key={key}>
 									{item.name} - {item.cost} Gold
 								</p>
 							</div>
 						);
 					})}
-					{(itemType.selectValue === 'hand' && handItemsShop.length > 0) && <img src={hand} className='item-logo' />}
+					{(itemType.selectValue === 'hand' && handItemsShop.length > 0) && <img src={hand} className='item-logo' alt="hand"/>}
 					{itemType.selectValue === 'hand' && handItemsShop.map((item, key) => {
 						return (
-							<div className='shop-row'>
-								<input type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
+							<div key={key} className='shop-row'>
+								<input key={key} type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
 								<p key={key}>
 									{item.name} - {item.cost} Gold
 								</p>
 							</div>
 						);
 					})}
-					{(itemType.selectValue === 'small' && smallItemsShop.length > 0) && <img src={small} className='item-logo' />}
+					{(itemType.selectValue === 'small' && smallItemsShop.length > 0) && <img src={small} className='item-logo' alt="small"/>}
 					{itemType.selectValue === 'small' && smallItemsShop.map((item, key) => {
 						return (
-							<div className='shop-row'>
-								<input type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
+							<div key={key} className='shop-row'>
+								<input key={key} type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
 								<p key={key}>
 									{item.name} - {item.cost} Gold
 								</p>

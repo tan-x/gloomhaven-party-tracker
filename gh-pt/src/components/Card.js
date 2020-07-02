@@ -7,7 +7,7 @@ export default function(props) {
     return (
         <div className={`playerCard ${props.classimg}`}>
             <div className="card-dimmer">
-                <img src={props.classimg === 'redGuard' ? rgicon : hatchicon} className="card-class-logo"/>
+                <img src={props.classimg === 'redGuard' ? rgicon : hatchicon} className="card-class-logo" alt="class logo"/>
                 <h2>{props.name}</h2>
                 <h4>Lvl. {props.stats[props.classimg].level} {props.class}</h4>
                 <div className="stats">
