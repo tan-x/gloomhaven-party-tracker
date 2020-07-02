@@ -186,8 +186,9 @@ export default function Items(props) {
 				<h2 className='modal-header'>Items</h2>
 				<select
 					name='type'
-					id='shop-type'
+					id='shop-filter'
 					onChange={(e) => {
+						console.log(e.target.value)
 						setItemType({ ...itemType, selectValue: e.target.value });
 					}}
 				>
@@ -198,8 +199,8 @@ export default function Items(props) {
 					<option value='small'>Small Items</option>
 				</select>
 				<div>
-					{headItemsShop.length > 0 && <img src={head} className='item-logo' />}
-					{headItemsShop.map((item, key) => {
+					{(itemType.selectValue === 'head' && headItemsShop.length > 0) && <img src={head} className='item-logo' />}
+					{itemType.selectValue === 'head' && headItemsShop.map((item, key) => {
 						return (
 							<div className='shop-row'>
 								<input type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
@@ -209,10 +210,8 @@ export default function Items(props) {
 							</div>
 						);
 					})}
-					{headItemsShop.length > 0 && <hr />}
-
-					{bodyItemsShop.length > 0 && <img src={body} className='item-logo'/>}
-					{bodyItemsShop.map((item, key) => {
+					{(itemType.selectValue === 'body' && bodyItemsShop.length > 0) && <img src={body} className='item-logo'/>}
+					{itemType.selectValue === 'body' && bodyItemsShop.map((item, key) => {
 						return (
 							<div className='shop-row'>
 								<input type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
@@ -222,9 +221,8 @@ export default function Items(props) {
 							</div>
 						);
 					})}
-					{bodyItemsShop.length > 0 && <hr />}
-					{legItemsShop.length > 0 && <img src={legs} className='item-logo' />}
-					{legItemsShop.map((item, key) => {
+					{(itemType.selectValue === 'legs' && legItemsShop.length > 0) && <img src={legs} className='item-logo' />}
+					{itemType.selectValue === 'legs' && legItemsShop.map((item, key) => {
 						return (
 							<div className='shop-row'>
 								<input type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
@@ -234,9 +232,8 @@ export default function Items(props) {
 							</div>
 						);
 					})}
-					{legItemsShop.length > 0 && <hr />}
-					{handItemsShop.length > 0 && <img src={hand} className='item-logo' />}
-					{handItemsShop.map((item, key) => {
+					{(itemType.selectValue === 'hand' && handItemsShop.length > 0) && <img src={hand} className='item-logo' />}
+					{itemType.selectValue === 'hand' && handItemsShop.map((item, key) => {
 						return (
 							<div className='shop-row'>
 								<input type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
@@ -246,9 +243,8 @@ export default function Items(props) {
 							</div>
 						);
 					})}
-					{handItemsShop.length > 0 && <hr />}
-					{smallItemsShop.length > 0 && <img src={small} className='item-logo' />}
-					{smallItemsShop.map((item, key) => {
+					{(itemType.selectValue === 'small' && smallItemsShop.length > 0) && <img src={small} className='item-logo' />}
+					{itemType.selectValue === 'small' && smallItemsShop.map((item, key) => {
 						return (
 							<div className='shop-row'>
 								<input type='checkbox' className='checkbox' id={item.id} onChange={e => addItem(e)}/>
