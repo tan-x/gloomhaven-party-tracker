@@ -1,5 +1,7 @@
 import React from 'react';
+import { motion } from "framer-motion";
 import firebase from './Firebase';
+import MakeshiftDrawer from './components/MakeshiftDrawer';
 import StatContext from './Context';
 import { GlobalStyles } from './global';
 import Header from './components/Header';
@@ -16,7 +18,8 @@ class App extends React.Component {
 			modalRoute: '',
 			stats: stats,
 			setStats: this.setStats,
-			partySize: 0,
+			showAddChar: true,
+			isOpen: false,
 		};
 	}
 
@@ -46,11 +49,29 @@ class App extends React.Component {
 	};
 
 	showModal = (e) => {
-		this.setState({ show: !this.state.show, modalRoute: e.id, charRoute: e.name });
+		if (e.id !== 'logout') {
+			this.setState({...this.state, show: !this.state.show, modalRoute: e.id, charRoute: e.name, isOpen:false });
+		}
 	};
+
 	hideModal = (e) => {
-		this.state.show && this.setState({ show: !this.state.show });
+		this.state.show && this.setState({...this.state, show: !this.state.show });
 	};
+
+
+
+	showDrawer = () => {
+		if (this.state.isOpen) {
+			this.setState({...this.state, isOpen: false})
+		} else {
+			this.setState({...this.state, isOpen: true})
+		}
+		console.log(this.state.isOpen);
+	}
+
+	hideDrawer = () => {
+		this.setState({...this.state, isOpen: false});
+	}
 
 	renderChars = () => {
 		const charCards = [];
@@ -60,6 +81,11 @@ class App extends React.Component {
 			if (statsRef[char].inParty) {
 				partySize++;
 				charCards.push(
+					<motion.div
+				style={{opacity: 0}}
+				animate={{opacity: 1}}
+				transition={{ duration: 1 }}
+				>
 					<Card
 						stats={statsRef}
 						key={char}
@@ -70,18 +96,25 @@ class App extends React.Component {
 							this.showModal(e.target);
 						}}
 					></Card>
+					</motion.div>
 				);
 			}
 		}
-		this.state = { ...this.state, partySize: partySize };
+		if (partySize === 4) {
+			this.state = { ...this.state, showAddChar: false };
+		}
 		charCards.reverse();
 		return charCards;
 	};
 
 	addCharButton = () => {
-		console.log(this.state.partySize);
-		if (this.state.partySize < 4) {
+		if (this.state.showAddChar) {
 			return (
+				<motion.div
+				style={{opacity: 0}}
+				animate={{opacity: 1}}
+				transition={{ delay: 1, duration: 1 }}
+				>
 				<div
 					id='addChar'
 					className='addChar'
@@ -95,32 +128,41 @@ class App extends React.Component {
 						<br /> Character
 					</p>
 				</div>
-			);
+				</motion.div>)
 		}
 	};
 
 	render() {
 		return (
-			<StatContext.Provider value={[this.state.stats, this.setStats]}>
+			<StatContext.Provider value={[this.state.stats, this.setStats, this.state.showAddChar]}>
 				<GlobalStyles />
-				<Header />
+				<Header onclick={this.showDrawer} open={this.state.isOpen}/>
 				<div
 					className='body'
 					onClick={() => {
 						this.hideModal();
 					}}
 				>
-					
-					{this.addCharButton()}
+
+
 					<div
 						className='scrollview'
 						onClick={() => {
 							this.hideModal();
+							this.hideDrawer();
 						}}
 					>
 						{this.renderChars()}
+
 					</div>
+					{/* {this.addCharButton()} */}
+					
 				</div>
+
+				<MakeshiftDrawer open={this.state.isOpen} addchar={(e) => {
+						this.showModal(e.target);
+						// this.hideDrawer();
+					}} />
 				<Modal
 					stats={this.state.stats}
 					show={this.state.show}

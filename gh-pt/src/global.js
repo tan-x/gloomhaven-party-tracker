@@ -39,7 +39,7 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none;
     margin-top: 70px;
-    padding-top: 30px;
+    padding-top: 60px;
     padding-bottom: 80px;
     height: 100%;
     min-height: 90%;
@@ -65,40 +65,76 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-text-stroke: .1px rgb(80, 80, 80);
   }
 
+  .drawer {
+    margin-top: 70px;
+    z-index: 91;
+    font-family: inherit;
+    color: whitesmoke;
+    text-shadow: 0 1 10px black;
+    border-radius: 4px;
+    border: none;
+  }
+
+  .drawer-dimmer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    flex: 1;
+    border: none;
+    background-color: rgba(240, 240, 240, .3);
+  }
+
+  #drawerArrow {
+    position: absolute;
+    bottom: -18px;
+    left: 50%;
+    z-index: 3;
+    transform: translate(-50%, 50%);
+    font-size: 20px;
+    color: white;
+    color: rgb(226, 201, 147);
+    text-shadow: 0 2px 15px black;
+  }
+
+  .menuItem {
+    font-size: calc(16px + 1.5vw);
+    margin: -5px 0 -5px 5px;
+    text-shadow: 0 0 10px black;
+  }
+
   #menuToggle {
-    clip-path: polygon(100% 54%, 100% 76%, 80% 100%, 20% 100%, 0 76%, 0 54%);
+    border-radius: 5px;
     height: calc(250px + .4vw);
-    width: 70vw;
+    width: 54vw;
     z-index: 2;
+    filter: drop-shadow(0 5px 10px rgba(140, 140, 140, .5));
   }
 
   #menuToggle-dimmer {
-    clip-path: polygon(100% 54%, 100% 76%, 80% 100%, 20% 100%, 0 76%, 0 54%);
+    // clip-path: polygon(100% 54%, 100% 76%, 80% 100%, 20% 100%, 0 76%, 0 54%);
     position: absolute;
-    top: -132px;
+    top: 0;
     left: 0;
-    transform: translate(20%, -10%);
     height: calc(250px + .4vw);
-    width: 70vw;
+    width: 54vw;
     z-index: 3;
     background-color: rgba(240, 240, 240, .3);
   }
 
   #menuToggle-shadow {
-    background-color: transparent;
-    filter: drop-shadow(0 5px 10px rgb(140, 140, 140));
-    z-index:1;
+    // filter: drop-shadow(0 5px 10px rgba(140, 140, 140, .5));
+    z-index: 1;
     position: absolute;
     top: -132px;
     left: 0;
-    transform: translate(20%, -10%);
-  
+    transform: translate(42.5%, -10%);
   }
 
   #menuArrow {
     position: absolute;
-    top: calc(48px + .6vw);
-    left: 50vw;
+    bottom: -18px;
+    left: 50%;
     z-index: 3;
     transform: translate(-50%, 50%);
     font-size: 20px;
@@ -195,7 +231,6 @@ export const GlobalStyles = createGlobalStyle`
 
   #addChar-name {
     height: 1.6rem;
-    font-family: inherit;
     font-size: 1.2rem;
     text-align: center;
     box-shadow: 0 0 10px rgb(215, 215, 215);
@@ -205,12 +240,12 @@ export const GlobalStyles = createGlobalStyle`
     width: 80px;
     pointer-events: none;
     max-height: 80px;
-    filter: invert(100%) sepia(100%) saturate(2022%) hue-rotate(287deg)
-      brightness(72%) contrast(189%);
-    position: absolute;
-    top: 44%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    // filter: invert(100%) sepia(100%) saturate(2022%) hue-rotate(287deg)
+    //   brightness(72%) contrast(189%);
+    // position: absolute;
+    // top: 44%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
   }
 
   .xpnum {
@@ -270,7 +305,7 @@ export const GlobalStyles = createGlobalStyle`
     max-width 400px;
     width: 20vw;
     height: 35vh;
-    margin: 30px;
+    margin: 0 30px 30px;
   }
 
   .card-dimmer {

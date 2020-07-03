@@ -15,6 +15,20 @@
   background: url(../assets/woodgrain.jpg);
 }
 
+.drawer {
+  width: 54%;
+  height: fit-content;
+  position: absolute;
+  top: 0;
+  left: 23%;
+  transform: translate(-50%, -50%);
+  background: url(../assets/woodgrain.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  box-shadow: 0 0 10px rgb(80, 80, 80);
+  font-family: PirataOne;
+}
+
 
 
 
