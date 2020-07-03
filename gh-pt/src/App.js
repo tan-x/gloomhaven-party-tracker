@@ -61,6 +61,11 @@ class App extends React.Component {
 			if (statsRef[char].inParty) {
 				partySize++;
 				charCards.push(
+					<motion.div
+				style={{opacity: 0}}
+				animate={{opacity: 1}}
+				transition={{ duration: 1 }}
+				>
 					<Card
 						stats={statsRef}
 						key={char}
@@ -71,6 +76,7 @@ class App extends React.Component {
 							this.showModal(e.target);
 						}}
 					></Card>
+					</motion.div>
 				);
 			}
 		}
