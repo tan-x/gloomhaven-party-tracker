@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from "framer-motion";
 import firebase from './Firebase';
 import StatContext from './Context';
 import { GlobalStyles } from './global';
@@ -16,7 +17,7 @@ class App extends React.Component {
 			modalRoute: '',
 			stats: stats,
 			setStats: this.setStats,
-			partySize: 0,
+			showAddChar: true,
 		};
 	}
 
@@ -73,15 +74,21 @@ class App extends React.Component {
 				);
 			}
 		}
-		this.state = { ...this.state, partySize: partySize };
+		if (partySize === 4) {
+			this.state = { ...this.state, showAddChar: false };
+		}
 		charCards.reverse();
 		return charCards;
 	};
 
 	addCharButton = () => {
-		console.log(this.state.partySize);
-		if (this.state.partySize < 4) {
+		if (this.state.showAddChar) {
 			return (
+				<motion.div
+				style={{opacity: 0}}
+				animate={{opacity: 1}}
+				transition={{ delay: 1, duration: 1 }}
+				>
 				<div
 					id='addChar'
 					className='addChar'
@@ -95,13 +102,13 @@ class App extends React.Component {
 						<br /> Character
 					</p>
 				</div>
-			);
+				</motion.div>)
 		}
 	};
 
 	render() {
 		return (
-			<StatContext.Provider value={[this.state.stats, this.setStats]}>
+			<StatContext.Provider value={[this.state.stats, this.setStats, this.state.showAddChar]}>
 				<GlobalStyles />
 				<Header />
 				<div
@@ -110,8 +117,6 @@ class App extends React.Component {
 						this.hideModal();
 					}}
 				>
-					
-					{this.addCharButton()}
 					<div
 						className='scrollview'
 						onClick={() => {
@@ -120,6 +125,7 @@ class App extends React.Component {
 					>
 						{this.renderChars()}
 					</div>
+					{this.addCharButton()}
 				</div>
 				<Modal
 					stats={this.state.stats}

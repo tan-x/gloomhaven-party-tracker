@@ -39,7 +39,7 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none;
     margin-top: 70px;
-    padding-top: 30px;
+    padding-top: 60px;
     padding-bottom: 80px;
     height: 100%;
     min-height: 90%;
@@ -86,8 +86,8 @@ export const GlobalStyles = createGlobalStyle`
 
   #menuToggle-shadow {
     background-color: transparent;
-    filter: drop-shadow(0 5px 10px rgb(140, 140, 140));
-    z-index:1;
+    filter: drop-shadow(0 5px 10px rgba(140, 140, 140, .5));
+    z-index: 1;
     position: absolute;
     top: -132px;
     left: 0;
@@ -270,7 +270,7 @@ export const GlobalStyles = createGlobalStyle`
     max-width 400px;
     width: 20vw;
     height: 35vh;
-    margin: 30px;
+    margin: 0 30px 30px;
   }
 
   .card-dimmer {
