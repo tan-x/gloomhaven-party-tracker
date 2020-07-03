@@ -11,12 +11,12 @@ export default function(props) {
                 <h2>{props.name}</h2>
                 <h4>Lvl. {props.stats[props.classimg].level} {props.class}</h4>
                 <div className="stats">
-                    <button onClick={props.onclick} name="xp" id={props.classimg}>XP: {props.stats[props.classimg].xp}</button>
-                    <button onClick={props.onclick} name="gold" id={props.classimg}>Gold: {props.stats[props.classimg].gold}</button>
+                    <button onClick={props.onclick} id="xp" name={props.classimg}>XP: {props.stats[props.classimg].xp}</button>
+                    <button onClick={props.onclick} id="gold" name={props.classimg}>Gold: {props.stats[props.classimg].gold}</button>
                 </div>
                 <div className="options">
-                    <button onClick={props.onclick} name="items" id={props.classimg}>Items</button>
-                    <button onClick={props.onclick} name="perks" id={props.classimg}>Perks</button>
+                    <button onClick={props.onclick} id="items" name={props.classimg}>Items</button>
+                    <button onClick={props.onclick} id="perks" name={props.classimg}>Perks</button>
                 </div>
             </div>
         </div>

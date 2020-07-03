@@ -31,8 +31,8 @@ export default class Perks extends React.Component {
 								<img src={xpicon} className='xpicon' alt='xp' />
 								<h2 className='xpnum'>{stats[this.props.route].xp}</h2>
 							</div>
-							<div className='goldSubmit'>
-								<input type='number' id='gold' name='goldAdd' ref={this.inputRef} />
+							<div className='columnFlex'>
+								<input type='number' id='goldIn' name='goldAdd' ref={this.inputRef} />
 								<button
 									id='xpbutton'
 									onClick={() => {

@@ -14,7 +14,7 @@
 }
 
 .body {
-  background: url(./assets/scrollbkground.jpg) no-repeat fixed center;
+  background: url(./assets/scrollbkground.jpg) no-repeat center center;
 }
 
 .App-link {

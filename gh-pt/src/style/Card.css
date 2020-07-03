@@ -6,6 +6,14 @@
    background: url(../assets/hatchet.jpg);
 }
 
+.voidwarden {
+   background: url(../assets/voidwarden.jpg);
+}
+
+.demolitionist {
+   background: url(../assets/demolitionist.jpg);
+}
+
 .modal {
    background: url(../assets/scrollbkground.jpg);
 }

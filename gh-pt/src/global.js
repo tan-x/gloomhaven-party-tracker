@@ -6,7 +6,6 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
     height: 100%;
     width: 100%;
-    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-stroke: .1px rgb(140, 140, 140);
@@ -15,30 +14,37 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
   .body {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
+    background-color: rgb(240, 224, 175);
     // background: url(https://i.pinimg.com/originals/6b/72/23/6b7223d0def9fb19401c5758808f4178.jpg) no-repeat fixed center;
     background-size: cover;
+    scroll-behavior: smooth;
     height: 100%;
     width: 100%;
     text-rendering: optimizeLegibility;
-    overflow: auto;
+    overflow: hidden;
   }
 
   .scrollview {
-
+    position: relative;
+    top: 0;
+    left: 0;
     display: flex;
     align-items: center;
     flex-direction: column;
-    overflow: auto;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none;
     margin-top: 70px;
-    height: auto;
+    padding-top: 30px;
+    padding-bottom: 80px;
+    height: 100%;
+    min-height: 90%;
     width: 100%;
+    overflow: scroll;
   }
 
   header {
@@ -57,6 +63,59 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-stroke: .1px rgb(80, 80, 80);
+  }
+
+  #menuToggle {
+    clip-path: polygon(100% 54%, 100% 76%, 80% 100%, 20% 100%, 0 76%, 0 54%);
+    height: calc(250px + .4vw);
+    width: 70vw;
+    z-index: 2;
+  }
+
+  #menuToggle-dimmer {
+    clip-path: polygon(100% 54%, 100% 76%, 80% 100%, 20% 100%, 0 76%, 0 54%);
+    position: absolute;
+    top: -132px;
+    left: 0;
+    transform: translate(20%, -10%);
+    height: calc(250px + .4vw);
+    width: 70vw;
+    z-index: 3;
+    background-color: rgba(240, 240, 240, .3);
+  }
+
+  #menuToggle-shadow {
+    background-color: transparent;
+    filter: drop-shadow(0 5px 10px rgb(140, 140, 140));
+    z-index:1;
+    position: absolute;
+    top: -132px;
+    left: 0;
+    transform: translate(20%, -10%);
+  
+  }
+
+  #menuArrow {
+    position: absolute;
+    top: calc(36px + .6vw);
+    left: 50vw;
+    z-index: 1000;
+    transform: translate(-50%, 50%);
+    font-size: 24px;
+    color: white;
+    color: rgb(226, 201, 147);
+    text-shadow: 0 2px 15px black;
+  }
+
+  #subtitle-text {
+    margin-top: -22px;
+    color: rgb(226, 201, 147);
+    text-shadow: 0 1 10px black
+  }
+
+  div > span {
+    font-size: 30px;
+    z-index: 2;
   }
 
   #subtitle > h2 {
@@ -100,6 +159,46 @@ export const GlobalStyles = createGlobalStyle`
     max-height: 50px;
     // filter: invert(100%) sepia(100%) saturate(2022%) hue-rotate(287deg)
     //   brightness(72%) contrast(189%);
+  }
+
+  .addChar {
+    position: absolute;
+    top: 90px;
+    left: 3%;
+    height: fit-content;
+    width: calc(35px + 3vw);
+    min-width: fit-content;
+    padding: 2px;
+    background: rgba(245, 245, 245, .6);
+    border: 1px outset gray;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 90;
+    color: gray;
+  }
+
+  .addChar:hover {
+    color: black;
+  }
+
+  .addChar > h2 {
+    margin: -5px;
+  }
+
+  .addChar > p {
+    font-size: 1.8vh;
+    margin: 0;
+  }
+
+  #addChar-name {
+    height: 1.6rem;
+    font-family: inherit;
+    font-size: 1.2rem;
+    text-align: center;
+    box-shadow: 0 0 10px rgb(215, 215, 215);
   }
 
   .xpicon {
@@ -190,6 +289,12 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-stroke: .1px rgb(140, 140, 140);
+    transition: background .6s ease-in-out;
+  }
+
+  .card-dimmer:hover {
+    background: rgba(245, 245, 245, .4);
+    transition: background .6s ease-in-out;
   }
 
   .card-dimmer > h2, h4 {
@@ -261,7 +366,7 @@ export const GlobalStyles = createGlobalStyle`
     box-shadow: 0 0 10px rgba(115, 115, 115, .5);
   }
 
-  #gold {
+  #goldIn {
     width: 50px;
     height: 2rem;
     font-family: inherit;
@@ -288,14 +393,14 @@ export const GlobalStyles = createGlobalStyle`
     box-shadow: 0 0 10px rgb(215, 215, 215);
   }
 
-  .goldSubmit {
+  .columnFlex {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
 
-  .goldSubmit > button {
+  .columnFlex > button {
     margin: 10px;
     border: 1px solid gray;
     border-radius: 2px;
@@ -512,6 +617,9 @@ export const GlobalStyles = createGlobalStyle`
     }
     p {
       font-size: 16px;
+    }
+    .body {
+      background-attachment: initial;
     }
   }
 
