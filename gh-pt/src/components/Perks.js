@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import firebase from "../Firebase";
+import StatContext from '../Context';
 import Checks from './Checks';
 import stats from '../stats';
 
 export default function Perks(props) {
-	const [perks, setPerks] = useState(stats[props.route].perks);
+	const [statContext, setStatContext] = useContext(StatContext);
+	const [perks, setPerks] = useState(statContext[props.route].perks);
 	const [checksVisible, setChecksVisible] = useState({ visible: false });
 	if (!checksVisible.visible) {
 		return (
@@ -75,7 +77,7 @@ export default function Perks(props) {
 		return (
 			<div className='columnFlex'>
 				<Checks
-					checks={stats[props.route].checks}
+					checks={statContext[props.route].checks}
 					route={props.route}
 					save={() => {
 						setChecksVisible({ visible: false });
