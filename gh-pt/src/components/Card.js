@@ -1,13 +1,36 @@
 import React from 'react';
 import rgicon from '../assets/class-icons/rgicon.png';
 import hatchicon from '../assets/class-icons/hatcheticon.png';
+import demoicon from '../assets/class-icons/demoicon.png';
+import voidicon from '../assets/class-icons/voidicon.png';
 import '../style/Card.css';
 
 export default function(props) {
+    const cardIcons = () => {
+        switch(props.classimg) {
+            case 'redGuard':
+                return (
+                    <img src={rgicon} className="card-class-logo" alt="class logo"/>
+                )
+            case 'hatchet':
+                return (
+                    <img src={hatchicon} className="card-class-logo" alt="class logo"/>
+                )
+            case 'voidwarden':
+                return (
+                    <img src={voidicon} className="card-class-logo" alt="class logo"/>
+                )
+            case 'demolitionist':
+                return (
+                    <img src={demoicon} className="card-class-logo" alt="class logo"/>
+                )
+        }
+    }
+
     return (
         <div className={`playerCard ${props.classimg}`}>
             <div className="card-dimmer">
-                <img src={props.classimg === 'redGuard' ? rgicon : hatchicon} className="card-class-logo" alt="class logo"/>
+                {cardIcons()}
                 <h2>{props.name}</h2>
                 <h4>Lvl. {props.stats[props.classimg].level} {props.class}</h4>
                 <div className="stats">
