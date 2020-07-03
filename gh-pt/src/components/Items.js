@@ -29,6 +29,9 @@ export default function Items(props) {
 		handItemsShop = [],
 		smallItemsShop = [];
 
+
+			// firebase.firestore().collection('template').doc(props.route).update(statContext[0][props.route]);
+
 	for (const item in items) {
 		switch (item) {
 			case 'head':

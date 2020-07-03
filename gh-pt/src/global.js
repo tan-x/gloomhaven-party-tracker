@@ -97,11 +97,11 @@ export const GlobalStyles = createGlobalStyle`
 
   #menuArrow {
     position: absolute;
-    top: calc(36px + .6vw);
+    top: calc(48px + .6vw);
     left: 50vw;
-    z-index: 1000;
+    z-index: 3;
     transform: translate(-50%, 50%);
-    font-size: 24px;
+    font-size: 20px;
     color: white;
     color: rgb(226, 201, 147);
     text-shadow: 0 2px 15px black;
