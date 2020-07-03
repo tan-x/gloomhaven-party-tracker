@@ -9,7 +9,8 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import woodBk from '../assets/woodgrain.jpg'
+import woodBk from '../assets/woodgrain.jpg';
+import xp from '../xpicon.svg';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -27,43 +28,41 @@ const useStyles = makeStyles(() => ({
 
 export default function MakeshiftDrawer(props) {
     const classes = useStyles();
-    const [selectedIndex, setSelectedIndex] = React.useState(1);
   
     function handleListItemClick(event, index) {
-      setSelectedIndex(index);
     }
   
     return (
-      <Slide direction="top" in={props.open}  >
+      <Slide direction="down" in={props.open} mountOnEnter unmountOnExit>
         <div className="drawer">
           <div className="drawer-dimmer">
           <List component="nav" aria-label="main mailbox folders">
             <ListItem
               button
-              selected={selectedIndex === 0}
               onClick={event => handleListItemClick(event, 0)}
             >
-              <h3 className="menuItem">Add Character</h3>
+              <img src={xp} className="header-class-logo"/>
+              <h3 className="menuItem"> Add Character</h3>
             </ListItem>
             <ListItem
               button
-              selected={selectedIndex === 1}
               onClick={event => handleListItemClick(event, 1)}
             >
-              <h3 className="menuItem">Party Manager</h3>
+              <img src={xp} className="header-class-logo"/>
+              <h3 className="menuItem"> Party Manager</h3>
             </ListItem>
             <ListItem
               button
-              selected={selectedIndex === 2}
               onClick={event => handleListItemClick(event, 2)}
             >
-              <h3 className="menuItem">Character List</h3>
+              <img src={xp} className="header-class-logo"/>
+              <h3 className="menuItem"> Character List</h3>
             </ListItem>
             <ListItem
               button
-              selected={selectedIndex === 3}
               onClick={event => handleListItemClick(event, 3)}
             >
+              <img src={xp} className="header-class-logo"/>
               <h3 className="menuItem">Logout</h3>
             </ListItem>
           </List>

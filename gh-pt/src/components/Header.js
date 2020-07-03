@@ -1,4 +1,5 @@
 import React from 'react';
+import Slide from '@material-ui/core/Slide';
 import xp from '../xpicon.svg';
 import icon1 from '../assets/class-icons/01 Brute.png';
 import icon2 from '../assets/class-icons/04 Scoundrel.png';
@@ -26,6 +27,7 @@ export default function Header(props) {
                 <h2 id="subtitle-text">Jaws <span>of the</span> Lion</h2>
             </div>
         </header>
+        {/* <Slide direction="top" in={props.open}  > */}
         <div id="menuToggle-shadow">
             <div id="menuToggle">
                 
@@ -35,6 +37,7 @@ export default function Header(props) {
 
             
             <h2 id="menuArrow">&#x25bc;</h2>
+            {/* </Slide> */}
             
         
         </>

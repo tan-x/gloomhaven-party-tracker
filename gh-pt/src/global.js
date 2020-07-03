@@ -71,6 +71,8 @@ export const GlobalStyles = createGlobalStyle`
     font-family: inherit;
     color: whitesmoke;
     text-shadow: 0 1 10px black;
+    border-radius: 4px;
+    border: none;
   }
 
   .drawer-dimmer {
@@ -79,12 +81,12 @@ export const GlobalStyles = createGlobalStyle`
     align-items: center;
     padding-top: 20px;
     flex: 1;
-    background-color: rgba(240, 240, 240, .3);
+    background-color: rgba(240, 240, 240, .4);
   }
 
   .menuItem {
     font-size: calc(16px + 1.5vw);
-    margin: -5px;
+    margin: -5px 0 -5px 5px;
     text-shadow: 0 0 10px black;
   }
 
@@ -100,7 +102,7 @@ export const GlobalStyles = createGlobalStyle`
     position: absolute;
     top: -132px;
     left: 0;
-    transform: translate(20%, -10%);
+    transform: translate(21.5%, -10%);
     height: calc(250px + .4vw);
     width: 70vw;
     z-index: 3;
@@ -114,7 +116,7 @@ export const GlobalStyles = createGlobalStyle`
     position: absolute;
     top: -132px;
     left: 0;
-    transform: translate(20%, -10%);
+    transform: translate(21.5%, -10%);
   
   }
 
@@ -227,12 +229,12 @@ export const GlobalStyles = createGlobalStyle`
     width: 80px;
     pointer-events: none;
     max-height: 80px;
-    filter: invert(100%) sepia(100%) saturate(2022%) hue-rotate(287deg)
-      brightness(72%) contrast(189%);
-    position: absolute;
-    top: 44%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    // filter: invert(100%) sepia(100%) saturate(2022%) hue-rotate(287deg)
+    //   brightness(72%) contrast(189%);
+    // position: absolute;
+    // top: 44%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
   }
 
   .xpnum {

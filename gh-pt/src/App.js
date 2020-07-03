@@ -133,7 +133,7 @@ class App extends React.Component {
 		return (
 			<StatContext.Provider value={[this.state.stats, this.setStats, this.state.showAddChar]}>
 				<GlobalStyles />
-				<Header onclick={this.showDrawer}/>
+				<Header onclick={this.showDrawer} open={this.state.isOpen}/>
 				<div
 					className='body'
 					onClick={() => {
