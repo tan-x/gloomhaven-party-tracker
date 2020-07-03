@@ -50,27 +50,26 @@ class App extends React.Component {
 
 	showModal = (e) => {
 		if (e.id !== 'logout') {
-			this.setState({...this.state, show: !this.state.show, modalRoute: e.id, charRoute: e.name, isOpen:false });
+			this.setState({show: !this.state.show, modalRoute: e.id, charRoute: e.name, isOpen:false });
 		}
 	};
 
 	hideModal = (e) => {
-		this.state.show && this.setState({...this.state, show: !this.state.show });
+		this.state.show && this.setState({show: !this.state.show });
 	};
 
 
 
 	showDrawer = () => {
 		if (this.state.isOpen) {
-			this.setState({...this.state, isOpen: false})
+			this.setState({ isOpen: false })
 		} else {
-			this.setState({...this.state, isOpen: true})
+			this.setState({ isOpen: true })
 		}
-		console.log(this.state.isOpen);
 	}
 
 	hideDrawer = () => {
-		this.setState({...this.state, isOpen: false});
+		this.setState({ isOpen: false });
 	}
 
 	renderChars = () => {
@@ -161,7 +160,7 @@ class App extends React.Component {
 
 				<MakeshiftDrawer open={this.state.isOpen} addchar={(e) => {
 						this.showModal(e.target);
-						// this.hideDrawer();
+						this.hideDrawer();
 					}} />
 				<Modal
 					stats={this.state.stats}
