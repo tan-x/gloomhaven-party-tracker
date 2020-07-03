@@ -13,11 +13,12 @@ export default function Header(props) {
     if (!click) {
       return (
         <>
-          <div id='menuToggle-shadow'>
+          <div id='menuToggle-shadow' onClick={props.onclick}>
             <div id='menuToggle'></div>
-          </div>
+          
           <div id='menuToggle-dimmer'></div>
-          <h2 id='menuArrow'>&#x25bc;</h2>
+          <h2 id='menuArrow' onClick={props.onclick}>&#x25bc;</h2>
+          </div>
         </>
       );
     }

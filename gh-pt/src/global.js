@@ -104,19 +104,18 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   #menuToggle {
-    // clip-path: polygon(100% 54%, 100% 76%, 80% 100%, 20% 100%, 0 76%, 0 54%);
     border-radius: 5px;
     height: calc(250px + .4vw);
     width: 54vw;
     z-index: 2;
+    filter: drop-shadow(0 5px 10px rgba(140, 140, 140, .5));
   }
 
   #menuToggle-dimmer {
     // clip-path: polygon(100% 54%, 100% 76%, 80% 100%, 20% 100%, 0 76%, 0 54%);
     position: absolute;
-    top: -132px;
+    top: 0;
     left: 0;
-    transform: translate(42.5%, -10%);
     height: calc(250px + .4vw);
     width: 54vw;
     z-index: 3;
@@ -124,20 +123,18 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   #menuToggle-shadow {
-    background-color: transparent;
-    filter: drop-shadow(0 5px 10px rgba(140, 140, 140, .5));
+    // filter: drop-shadow(0 5px 10px rgba(140, 140, 140, .5));
     z-index: 1;
     position: absolute;
     top: -132px;
     left: 0;
     transform: translate(42.5%, -10%);
-  
   }
 
   #menuArrow {
     position: absolute;
-    top: calc(48px + .6vw);
-    left: 50vw;
+    bottom: -18px;
+    left: 50%;
     z-index: 3;
     transform: translate(-50%, 50%);
     font-size: 20px;

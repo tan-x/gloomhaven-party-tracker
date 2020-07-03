@@ -49,10 +49,13 @@ class App extends React.Component {
 	};
 
 	showModal = (e) => {
-		this.setState({ show: !this.state.show, modalRoute: e.id, charRoute: e.name });
+		if (e.id !== 'logout') {
+			this.setState({...this.state, show: !this.state.show, modalRoute: e.id, charRoute: e.name, isOpen:false });
+		}
 	};
+
 	hideModal = (e) => {
-		this.state.show && this.setState({ show: !this.state.show });
+		this.state.show && this.setState({...this.state, show: !this.state.show });
 	};
 
 
@@ -152,11 +155,14 @@ class App extends React.Component {
 						{this.renderChars()}
 
 					</div>
-					{this.addCharButton()}
+					{/* {this.addCharButton()} */}
 					
 				</div>
 
-				<MakeshiftDrawer open={this.state.isOpen}/>
+				<MakeshiftDrawer open={this.state.isOpen} addchar={(e) => {
+						this.showModal(e.target);
+						// this.hideDrawer();
+					}} />
 				<Modal
 					stats={this.state.stats}
 					show={this.state.show}

@@ -30,6 +30,7 @@ export default function MakeshiftDrawer(props) {
     const classes = useStyles();
   
     function handleListItemClick(event, index) {
+      props.addchar(event);
     }
   
     return (
@@ -39,31 +40,37 @@ export default function MakeshiftDrawer(props) {
           <List component="nav" aria-label="main mailbox folders">
             <ListItem
               button
-              onClick={event => handleListItemClick(event, 0)}
+              id="addChar"
+              onClick={event => handleListItemClick(event, 1)}
             >
-              <img src={xp} className="header-class-logo"/>
-              <h3 className="menuItem"> Add Character</h3>
+              <img 
+              id="addChar" src={xp} className="header-class-logo"/>
+              <h3 
+              id="addChar" className="menuItem"> Add Character</h3>
             </ListItem>
             <ListItem
+              id="partymgr"
               button
               onClick={event => handleListItemClick(event, 1)}
             >
-              <img src={xp} className="header-class-logo"/>
-              <h3 className="menuItem"> Party Manager</h3>
+              <img id="partymgr" src={xp} className="header-class-logo"/>
+              <h3 id="partymgr" className="menuItem"> Party Manager</h3>
             </ListItem>
             <ListItem
               button
+              id="charlist"
               onClick={event => handleListItemClick(event, 2)}
             >
-              <img src={xp} className="header-class-logo"/>
-              <h3 className="menuItem"> Character List</h3>
+              <img id="charlist" src={xp} className="header-class-logo"/>
+              <h3 id="charlist" className="menuItem"> Character List</h3>
             </ListItem>
             <ListItem
+              id="logout"
               button
               onClick={event => handleListItemClick(event, 3)}
             >
-              <img src={xp} className="header-class-logo"/>
-              <h3 className="menuItem">Logout</h3>
+              <img id="logout" src={xp} className="header-class-logo"/>
+              <h3 id="logout" className="menuItem">Logout</h3>
             </ListItem>
           </List>
           <h2 id="drawerArrow">&#x25bc;</h2>
