@@ -7,10 +7,10 @@ import icon4 from '../assets/class-icons/03 Spellweaver.png';
 import '../style/Header.css';
 import ghfont from '../style/PirataOne-Gloomhaven.ttf';
 
-export default function Header() {
+export default function Header(props) {
     return (
         <>
-        <header className="header">
+        <header className="header" onClick={props.onclick}>
             <div className="dimmer">
                 <img src={icon1} className="header-class-logo" alt="brute"/>
                 <img src={icon2} className="header-class-logo" alt="scoundrel"/>

@@ -65,6 +65,17 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-text-stroke: .1px rgb(80, 80, 80);
   }
 
+  .drawer {
+    font-family: inherit;
+    color: whitesmoke;
+    text-shadow: 0 1 10px black;
+  }
+
+  .drawer-dimmer {
+    flex: 1;
+    background-color: rgba(240, 240, 240, .3);
+  }
+
   #menuToggle {
     clip-path: polygon(100% 54%, 100% 76%, 80% 100%, 20% 100%, 0 76%, 0 54%);
     height: calc(250px + .4vw);
@@ -195,7 +206,6 @@ export const GlobalStyles = createGlobalStyle`
 
   #addChar-name {
     height: 1.6rem;
-    font-family: inherit;
     font-size: 1.2rem;
     text-align: center;
     box-shadow: 0 0 10px rgb(215, 215, 215);

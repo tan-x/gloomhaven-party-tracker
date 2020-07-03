@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from "framer-motion";
 import firebase from './Firebase';
+import MakeshiftDrawer from './components/MakeshiftDrawer';
 import StatContext from './Context';
 import { GlobalStyles } from './global';
 import Header from './components/Header';
@@ -18,6 +19,7 @@ class App extends React.Component {
 			stats: stats,
 			setStats: this.setStats,
 			showAddChar: true,
+			isOpen: false,
 		};
 	}
 
@@ -112,17 +114,24 @@ class App extends React.Component {
 		}
 	};
 
+	toggle = () => {
+		this.setState({...this.state, isOpen: !this.state.isOpen})
+		console.log(this.state.isOpen);
+	}
+
 	render() {
 		return (
 			<StatContext.Provider value={[this.state.stats, this.setStats, this.state.showAddChar]}>
 				<GlobalStyles />
-				<Header />
+				<Header onclick={this.toggle}/>
 				<div
 					className='body'
 					onClick={() => {
 						this.hideModal();
 					}}
 				>
+
+
 					<div
 						className='scrollview'
 						onClick={() => {
@@ -130,8 +139,11 @@ class App extends React.Component {
 						}}
 					>
 						{this.renderChars()}
+
+				<MakeshiftDrawer open={this.state.isOpen}/>
 					</div>
 					{this.addCharButton()}
+					
 				</div>
 				<Modal
 					stats={this.state.stats}
