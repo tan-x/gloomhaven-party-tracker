@@ -81,7 +81,20 @@ export const GlobalStyles = createGlobalStyle`
     align-items: center;
     padding-top: 20px;
     flex: 1;
-    background-color: rgba(240, 240, 240, .4);
+    border: none;
+    background-color: rgba(240, 240, 240, .3);
+  }
+
+  #drawerArrow {
+    position: absolute;
+    bottom: -18px;
+    left: 50%;
+    z-index: 3;
+    transform: translate(-50%, 50%);
+    font-size: 20px;
+    color: white;
+    color: rgb(226, 201, 147);
+    text-shadow: 0 2px 15px black;
   }
 
   .menuItem {
@@ -91,20 +104,21 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   #menuToggle {
-    clip-path: polygon(100% 54%, 100% 76%, 80% 100%, 20% 100%, 0 76%, 0 54%);
+    // clip-path: polygon(100% 54%, 100% 76%, 80% 100%, 20% 100%, 0 76%, 0 54%);
+    border-radius: 5px;
     height: calc(250px + .4vw);
-    width: 70vw;
+    width: 54vw;
     z-index: 2;
   }
 
   #menuToggle-dimmer {
-    clip-path: polygon(100% 54%, 100% 76%, 80% 100%, 20% 100%, 0 76%, 0 54%);
+    // clip-path: polygon(100% 54%, 100% 76%, 80% 100%, 20% 100%, 0 76%, 0 54%);
     position: absolute;
     top: -132px;
     left: 0;
-    transform: translate(21.5%, -10%);
+    transform: translate(42.5%, -10%);
     height: calc(250px + .4vw);
-    width: 70vw;
+    width: 54vw;
     z-index: 3;
     background-color: rgba(240, 240, 240, .3);
   }
@@ -116,7 +130,7 @@ export const GlobalStyles = createGlobalStyle`
     position: absolute;
     top: -132px;
     left: 0;
-    transform: translate(21.5%, -10%);
+    transform: translate(42.5%, -10%);
   
   }
 

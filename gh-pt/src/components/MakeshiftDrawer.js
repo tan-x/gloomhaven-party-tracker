@@ -66,6 +66,7 @@ export default function MakeshiftDrawer(props) {
               <h3 className="menuItem">Logout</h3>
             </ListItem>
           </List>
+          <h2 id="drawerArrow">&#x25bc;</h2>
           </div>
         </div>
       </Slide>
