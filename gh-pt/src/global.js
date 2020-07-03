@@ -66,6 +66,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .drawer {
+    margin-top: 70px;
     z-index: 91;
     font-family: inherit;
     color: whitesmoke;
@@ -76,7 +77,7 @@ export const GlobalStyles = createGlobalStyle`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 30px;
+    padding-top: 20px;
     flex: 1;
     background-color: rgba(240, 240, 240, .3);
   }

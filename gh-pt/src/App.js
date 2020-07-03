@@ -55,6 +55,21 @@ class App extends React.Component {
 		this.state.show && this.setState({ show: !this.state.show });
 	};
 
+
+
+	showDrawer = () => {
+		if (this.state.isOpen) {
+			this.setState({...this.state, isOpen: false})
+		} else {
+			this.setState({...this.state, isOpen: true})
+		}
+		console.log(this.state.isOpen);
+	}
+
+	hideDrawer = () => {
+		this.setState({...this.state, isOpen: false});
+	}
+
 	renderChars = () => {
 		const charCards = [];
 		const statsRef = this.state.stats;
@@ -114,16 +129,11 @@ class App extends React.Component {
 		}
 	};
 
-	toggle = () => {
-		this.setState({...this.state, isOpen: !this.state.isOpen})
-		console.log(this.state.isOpen);
-	}
-
 	render() {
 		return (
 			<StatContext.Provider value={[this.state.stats, this.setStats, this.state.showAddChar]}>
 				<GlobalStyles />
-				<Header onclick={this.toggle}/>
+				<Header onclick={this.showDrawer}/>
 				<div
 					className='body'
 					onClick={() => {
@@ -136,15 +146,17 @@ class App extends React.Component {
 						className='scrollview'
 						onClick={() => {
 							this.hideModal();
+							this.hideDrawer();
 						}}
 					>
 						{this.renderChars()}
 
-				<MakeshiftDrawer open={this.state.isOpen}/>
 					</div>
 					{this.addCharButton()}
 					
 				</div>
+
+				<MakeshiftDrawer open={this.state.isOpen}/>
 				<Modal
 					stats={this.state.stats}
 					show={this.state.show}
