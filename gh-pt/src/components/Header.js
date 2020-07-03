@@ -9,6 +9,7 @@ import ghfont from '../style/PirataOne-Gloomhaven.ttf';
 
 export default function Header() {
     return (
+        <>
         <header className="header">
             <div className="dimmer">
                 <img src={icon1} className="header-class-logo" alt="brute"/>
@@ -22,8 +23,20 @@ export default function Header() {
                 <img src={icon4} className="header-class-logo" alt="spellweaver"/>
             </div>
             <div id="subtitle">
-                <h2 style={{marginTop: '-25px', color: 'rgb(226, 201, 147)', textShadow: '0 0 2vw black'}}>Jaws <span>of the</span> Lion</h2>
+                <h2 id="subtitle-text">Jaws <span>of the</span> Lion</h2>
             </div>
         </header>
+        <div id="menuToggle-shadow">
+            <div id="menuToggle">
+                
+            </div>
+            </div>
+            <div id="menuToggle-dimmer"></div>
+
+            
+            <h2 id="menuArrow">&#x25bc;</h2>
+            
+        
+        </>
     )
 }

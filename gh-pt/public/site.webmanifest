@@ -1,5 +1,5 @@
 {
-  "name": "Gloomhaven Party Tracker",
+    "name": "Gloomhaven Party Tracker",
     "short_name": "Party Tracker",
     "icons": [
         {
@@ -13,8 +13,7 @@
             "type": "image/png"
         }
     ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone"
 }

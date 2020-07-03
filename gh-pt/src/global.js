@@ -6,7 +6,6 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
     height: 100%;
     width: 100%;
-    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-stroke: .1px rgb(140, 140, 140);
@@ -15,17 +14,19 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
   .body {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
+    background-color: rgb(240, 224, 175);
     // background: url(https://i.pinimg.com/originals/6b/72/23/6b7223d0def9fb19401c5758808f4178.jpg) no-repeat fixed center;
     background-size: cover;
+    scroll-behavior: smooth;
     height: 100%;
     width: 100%;
     text-rendering: optimizeLegibility;
-    overflow: auto;
+    overflow: hidden;
   }
 
   .scrollview {
@@ -35,12 +36,15 @@ export const GlobalStyles = createGlobalStyle`
     display: flex;
     align-items: center;
     flex-direction: column;
-    overflow: auto;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none;
     margin-top: 70px;
-    height: auto;
+    padding-top: 30px;
+    padding-bottom: 80px;
+    height: 100%;
+    min-height: 90%;
     width: 100%;
+    overflow: scroll;
   }
 
   header {
@@ -59,6 +63,59 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-stroke: .1px rgb(80, 80, 80);
+  }
+
+  #menuToggle {
+    clip-path: polygon(100% 54%, 100% 76%, 80% 100%, 20% 100%, 0 76%, 0 54%);
+    height: calc(250px + .4vw);
+    width: 70vw;
+    z-index: 2;
+  }
+
+  #menuToggle-dimmer {
+    clip-path: polygon(100% 54%, 100% 76%, 80% 100%, 20% 100%, 0 76%, 0 54%);
+    position: absolute;
+    top: -132px;
+    left: 0;
+    transform: translate(20%, -10%);
+    height: calc(250px + .4vw);
+    width: 70vw;
+    z-index: 3;
+    background-color: rgba(240, 240, 240, .3);
+  }
+
+  #menuToggle-shadow {
+    background-color: transparent;
+    filter: drop-shadow(0 5px 10px rgb(140, 140, 140));
+    z-index:1;
+    position: absolute;
+    top: -132px;
+    left: 0;
+    transform: translate(20%, -10%);
+  
+  }
+
+  #menuArrow {
+    position: absolute;
+    top: calc(36px + .6vw);
+    left: 50vw;
+    z-index: 1000;
+    transform: translate(-50%, 50%);
+    font-size: 24px;
+    color: white;
+    color: rgb(226, 201, 147);
+    text-shadow: 0 2px 15px black;
+  }
+
+  #subtitle-text {
+    margin-top: -22px;
+    color: rgb(226, 201, 147);
+    text-shadow: 0 1 10px black
+  }
+
+  div > span {
+    font-size: 30px;
+    z-index: 2;
   }
 
   #subtitle > h2 {
@@ -106,10 +163,11 @@ export const GlobalStyles = createGlobalStyle`
 
   .addChar {
     position: absolute;
-    top: 20px;
+    top: 90px;
     left: 3%;
     height: fit-content;
     width: calc(35px + 3vw);
+    min-width: fit-content;
     padding: 2px;
     background: rgba(245, 245, 245, .6);
     border: 1px outset gray;
@@ -559,6 +617,9 @@ export const GlobalStyles = createGlobalStyle`
     }
     p {
       font-size: 16px;
+    }
+    .body {
+      background-attachment: initial;
     }
   }
 

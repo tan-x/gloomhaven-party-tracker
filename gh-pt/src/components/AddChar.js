@@ -7,69 +7,55 @@ import hatchicon from '../assets/class-icons/hatcheticon.png';
 export default class Perks extends React.Component {
 	constructor(props) {
 		super(props);
-        this.state = { selectValue: '', newName: '' };
-        this.availChars = [];
-        this.optionRef = React.createRef();
-        console.log(this.state.selectValue);
+        this.state = { selectValue: 'None', newName: '', availChars: [], options: []};
 	}
 
     static contextType = StatContext;
 
-    componentDidMount() {
-        const statContext = this.context;
-		const statsRef = statContext[0];
-		for (const char in statsRef) {
-            // console.log(statsRef[char]);
-			if (!statsRef[char].inParty) {
-				// console.log(statsRef[char].inParty);
-				this.availChars.push(<option>{statsRef[char].class}</option>)
-			}
-        }
-        this.state = {...this.state, selectValue: this.availChars[0]};
-    }
-
     renderOptions = () => {
-        this.availChars = [];
         const statContext = this.context;
-		const statsRef = statContext[0];
+        const statsRef = statContext[0];
+        const newAvailChars = [];
+        const newOptions = [];
 		for (const char in statsRef) {
-            // console.log(statsRef[char]);
 			if (!statsRef[char].inParty) {
-				// console.log(statsRef[char].inParty);
-				this.availChars.push(<option>{statsRef[char].class}</option>)
+                newAvailChars.push(statsRef[char].class);
+                newOptions.push(<option>{statsRef[char].class}</option>)
 			}
         }
-        this.state = {...this.state, selectValue: this.availChars[0]};
-		return this.availChars;
+        if(newOptions.length == 0) {
+            newOptions.push(<option>None</option>);
+        };
+        this.state = {...this.state, selectValue: newAvailChars[0], availChars: newAvailChars, options: newOptions};
+		return this.state.options;
 	}
     
-    addCharacter() {
-        console.log(this.state.selectValue)
-        if (typeof this.state.selectValue === 'String') {
+    addCharacter(e) {
+        if (this.state.selectValue && this.state.selectValue !== 'None') {
             const statContext = this.context;
+            const lowerCase = this.state.selectValue.toLowerCase();
             const newStats = Object.assign({}, statContext[0]);
-            newStats[this.optionRef.current.value.toLowerCase()].name = this.state.newName;
-            newStats[this.state.selectValue].inParty = true;
+            newStats[lowerCase].name = this.state.newName;
+            newStats[lowerCase].inParty = true;
             statContext[1](newStats);
-            firebase.firestore().collection('starstreak').doc(this.state.selectValue).update(newStats[this.state.selectValue]);
+            firebase.firestore().collection('starstreak').doc(lowerCase).update(newStats[lowerCase]);
         }
+        this.props.onclose();
     }
 
 	render() {
 		return (
             <div className="columnFlex">
-                {this.availChars > 0 && <h2 className='modal-header'>Add Character</h2>}
+                <h2 className='modal-header'>Add Character</h2>
                 <select
 					name='type'
                     id='shop-filter'
-                    ref={this.optionRef}
 					onChange={(e) => {
                         this.state = ({...this.state, selectValue: e.target.value.toLowerCase()});
 					}}
 				>
                     {this.renderOptions()}
                 </select>
-                {/* <img src={this.state.selectValue === 'Voidwarden' ? rgicon : hatchicon} className="card-class-logo" alt="class logo"/> */}
                 <input type='text' id='addChar-name' name='goldAdd' placeholder="Name" onChange={(e) => {this.state = ({...this.state, newName: e.target.value})}}/>
                 <button
 						className='additem'
