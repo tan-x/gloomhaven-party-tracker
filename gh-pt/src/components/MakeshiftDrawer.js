@@ -43,31 +43,28 @@ export default function MakeshiftDrawer(props) {
               selected={selectedIndex === 0}
               onClick={event => handleListItemClick(event, 0)}
             >
-              <ListItemText primary="Add Character" />
+              <h3 className="menuItem">Add Character</h3>
             </ListItem>
             <ListItem
               button
               selected={selectedIndex === 1}
               onClick={event => handleListItemClick(event, 1)}
             >
-              <ListItemText primary="Party Manager" />
+              <h3 className="menuItem">Party Manager</h3>
             </ListItem>
-          </List>
-          <Divider />
-          <List component="nav" aria-label="secondary mailbox folder">
             <ListItem
               button
               selected={selectedIndex === 2}
               onClick={event => handleListItemClick(event, 2)}
             >
-              <ListItemText primary="Character List" />
+              <h3 className="menuItem">Character List</h3>
             </ListItem>
             <ListItem
               button
               selected={selectedIndex === 3}
               onClick={event => handleListItemClick(event, 3)}
             >
-              <ListItemText primary="Logout" />
+              <h3 className="menuItem">Logout</h3>
             </ListItem>
           </List>
           </div>

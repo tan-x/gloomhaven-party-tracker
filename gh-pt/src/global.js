@@ -66,14 +66,25 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .drawer {
+    z-index: 91;
     font-family: inherit;
     color: whitesmoke;
     text-shadow: 0 1 10px black;
   }
 
   .drawer-dimmer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
     flex: 1;
     background-color: rgba(240, 240, 240, .3);
+  }
+
+  .menuItem {
+    font-size: calc(16px + 1.5vw);
+    margin: -5px;
+    text-shadow: 0 0 10px black;
   }
 
   #menuToggle {
