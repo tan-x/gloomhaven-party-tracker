@@ -306,6 +306,7 @@ export const GlobalStyles = createGlobalStyle`
     width: 20vw;
     height: 35vh;
     margin: 0 30px 30px;
+    z-index: 500;
   }
 
   .card-dimmer {

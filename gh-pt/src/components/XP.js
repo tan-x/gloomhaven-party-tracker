@@ -45,16 +45,22 @@ export default class Perks extends React.Component {
 											const newStats = Object.assign({}, stats);
 											newStats[this.props.route].xp = newXP;
 											if (stats[this.props.route].level < newLvl) {
+												console.log(newLvl);
 												newStats[this.props.route].level = newLvl;
 												this.levelUp();
-											}
-                                            setStats(newStats);
-											firebase.firestore().collection('starstreak')
+												firebase.firestore().collection('starstreak')
+												.doc(this.props.route)
+												.update({
+													xp: newXP, level: newLvl
+													});
+											} else {
+												firebase.firestore().collection('starstreak')
 												.doc(this.props.route)
 												.update({
 													xp: newXP
 													});
-												
+											}
+                                            setStats(newStats);
 										}
 									}}
 								>
