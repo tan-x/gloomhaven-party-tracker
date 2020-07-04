@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 import firebase from './Firebase';
 import MakeshiftDrawer from './components/MakeshiftDrawer';
 import StatContext from './Context';
@@ -50,57 +50,46 @@ class App extends React.Component {
 
 	showModal = (e) => {
 		if (e.id !== 'logout') {
-			this.setState({show: !this.state.show, modalRoute: e.id, charRoute: e.name, isOpen:false });
+			this.setState({ show: !this.state.show, modalRoute: e.id, charRoute: e.name, isOpen: false });
 		}
 	};
 
 	hideModal = (e) => {
-		this.state.show && this.setState({show: !this.state.show });
+		this.state.show && this.setState({ show: !this.state.show });
 	};
-
-
 
 	showDrawer = () => {
 		if (this.state.isOpen) {
-			this.setState({ isOpen: false })
+			this.setState({ isOpen: false });
 		} else {
-			this.setState({ isOpen: true })
+			this.setState({ isOpen: true });
 		}
-	}
+	};
 
 	hideDrawer = () => {
 		this.setState({ isOpen: false });
-	}
+	};
 
 	renderChars = () => {
 		const charCards = [];
 		const statsRef = this.state.stats;
-		let partySize = 0;
 		for (const char in statsRef) {
 			if (statsRef[char].inParty) {
-				partySize++;
 				charCards.push(
-					<motion.div
-				style={{opacity: 0}}
-				animate={{opacity: 1}}
-				transition={{ duration: 1 }}
-				>
-					<Card
-						stats={statsRef}
-						key={char}
-						name={statsRef[char].name}
-						class={statsRef[char].class}
-						classimg={char}
-						onclick={(e) => {
-							this.showModal(e.target);
-						}}
-					></Card>
+					<motion.div style={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
+						<Card
+							stats={statsRef}
+							key={char}
+							name={statsRef[char].name}
+							class={statsRef[char].class}
+							classimg={char}
+							onclick={(e) => {
+								this.showModal(e.target);
+							}}
+						></Card>
 					</motion.div>
 				);
 			}
-		}
-		if (partySize === 4) {
-			this.state = { ...this.state, showAddChar: false };
 		}
 		charCards.reverse();
 		return charCards;
@@ -110,40 +99,39 @@ class App extends React.Component {
 		if (this.state.showAddChar) {
 			return (
 				<motion.div
-				style={{opacity: 0}}
-				animate={{opacity: 1}}
-				transition={{ delay: 1, duration: 1 }}
+					style={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{ delay: 1, duration: 1 }}
 				>
-				<div
-					id='addChar'
-					className='addChar'
-					onClick={(e) => {
-						this.showModal(e.target);
-					}}
-				>
-					<h2 id='addChar'>+</h2>
-					<p id='addChar'>
-						Add
-						<br /> Character
-					</p>
-				</div>
-				</motion.div>)
+					<div
+						id='addChar'
+						className='addChar'
+						onClick={(e) => {
+							this.showModal(e.target);
+						}}
+					>
+						<h2 id='addChar'>+</h2>
+						<p id='addChar'>
+							Add
+							<br /> Character
+						</p>
+					</div>
+				</motion.div>
+			);
 		}
 	};
 
 	render() {
 		return (
-			<StatContext.Provider value={[this.state.stats, this.setStats, this.state.showAddChar]}>
+			<StatContext.Provider value={[this.state.stats, this.setStats]}>
 				<GlobalStyles />
-				<Header onclick={this.showDrawer} open={this.state.isOpen}/>
+				<Header onclick={this.showDrawer} open={this.state.isOpen} />
 				<div
 					className='body'
 					onClick={() => {
 						this.hideModal();
 					}}
 				>
-
-
 					<div
 						className='scrollview'
 						onClick={() => {
@@ -152,16 +140,17 @@ class App extends React.Component {
 						}}
 					>
 						{this.renderChars()}
-
 					</div>
 					{/* {this.addCharButton()} */}
-					
 				</div>
 
-				<MakeshiftDrawer open={this.state.isOpen} addchar={(e) => {
+				<MakeshiftDrawer
+					open={this.state.isOpen}
+					addchar={(e) => {
 						this.showModal(e.target);
 						this.hideDrawer();
-					}} />
+					}}
+				/>
 				<Modal
 					stats={this.state.stats}
 					show={this.state.show}
