@@ -1,6 +1,20 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const shop = require('../shop');
+const firebase = require('firebase/app');
+require('firebase/firestore');
+
+const firebaseConfig = {
+    apiKey: "process.env.FIREBASE_KEY",
+    authDomain: "ghpartytracker.firebaseapp.com",
+    databaseURL: "https://ghpartytracker.firebaseio.com",
+    projectId: "ghpartytracker",
+    storageBucket: "ghpartytracker.appspot.com",
+    messagingSenderId: "675542052221",
+    appId: "1:675542052221:web:782ae63b97562e49b93014",
+    measurementId: "G-39WBY8QF9B"
+  };
+
+firebase.initializeApp(firebaseConfig);
 
 inquirer.prompt([
     {
@@ -15,23 +29,27 @@ inquirer.prompt([
         name: 'type',
     },
     {
-        type: 'input',
+        type: 'number',
         message: 'Available:',
         name: 'available',
     },
     {
-        type: 'input',
+        type: 'number',
         message: 'Total:',
         name: 'total',
     },
     {
-        type: 'input',
+        type: 'number',
         message: 'Cost:',
         name: 'cost',
     },
+    {
+        type: 'number',
+        message: 'Item #:',
+        name: 'id',
+    }
 ]).then(response => {
-    response.available = parseInt(response.available);
-    response.total = parseInt(response.total);
+    response.id = response.id - 1;
     console.log(response);
     inquirer.prompt({
         type: 'confirm',
@@ -39,12 +57,12 @@ inquirer.prompt([
         name: 'additem'
     }).then(res => {
         if(res.additem) {
-            let shopCopy = fs.readFileSync(__dirname + '/../shop.js');
-            console.log(shopCopy);
-            // let newShop = shop.push(response);
-            // let shopCopy = shop.toString;
-            // console.log(shop);
-            // shopCopy.replace(shop.toString, newShop);
+            let shopjson = fs.readFileSync(__dirname + '/../shop.json');
+            let shopCopy = JSON.parse(shopjson);
+            shopCopy.push(response);
+            let data = JSON.stringify(shopCopy, null, 2);
+            fs.writeFileSync('shop.json', data);
+			firebase.firestore().collection('template').doc('shop').set({shop: shopCopy});
         }
     })
 })
