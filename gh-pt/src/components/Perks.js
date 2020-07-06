@@ -29,7 +29,7 @@ req.keys().forEach(function(key){
 console.log();
 
 export default function Perks(props) {
-	const [statContext, setStatContext] = useContext(StatContext);
+	const [statContext, setStatContext, loggedIn, setLoggedIn, party, setParty] = useContext(StatContext);
 	const [perks, setPerks] = useState(statContext[props.route].perks);
 	const [checksVisible, setChecksVisible] = useState({ visible: false });
 
@@ -75,7 +75,7 @@ export default function Perks(props) {
 														];
 														return previousState;
 													});
-													firebase.firestore().collection('starstreak').doc(props.route).update({perks: perks});
+													firebase.firestore().collection(party[0]).doc(props.route).update({perks: perks});
 												}}
 											/>
 										);
@@ -94,7 +94,7 @@ export default function Perks(props) {
 														];
 														return previousState;
 													});
-													firebase.firestore().collection('starstreak').doc(props.route).update({perks: perks});
+													firebase.firestore().collection(party[0]).doc(props.route).update({perks: perks});
 												}}
 											/>
 										);

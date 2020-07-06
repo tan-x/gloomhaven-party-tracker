@@ -1,16 +1,15 @@
 import React from 'react';
 import firebase from "../Firebase";
 import StatContext from '../Context';
-import rgicon from '../assets/class-icons/rgicon.png';
-import hatchicon from '../assets/class-icons/hatcheticon.png';
 
 export default class Perks extends React.Component {
 	constructor(props) {
 		super(props);
-        this.state = { selectValue: 'None', newName: '', availChars: [], options: []};
+        this.state = { selectValue: 'Demolitionist', newName: '', newParty: '', availChars: [], options: []};
 	}
 
     static contextType = StatContext;
+    
 
     renderOptions = () => {
         const statContext = this.context;
@@ -31,15 +30,26 @@ export default class Perks extends React.Component {
 		return this.state.options;
 	}
     
-    addCharacter(e) {
-        if (this.state.selectValue && this.state.selectValue !== 'None') {
+    addParty(e) {
+        const user = firebase.auth().currentUser;
+        if (this.state.selectValue && this.state.selectValue !== 'None' && this.state.newParty !== '') {
             const statContext = this.context;
             const lowerCase = this.state.selectValue.toLowerCase();
+            if (lowerCase === "red guard") {
+                lowerCase = "redGuard";
+            }
             const newStats = Object.assign({}, statContext[0]);
             newStats[lowerCase].name = this.state.newName;
             newStats[lowerCase].inParty = true;
             statContext[1](newStats);
-            firebase.firestore().collection(statContext[4][0]).doc(lowerCase).update(newStats[lowerCase]);
+            for (const obj in statContext[0]) {
+                console.log(statContext[0][obj])
+                firebase.firestore().collection(this.state.newParty).doc(obj).set(statContext[0][obj]);
+            }
+
+            console.log(user.uid)
+            firebase.firestore().collection('users').doc(user.uid).update({party: [this.state.newParty]});
+            // firebase.firestore().collection(statContext[4]).doc(lowerCase).update(newStats[lowerCase]);
         }
         this.props.onclose();
     }
@@ -47,7 +57,8 @@ export default class Perks extends React.Component {
 	render() {
 		return (
             <div className="columnFlex">
-                <h2 className='modal-header'>Add Character</h2>
+                <h2 className='modal-header'>Party Manager</h2>
+                <input type='text' id='addChar-name' name='goldAdd' placeholder="Party Name" onChange={(e) => {this.state = ({...this.state, newParty: e.target.value})}}/>
                 <select
 					name='type'
                     id='shop-filter'
@@ -57,11 +68,11 @@ export default class Perks extends React.Component {
 				>
                     {this.renderOptions()}
                 </select>
-                <input type='text' id='addChar-name' name='goldAdd' placeholder="Name" onChange={(e) => {this.state = ({...this.state, newName: e.target.value})}}/>
+                <input type='text' id='addChar-name' name='goldAdd' placeholder="Character Name" onChange={(e) => {this.state = ({...this.state, newName: e.target.value})}}/>
                 <button
 						className='additem'
 						onClick={() => {
-                            this.addCharacter();
+                            this.addParty();
                         }}
                         // onMouse={this.props.onclose}
 					>

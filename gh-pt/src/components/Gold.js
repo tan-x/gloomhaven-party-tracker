@@ -20,7 +20,7 @@ export default class Perks extends React.Component {
 			const newStats = Object.assign({}, statContext[0]);
 			newStats[this.props.route].gold = newGold;
 			statContext[1](newStats);
-			firebase.firestore().collection('starstreak').doc(this.props.route).update({
+			firebase.firestore().collection(statContext[4][0]).doc(this.props.route).update({
 				gold: newGold,
 			});
 		}

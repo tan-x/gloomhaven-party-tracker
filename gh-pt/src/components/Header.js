@@ -31,7 +31,7 @@ export default function Header(props) {
           <img src={icon1} className='header-class-logo' alt='brute' />
           <img src={icon2} className='header-class-logo' alt='scoundrel' />
           <div className='logo'>
-            <h1 style={{ fontFamily: ghfont }}>Party Tracker</h1>
+            <h1 style={{ fontFamily: ghfont }} className="title">Party Tracker</h1>
             <img src={xp} className='App-logo' alt='xp' />
             {/* <h1> the Lion</h1> */}
           </div>

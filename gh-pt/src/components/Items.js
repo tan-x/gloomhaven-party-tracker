@@ -123,7 +123,7 @@ export default function Items(props) {
 			statContext[1](newStats);
 			// reset cart to empty array
 			setCart({...cart, myCart: [], total: 0});
-			firebase.firestore().collection('starstreak').doc(props.route).update(newStats[props.route]);
+			firebase.firestore().collection(statContext[4][0]).doc(props.route).update(newStats[props.route]);
 			setShopVisible({...shopVisible, visible: false });
 		} else {
 			// if cart total is greater than player's gold, alert them
