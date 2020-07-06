@@ -29,16 +29,16 @@ export default class Login extends React.Component {
 	componentDidMount() {
 		const statContext = this.context;
 		this.unregisterAuthObserver = firebase.auth().onAuthStateChanged((user) => {
-			this.setState({ isSignedIn: !!user });
-			statContext[3](!!user);
             if (user != null) {
                 firebase.firestore().collection('users').get().then(querySnapshot => {
                     querySnapshot.forEach((doc) => {
                         if(doc.data().uid === user.uid) {
 							statContext[5](doc.data().party)
-							this.state = {...this.state, userExists: true};
+							this.setState({ userExists: true });
                         }
-                    })
+					})
+					this.setState({ isSignedIn: !!user });
+					statContext[3](!!user);
                 }).then(() => {
                     if (!this.state.userExists) {
                         let userData = {
@@ -49,7 +49,12 @@ export default class Login extends React.Component {
 							uid: user.uid,
 							party: ["template"]
                         }
-                        firebase.firestore().collection('users').doc(userData.uid).set(userData);
+						firebase.firestore().collection('users').doc(userData.uid).set(userData).then(() => {
+							statContext[5](userData.party);
+							this.setState({ userExists: true });
+							this.setState({ isSignedIn: !!user });
+							statContext[3](!!user);
+						});
                     }
                 })
                 

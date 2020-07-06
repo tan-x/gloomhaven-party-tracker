@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import firebase, { config } from './Firebase';
 import MakeshiftDrawer from './components/MakeshiftDrawer';
@@ -22,11 +22,10 @@ class App extends React.Component {
 			showAddChar: true,
 			isOpen: false,
 			isLoggedIn: false,
-			party: ['']
+			party: [''],
+			userData: {},
 		};
 	}
-
-	
 
 	// componentDidMount() {
 	// 	const db = firebase.firestore();
@@ -49,7 +48,7 @@ class App extends React.Component {
 	// 		});
 	// 	var user = firebase.auth().currentUser;
 	// 	var name, email, photoUrl, uid, emailVerified;
-		
+
 	// 	if (user != null) {
 	// 		name = user.displayName;
 	// 		email = user.email;
@@ -72,6 +71,10 @@ class App extends React.Component {
 
 	setParty = (party) => {
 		this.setState({ ...this.state, party: party });
+	};
+
+	setUserData = (data) => {
+		this.setState({ ...this.state, userData: data });
 	};
 
 	showModal = (e) => {
@@ -150,14 +153,36 @@ class App extends React.Component {
 	render() {
 		if (this.state.isLoggedIn === true) {
 			return (
-				<StatContext.Provider value={[this.state.stats, this.setStats, this.state.isLoggedIn, this.setLoggedIn, this.state.party, this.setParty]}>
+				<StatContext.Provider
+					value={[
+						this.state.stats,
+						this.setStats,
+						this.state.isLoggedIn,
+						this.setLoggedIn,
+						this.state.party,
+						this.setParty,
+						this.userData,
+						this.setUserData,
+					]}
+				>
 					<GlobalStyles />
-					<Main/>
+					<Main />
 				</StatContext.Provider>
 			);
 		} else {
 			return (
-				<StatContext.Provider value={[this.state.stats, this.setStats, this.state.isLoggedIn, this.setLoggedIn, this.state.party, this.setParty]}>
+				<StatContext.Provider
+					value={[
+						this.state.stats,
+						this.setStats,
+						this.state.isLoggedIn,
+						this.setLoggedIn,
+						this.state.party,
+						this.setParty,
+						this.userData,
+						this.setUserData,
+					]}
+				>
 					<GlobalStyles />
 					<Header onclick={this.showDrawer} open={this.state.isOpen} />
 					<div
@@ -173,13 +198,12 @@ class App extends React.Component {
 								this.hideDrawer();
 							}}
 						>
-							<Login/>
+							<Login />
 						</div>
 					</div>
 				</StatContext.Provider>
-			)
+			);
 		}
-		
 	}
 }
 
