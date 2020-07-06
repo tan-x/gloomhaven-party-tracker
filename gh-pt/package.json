@@ -18,6 +18,7 @@
     "react-dom": "^16.13.1",
     "react-reveal": "^1.2.2",
     "react-scripts": "3.4.1",
+    "react-string-replace": "^0.4.4",
     "react-transition-group": "^4.4.1",
     "styled-components": "^5.1.1"
   },

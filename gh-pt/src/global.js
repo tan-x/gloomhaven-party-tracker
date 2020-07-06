@@ -297,8 +297,7 @@ export const GlobalStyles = createGlobalStyle`
   .playerCard {
     background-position: center center;
     background-size: cover;
-    border: 1px outset;
-    border-radius: 6px;
+    border-radius: 3px;
     box-shadow: 0 2px 15px gray;
     min-width: 200px;
     min-height: 255px;
@@ -312,7 +311,7 @@ export const GlobalStyles = createGlobalStyle`
   .card-dimmer {
     height: 100%;
     width: 100%;
-    background: rgba(245, 245, 245, .6);
+    background: rgba(245, 245, 245, .5);
     position: relative;
     display: flex;
     justify-content: flex-start;
@@ -321,7 +320,7 @@ export const GlobalStyles = createGlobalStyle`
     color: black;
     text-shadow: 0 0 5px white;
     padding: 18px;
-    border-radius: 6px;
+    border-radius: 3px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-stroke: .1px rgb(140, 140, 140);
@@ -337,6 +336,34 @@ export const GlobalStyles = createGlobalStyle`
     margin: -4px;
   }
 
+  .ruleline {
+    width: 90%;
+    position: absolute;
+    filter: opacity(85%);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .card-border {
+    position: absolute;
+    top:-4.2%;
+    left: -8%;
+    width: 55%;
+    height: 55%;
+    filter: brightness(110%) sepia(80%) drop-shadow(0 3px 10px rgba(0, 0, 0, 0.7));
+  }
+
+  .card-borderbtm {
+    position: absolute;
+    bottom:-3.5%;
+    right: -6.5%;
+    width: 45%;
+    height: 45%;
+    transform: rotate(180deg);
+    filter: brightness(110%) sepia(80%) drop-shadow(0 -3px 10px rgba(0, 0, 0, 0.7));
+  }
+
   h2 {
     font-size: 2.4rem;
   }
@@ -344,6 +371,7 @@ export const GlobalStyles = createGlobalStyle`
   .card-class-logo {
     height: 5vh;
     max-height: 50px;
+    z-index: 20;
   }
 
   .item-logo {
@@ -357,6 +385,7 @@ export const GlobalStyles = createGlobalStyle`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
     width: 100%;
     height: 70%;
   }
@@ -369,7 +398,7 @@ export const GlobalStyles = createGlobalStyle`
     display: flex;
     justify-content: center;
     align-self: flex-end;
-    // position: absolute;
+    position: relative;
     // bottom: 0;
     // left: 0;
     width: 100%;
@@ -378,11 +407,12 @@ export const GlobalStyles = createGlobalStyle`
   .options > button {
     margin: 4px;
     border: 1px solid gray;
-    border-radius: 2px;
+    border-radius: 5px;
     background: rgba(245, 245, 245, .6);
     box-shadow: 0 0 10px rgba(115, 115, 115, .5);
     font-family: inherit;
     font-size: 1.2rem;
+    z-index: 2;
   }
 
   #xpbutton {
@@ -392,8 +422,8 @@ export const GlobalStyles = createGlobalStyle`
   .stats > button {
     margin: 4px;
     border: 1px solid gray;
-    border-radius: 2px;
-    background: rgba(245, 245, 245, .5);
+    border-radius: 5px;
+    background: rgba(245, 245, 245, .6);
     font-family: inherit;
     font-size: calc(1.1rem + 1vw);
     -webkit-font-smoothing: antialiased;
@@ -462,7 +492,7 @@ export const GlobalStyles = createGlobalStyle`
     background-position: center center;
     width: fit-content;
     min-width: 250px;
-    max-width: calc(92vw);
+    max-width: calc(90vw);
     height: fit-content;
     min-height: fit-content;
     position: absolute;
@@ -518,12 +548,24 @@ export const GlobalStyles = createGlobalStyle`
 
   .perk-row {
     display: flex;
-    align-items: center
+    align-items: center;
+    width: 100%;
   }
 
   .perk-text {
     width: 74%;
     text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+  }
+
+  .perk-icon {
+    width: 4%;
+    min-width: 16px;
+    margin-bottom: 3px;
+    vertical-align: bottom;
   }
 
   .checkboxes {
@@ -548,7 +590,7 @@ export const GlobalStyles = createGlobalStyle`
 
   .checks {
     padding: 9px;
-    margin: 3px;
+    margin: 1px;
   }
 
   .checkbox:active, .checkbox:checked:active {
@@ -692,7 +734,8 @@ export const GlobalStyles = createGlobalStyle`
       font-size: 1.5vw;
     }
     .modal {
-      min-width: 380px
+      min-width: 380px;
+      width: 40%;
     }
     .modal-header {
       font-size: calc(12px + 1.5vw);
