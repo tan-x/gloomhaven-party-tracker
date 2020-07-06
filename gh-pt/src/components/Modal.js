@@ -33,7 +33,6 @@ export default class Modal extends React.Component {
 						&#10006;
 					</button>
                     {this.renderSwitch(this.props.modalRoute)}
-					{/* {this.props.children} */}
 				</div>
 			</div>
 		);

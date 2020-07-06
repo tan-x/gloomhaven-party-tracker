@@ -18,6 +18,8 @@ import pull from '../assets/status-fx/pull.png';
 import push from '../assets/status-fx/push.png';
 import stun from '../assets/status-fx/stun.png';
 import wound from '../assets/status-fx/wound.png';
+import shield from '../assets/status-fx/shield.png';
+import heal from '../assets/status-fx/heal.png';
 
 var req = require.context("../assets/Element Icons", false, /.*\.png$/);
 req.keys().forEach(function(key){
@@ -32,10 +34,16 @@ export default function Perks(props) {
 	const [checksVisible, setChecksVisible] = useState({ visible: false });
 
 	function replace(text) {
-		let placeholder = ['fire', 'air', 'dark', 'light', 'earth', 'ice', 'curse', 'disarm', 'immobilize', 'muddle', 'poison', 'pull', 'push', 'stun', 'wound'];
-		let src = [fire, air, dark, light, earth, ice, curse, disarm, immobilize, muddle, poison, pull, push, stun, wound];
+		let placeholder = ['fire', 'air', 'dark', 'light', 'earth', 'ice', 'curse', 'disarm', 'immobilize', 'muddle', 'poison', 'pull', 'push', 'stun', 'wound', 'shield', 'heal'];
+		let src = [fire, air, dark, light, earth, ice, curse, disarm, immobilize, muddle, poison, pull, push, stun, wound, shield, heal];
 		placeholder.forEach((pholder, i) => {
 			text = reactStringReplace(text, pholder, (match) => {
+				if (match === 'Shield') {
+					return <><span>Shield</span><img src={src[i]} alt={pholder} className="perk-icon"/></>
+				}
+				if (match === 'heal') {
+					return <><span>Heal</span><img src={src[i]} alt={pholder} className="perk-icon"/></>
+				}
 				return <img src={src[i]} alt={pholder} className="perk-icon"/>
 			})
 		})

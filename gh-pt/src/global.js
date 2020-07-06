@@ -251,7 +251,8 @@ export const GlobalStyles = createGlobalStyle`
   .xpnum {
     font-size: 33px;
     position: absolute;
-    top: 18%;
+    color: whitesmoke!important;
+    top: 14%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
@@ -492,7 +493,7 @@ export const GlobalStyles = createGlobalStyle`
     background-position: center center;
     width: fit-content;
     min-width: 250px;
-    max-width: calc(90vw);
+    max-width: 92vw;
     height: fit-content;
     min-height: fit-content;
     position: absolute;
@@ -550,22 +551,25 @@ export const GlobalStyles = createGlobalStyle`
     display: flex;
     align-items: center;
     width: 100%;
+    margin-right: 10px;
   }
 
   .perk-text {
     width: 74%;
     text-align: left;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    position: relative;
+    white-space: nowrap;
   }
 
   .perk-icon {
-    width: 4%;
+    width: calc(12px + 1vw);
     min-width: 16px;
     margin-bottom: 3px;
+    margin-right: -2px;
     vertical-align: bottom;
+  }
+
+  .perk-div {
+    width: 90vw;
   }
 
   .checkboxes {
@@ -693,11 +697,17 @@ export const GlobalStyles = createGlobalStyle`
     .body {
       flex-direction: column;
     }
-    p {
-      font-size: 16px;
-    }
     .body {
       background-attachment: initial;
+    }
+  }
+
+  @media screen and (max-width: 390px) {
+    p {
+      font-size: 12px;
+    }
+    .perk-text {
+      overflow: scroll
     }
   }
 
@@ -713,6 +723,18 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
+  @media screen and (max-width: 380px) {
+    .perk-text {
+      overflow: scroll
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    .modal-perks {
+      min-width: 380px;
+      width: 40%;
+    }
+  }
   @media screen and (min-width: 1200px) {
     
     .scrollview {
@@ -736,6 +758,10 @@ export const GlobalStyles = createGlobalStyle`
     .modal {
       min-width: 380px;
       width: 40%;
+    }
+    .modal-perks {
+      min-width: 380px;
+      width: fit-content;
     }
     .modal-header {
       font-size: calc(12px + 1.5vw);
