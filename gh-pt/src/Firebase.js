@@ -1,8 +1,9 @@
 import * as firebase from "firebase/app";
+import * as firebaseui from 'firebaseui';
 import "firebase/firestore";
 
-const firebaseConfig = {
-    apiKey: "process.env.FIREBASE_KEY",
+export const firebaseConfig = {
+    apiKey: "AIzaSyDMP0FGRfMfSIQIYc0x1qlW1SSwKA_DRf4",
     authDomain: "ghpartytracker.firebaseapp.com",
     databaseURL: "https://ghpartytracker.firebaseio.com",
     projectId: "ghpartytracker",

@@ -7,6 +7,7 @@ import { GlobalStyles } from './global';
 import Header from './components/Header';
 import Card from './components/Card';
 import Modal from './components/Modal';
+import Login from './components/Login';
 import stats from './stats';
 import './App.css';
 
@@ -20,6 +21,7 @@ class App extends React.Component {
 			setStats: this.setStats,
 			showAddChar: true,
 			isOpen: false,
+			isLoggedIn: false,
 		};
 	}
 
@@ -46,6 +48,10 @@ class App extends React.Component {
 
 	setStats = (newStats) => {
 		this.setState({ ...this.state, stats: newStats });
+	};
+
+	setLoggedIn = (loggedIn) => {
+		this.setState({ ...this.state, isLoggedIn: loggedIn });
 	};
 
 	showModal = (e) => {
@@ -122,46 +128,73 @@ class App extends React.Component {
 	};
 
 	render() {
-		return (
-			<StatContext.Provider value={[this.state.stats, this.setStats]}>
-				<GlobalStyles />
-				<Header onclick={this.showDrawer} open={this.state.isOpen} />
-				<div
-					className='body'
-					onClick={() => {
-						this.hideModal();
-					}}
-				>
+		let test = false
+		if (this.state.isLoggedIn === true) {
+			return (
+				<StatContext.Provider value={[this.state.stats, this.setStats, this.state.isLoggedIn, this.setLoggedIn]}>
+					<GlobalStyles />
+					<Header onclick={this.showDrawer} open={this.state.isOpen} />
 					<div
-						className='scrollview'
+						className='body'
 						onClick={() => {
 							this.hideModal();
-							this.hideDrawer();
 						}}
 					>
-						{this.renderChars()}
+						<div
+							className='scrollview'
+							onClick={() => {
+								this.hideModal();
+								this.hideDrawer();
+							}}
+						>
+							{this.renderChars()}
+						</div>
+						{/* {this.addCharButton()} */}
 					</div>
-					{/* {this.addCharButton()} */}
-				</div>
-
-				<MakeshiftDrawer
-					open={this.state.isOpen}
-					addchar={(e) => {
-						this.showModal(e.target);
-						this.hideDrawer();
-					}}
-				/>
-				<Modal
-					stats={this.state.stats}
-					show={this.state.show}
-					onclose={() => {
-						this.hideModal();
-					}}
-					modalRoute={this.state.modalRoute}
-					charRoute={this.state.charRoute}
-				/>
-			</StatContext.Provider>
-		);
+	
+					<MakeshiftDrawer
+						open={this.state.isOpen}
+						addchar={(e) => {
+							this.showModal(e.target);
+							this.hideDrawer();
+						}}
+					/>
+					<Modal
+						stats={this.state.stats}
+						show={this.state.show}
+						onclose={() => {
+							this.hideModal();
+						}}
+						modalRoute={this.state.modalRoute}
+						charRoute={this.state.charRoute}
+					/>
+				</StatContext.Provider>
+			);
+		} else {
+			return (
+				<StatContext.Provider value={[this.state.stats, this.setStats, this.state.isLoggedIn, this.setLoggedIn]}>
+					<GlobalStyles />
+					<Header onclick={this.showDrawer} open={this.state.isOpen} />
+					<div
+						className='body'
+						onClick={() => {
+							this.hideModal();
+						}}
+					>
+						<div
+							className='scrollview'
+							onClick={() => {
+								this.hideModal();
+								this.hideDrawer();
+							}}
+						>
+							<Login/>
+						</div>
+					</div>
+				</StatContext.Provider>
+			)
+		}
+		
 	}
 }
 

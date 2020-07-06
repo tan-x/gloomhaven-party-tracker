@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import StatContext from '../Context'
 import clsx from 'clsx';
+import firebase, {config} from '../Firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Slide from '@material-ui/core/Slide';
@@ -28,6 +30,7 @@ const useStyles = makeStyles(() => ({
 
 export default function MakeshiftDrawer(props) {
     const classes = useStyles();
+    const [stats, setStats, loggedIn, setLoggedIn] = useContext(StatContext);
   
     function handleListItemClick(event, index) {
       props.addchar(event);
@@ -70,7 +73,13 @@ export default function MakeshiftDrawer(props) {
               onClick={event => handleListItemClick(event, 3)}
             >
               <img id="logout" src={xp} className="header-class-logo"/>
-              <h3 id="logout" className="menuItem">Logout</h3>
+              <h3 id="logout" className="menuItem" onClick={() => {
+                firebase.auth().signOut().then((res) => {
+
+                  setLoggedIn(false);
+                  console.log(loggedIn);
+                
+              })}}>Logout</h3>
             </ListItem>
           </List>
           <h2 id="drawerArrow">&#x25bc;</h2>

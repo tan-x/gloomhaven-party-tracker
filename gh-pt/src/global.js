@@ -58,11 +58,14 @@ export const GlobalStyles = createGlobalStyle`
     top: 0;
     color: whitesmoke;
     letter-spacing: 6px;
-    text-shadow: 0 5px 14px black;
     box-shadow: 0 3px 18px black;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-stroke: .1px rgb(80, 80, 80);
+  }
+
+  .title {
+    text-shadow: 0 5px 14px black;
   }
 
   .drawer {
@@ -145,8 +148,8 @@ export const GlobalStyles = createGlobalStyle`
 
   #subtitle-text {
     margin-top: -22px;
-    color: rgb(226, 201, 147);
-    text-shadow: 0 1 10px black
+    color: rgb(248,225,184);
+    // text-shadow: 0 0 10px grey;
   }
 
   div > span {
@@ -155,10 +158,18 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   #subtitle > h2 {
+    background: -webkit-linear-gradient(top, #f8e1b8, #ebd5ae, #DF9F28);
+    background: linear-gradient(top, #f8e1b8, #ebd5ae, #DF9F28);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
     letter-spacing: 4px;
   }
 
   h2 > span {
+    background: -webkit-linear-gradient(top, #f8e1b8, #ebd5ae, #DF9F28);
+    background: linear-gradient(top, #f8e1b8, #ebd5ae, #DF9F28);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
     font-size: calc(14px + .8vw);
     position: relative;
     top: -3px;
@@ -340,7 +351,7 @@ export const GlobalStyles = createGlobalStyle`
   .ruleline {
     width: 90%;
     position: absolute;
-    filter: opacity(85%);
+    filter: opacity(65%) saturate(10%);
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
