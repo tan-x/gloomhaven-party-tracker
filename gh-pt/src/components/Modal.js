@@ -4,6 +4,7 @@ import Items from './Items';
 import XP from './XP';
 import Gold from './Gold';
 import AddChar from './AddChar';
+import PartyMgr from './PartyMgr';
 import '../style/Card.css';
 
 export default class Modal extends React.Component {
@@ -20,6 +21,8 @@ export default class Modal extends React.Component {
 				return <Gold stats={this.props.stats} route={this.props.charRoute} />;
 			case 'addChar':
 				return <AddChar onclose={this.props.onclose}/>;
+			case 'partyMgr':
+				return <PartyMgr onclose={this.props.onclose}/>;
 		}
 	}
 	render() {

@@ -52,12 +52,12 @@ export default function MakeshiftDrawer(props) {
               id="addChar" className="menuItem"> Add Character</h3>
             </ListItem>
             <ListItem
-              id="partymgr"
+              id="partyMgr"
               button
               onClick={event => handleListItemClick(event, 1)}
             >
-              <img id="partymgr" src={xp} className="header-class-logo"/>
-              <h3 id="partymgr" className="menuItem"> Party Manager</h3>
+              <img id="partyMgr" src={xp} className="header-class-logo"/>
+              <h3 id="partyMgr" className="menuItem"> Party Manager</h3>
             </ListItem>
             <ListItem
               button

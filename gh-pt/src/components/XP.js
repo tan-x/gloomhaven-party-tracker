@@ -22,7 +22,7 @@ export default class Perks extends React.Component {
 	render() {
 		return (
 			<StatContext.Consumer>
-				{([stats, setStats]) => {
+				{([stats, setStats, isLoggedIn, setLoggedIn, party, setParty]) => {
 					return (
 						<>
 							<h2 className='modal-header'>XP</h2>
@@ -48,13 +48,13 @@ export default class Perks extends React.Component {
 												console.log(newLvl);
 												newStats[this.props.route].level = newLvl;
 												this.levelUp();
-												firebase.firestore().collection('starstreak')
+												firebase.firestore().collection(party[0])
 												.doc(this.props.route)
 												.update({
 													xp: newXP, level: newLvl
 													});
 											} else {
-												firebase.firestore().collection('starstreak')
+												firebase.firestore().collection(party[0])
 												.doc(this.props.route)
 												.update({
 													xp: newXP

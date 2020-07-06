@@ -2,9 +2,6 @@ import React from 'react';
 import firebase, { config } from '../Firebase';
 import StatContext from '../Context';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import ruleline from '../assets/ruleline1.png';
-import border from '../assets/border2.png';
-import '../style/Card.css';
 
 export default class Login extends React.Component {
 	static contextType = StatContext;
@@ -38,7 +35,8 @@ export default class Login extends React.Component {
                 firebase.firestore().collection('users').get().then(querySnapshot => {
                     querySnapshot.forEach((doc) => {
                         if(doc.data().uid === user.uid) {
-                            this.state = {...this.state, userExists: true};
+							this.state = {...this.state, userExists: true};
+							statContext[5](user.party)
                         }
                     })
                 }).then(() => {
@@ -48,7 +46,8 @@ export default class Login extends React.Component {
                             email: user.email,
                             photoUrl: user.photoURL,
                             emailVerified: user.emailVerified,
-                            uid: user.uid,
+							uid: user.uid,
+							party: ["template"]
                         }
                         firebase.firestore().collection('users').doc(userData.uid).set(userData);
                     }

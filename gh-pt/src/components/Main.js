@@ -3,11 +3,9 @@ import { motion } from 'framer-motion';
 import firebase, { config } from '../Firebase';
 import MakeshiftDrawer from './MakeshiftDrawer';
 import StatContext from '../Context';
-import { GlobalStyles } from '../global';
 import Header from './Header';
 import Card from './Card';
 import Modal from './Modal';
-import Login from './Login';
 import stats from '../stats';
 import '../App.css';
 
@@ -17,12 +15,13 @@ class Main extends React.Component {
 		this.state = {
 			show: false,
 			modalRoute: '',
-			stats: stats,
+			stats: {},
 			setStats: this.setStats,
 			showAddChar: true,
 			isOpen: false,
             isLoggedIn: false,
-            party: '',
+			party: '',
+			partyIndex: 0,
 		};
     }
     
@@ -32,30 +31,37 @@ class Main extends React.Component {
 		const statContext = this.context;
         const db = firebase.firestore();
         const user = firebase.auth().currentUser;
-        let party;
-        const userRef = db.collection('users').doc(user.uid);
+		let party;
+		// set userDB reference to get user data using current user id
+		const userRef = db.collection('users').doc(user.uid);
+		// get user data and main party name, set to state
         db.collection('users').doc(user.uid).get().then(querySnapshot => {
-            if (querySnapshot.data().party) {
-                party = querySnapshot.data().party;
-                this.setState({party: party[0]});
-                const statsRef = db.collection(party[0]);
+            if (statContext[4][0] !== 'template') {
+				console.log(statContext[4])
+				party = statContext[4];
+				this.setState({party: party});
+				// statContext[5](party);
+				// set statsDB ref using retrieved party name for collection
+                const statsRef = db.collection(party[this.state.partyIndex]);
                 statsRef
                     .get()
                     .then((querySnapshot) => {
                         let fireStats = {};
                         querySnapshot.forEach(function (doc) {
+							// set up local copy of character data from party and put in context
                             if (doc.data().class) {
                                 let docId = doc.id;
                                 let docData = doc.data();
                                 fireStats = { ...fireStats, [docId]: docData };
                             }
                         });
-                        statContext[1](fireStats);
+						statContext[1](fireStats);
                     })
                     .catch(function (error) {
                         console.log('Error getting documents: ', error);
                     });
             } else {
+				// if user has no party set up yet, use the template data set and put in context
                 const statsRef = db.collection('template');
                 this.setState({party: 'template'});
                 statsRef
@@ -69,15 +75,14 @@ class Main extends React.Component {
                                 fireStats = { ...fireStats, [docId]: docData };
                             }
                         });
-                        statContext[1](fireStats);
+						statContext[1](fireStats);
+						this.setState({show: true, modalRoute: 'partyMgr'})
                     })
                     .catch(function (error) {
                         console.log('Error getting documents: ', error);
                     });
-            }
-            
-        })
-		
+            } 
+		})
 	}
 
 	setStats = (newStats) => {
@@ -110,6 +115,7 @@ class Main extends React.Component {
 		this.setState({ isOpen: false });
 	};
 
+	// render all characters' cards that are in the current user's party
 	renderChars = () => {
 		const statContext = this.context;
 		const charCards = [];
@@ -139,7 +145,7 @@ class Main extends React.Component {
 	render() {
 			return (
 				<StatContext.Consumer>
-                    {([stats, setStats]) => {
+                    {([stats, setStats, isLoggedIn, setLoggedIn, party, setParty]) => {
 					    return (
                             <>
 					<Header onclick={this.showDrawer} open={this.state.isOpen} />

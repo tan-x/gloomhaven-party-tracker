@@ -75,7 +75,7 @@ export default function Perks(props) {
 														];
 														return previousState;
 													});
-													firebase.firestore().collection('starstreak').doc(props.route).update({perks: perks});
+													firebase.firestore().collection(statContext[4][0]).doc(props.route).update({perks: perks});
 												}}
 											/>
 										);
@@ -94,7 +94,7 @@ export default function Perks(props) {
 														];
 														return previousState;
 													});
-													firebase.firestore().collection('starstreak').doc(props.route).update({perks: perks});
+													firebase.firestore().collection(statContext[4][0]).doc(props.route).update({perks: perks});
 												}}
 											/>
 										);

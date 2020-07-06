@@ -17,11 +17,12 @@ class App extends React.Component {
 		this.state = {
 			show: false,
 			modalRoute: '',
-			stats: stats,
+			stats: {},
 			setStats: this.setStats,
 			showAddChar: true,
 			isOpen: false,
 			isLoggedIn: false,
+			party: ['template']
 		};
 	}
 
@@ -60,13 +61,6 @@ class App extends React.Component {
 	// 		}
 	// 		console.log(name)
 	// }
-
-	  
-
-	componentDidUpdate() {
-		console.log()
-		
-	}
 
 	setStats = (newStats) => {
 		this.setState({ ...this.state, stats: newStats });
@@ -156,14 +150,14 @@ class App extends React.Component {
 	render() {
 		if (this.state.isLoggedIn === true) {
 			return (
-				<StatContext.Provider value={[this.state.stats, this.setStats, this.state.isLoggedIn, this.setLoggedIn, this.state.party, this.state.setParty]}>
+				<StatContext.Provider value={[this.state.stats, this.setStats, this.state.isLoggedIn, this.setLoggedIn, this.state.party, this.setParty]}>
 					<GlobalStyles />
 					<Main/>
 				</StatContext.Provider>
 			);
 		} else {
 			return (
-				<StatContext.Provider value={[this.state.stats, this.setStats, this.state.isLoggedIn, this.setLoggedIn]}>
+				<StatContext.Provider value={[this.state.stats, this.setStats, this.state.isLoggedIn, this.setLoggedIn, this.state.party, this.setParty]}>
 					<GlobalStyles />
 					<Header onclick={this.showDrawer} open={this.state.isOpen} />
 					<div

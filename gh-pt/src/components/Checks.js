@@ -70,13 +70,13 @@ export default class Checks extends React.Component {
             const newStats = Object.assign({}, statContext[0]);
             newStats[this.props.route].checks = checks + 1;
             statContext[1](newStats);
-            firebase.firestore().collection('starstreak').doc(this.props.route).update(newStats[this.props.route]);
+            firebase.firestore().collection(statContext[4][0]).doc(this.props.route).update(newStats[this.props.route]);
         } else if (!e.target.checked && e.target.id == checks - 1) {
             this.checkRem = (checks - 1) % 3;
             const newStats = Object.assign({}, statContext[0]);
             newStats[this.props.route].checks = checks - 1;
             statContext[1](newStats);
-            firebase.firestore().collection('starstreak').doc(this.props.route).update(newStats[this.props.route]);
+            firebase.firestore().collection(statContext[4][0]).doc(this.props.route).update(newStats[this.props.route]);
         }
 	}
 
