@@ -9,7 +9,8 @@ import '../style/Card.css';
 export default class Login extends React.Component {
 	static contextType = StatContext;
 	state = {
-		isSignedIn: false, // Local signed-in state.
+        isSignedIn: false, // Local signed-in state.
+        userExists: false,
 	};
 
 	// Configure FirebaseUI.
@@ -32,8 +33,29 @@ export default class Login extends React.Component {
 		const statContext = this.context;
 		this.unregisterAuthObserver = firebase.auth().onAuthStateChanged((user) => {
 			this.setState({ isSignedIn: !!user });
-			console.log(user);
-			statContext[3](!!user);
+            statContext[3](!!user);
+            if (user != null) {
+                firebase.firestore().collection('users').get().then(querySnapshot => {
+                    querySnapshot.forEach((doc) => {
+                        if(doc.data().uid === user.uid) {
+                            this.state = {...this.state, userExists: true};
+                        }
+                    })
+                }).then(() => {
+                    if (!this.state.userExists) {
+                        let userData = {
+                            name: user.displayName,
+                            email: user.email,
+                            photoUrl: user.photoURL,
+                            emailVerified: user.emailVerified,
+                            uid: user.uid,
+                        }
+                        firebase.firestore().collection('users').doc(userData.uid).set(userData);
+                    }
+                })
+                
+            }
+            
 		});
 	}
 

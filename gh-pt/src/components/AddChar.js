@@ -15,6 +15,7 @@ export default class Perks extends React.Component {
     renderOptions = () => {
         const statContext = this.context;
         const statsRef = statContext[0];
+        console.log(statContext[0])
         const newAvailChars = [];
         const newOptions = [];
 		for (const char in statsRef) {
@@ -38,7 +39,7 @@ export default class Perks extends React.Component {
             newStats[lowerCase].name = this.state.newName;
             newStats[lowerCase].inParty = true;
             statContext[1](newStats);
-            firebase.firestore().collection('starstreak').doc(lowerCase).update(newStats[lowerCase]);
+            firebase.firestore().collection(statContext[4]).doc(lowerCase).update(newStats[lowerCase]);
         }
         this.props.onclose();
     }
