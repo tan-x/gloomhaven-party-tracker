@@ -1,8 +1,3 @@
-const inquirer = require('inquirer');
-const fs = require('fs');
-const firebase = require('firebase/app');
-require('firebase/firestore');
-
 const stats = {
 	redGuard: {
 		name: '',
@@ -222,42 +217,68 @@ const stats = {
 	},
 };
 
-const firebaseConfig = {
-	apiKey: 'process.env.FIREBASE_KEY',
-	authDomain: 'ghpartytracker.firebaseapp.com',
-	databaseURL: 'https://ghpartytracker.firebaseio.com',
-	projectId: 'ghpartytracker',
-	storageBucket: 'ghpartytracker.appspot.com',
-	messagingSenderId: '675542052221',
-	appId: '1:675542052221:web:782ae63b97562e49b93014',
-	measurementId: 'G-39WBY8QF9B',
-};
+switch (true) {
+	case stats.hatchet.xp < 45:
+		stats.hatchet.level = 1;
+		break;
+	case stats.hatchet.xp >= 45 && stats.hatchet.xp < 95:
+		stats.hatchet.level = 2;
+		break;
+	case stats.hatchet.xp >= 95 && stats.hatchet.xp < 150:
+		stats.hatchet.level = 3;
+		break;
+	case stats.hatchet.xp >= 150 && stats.hatchet.xp < 210:
+		stats.hatchet.level = 4;
+		break;
+	case stats.hatchet.xp >= 210 && stats.hatchet.xp < 275:
+		stats.hatchet.level = 5;
+		break;
+	case stats.hatchet.xp >= 275 && stats.hatchet.xp < 345:
+		stats.hatchet.level = 6;
+		break;
+	case stats.hatchet.xp >= 345 && stats.hatchet.xp < 420:
+		stats.hatchet.level = 7;
+		break;
+	case stats.hatchet.xp >= 420 && stats.hatchet.xp < 500:
+		stats.hatchet.level = 8;
+		break;
+	case stats.hatchet.xp >= 500:
+		stats.hatchet.level = 9;
+		break;
+	default:
+		stats.hatchet.level = 1;
+}
 
-firebase.initializeApp(firebaseConfig);
+switch (true) {
+	case stats.redGuard.xp < 45:
+		stats.redGuard.level = 1;
+		break;
+	case stats.redGuard.xp >= 45 && stats.redGuard.xp < 95:
+		stats.redGuard.level = 2;
+		break;
+	case stats.redGuard.xp >= 95 && stats.redGuard.xp < 150:
+		stats.redGuard.level = 3;
+		break;
+	case stats.redGuard.xp >= 150 && stats.redGuard.xp < 210:
+		stats.redGuard.level = 4;
+		break;
+	case stats.redGuard.xp >= 210 && stats.redGuard.xp < 275:
+		stats.redGuard.level = 5;
+		break;
+	case stats.redGuard.xp >= 275 && stats.redGuard.xp < 345:
+		stats.redGuard.level = 6;
+		break;
+	case stats.redGuard.xp >= 345 && stats.redGuard.xp < 420:
+		stats.redGuard.level = 7;
+		break;
+	case stats.redGuard.xp >= 420 && stats.redGuard.xp < 500:
+		stats.redGuard.level = 8;
+		break;
+	case stats.redGuard.xp >= 500:
+		stats.redGuard.level = 9;
+		break;
+	default:
+		stats.hatchet.level = 1;
+}
 
-inquirer
-	.prompt([
-		{
-			type: 'input',
-			message: 'Collection:',
-			name: 'collection',
-		},
-		{
-			type: 'input',
-			message: 'Doc:',
-			name: 'doc',
-		},
-		{
-			type: 'confirm',
-			message: 'Update firebase shop?',
-			name: 'update',
-		},
-	])
-	.then((res) => {
-		if (res.update) {
-			firebase.firestore().collection(res.collection).doc(res.doc).update({perks: stats[res.doc].perks});
-			// let shopjson = fs.readFileSync(__dirname + '/../shop.json');
-			// let shopCopy = JSON.parse(shopjson);
-			// firebase.firestore().collection(res.collection).doc('shop').set({ shop: shopCopy });
-		}
-	});
+export default stats;

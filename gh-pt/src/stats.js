@@ -23,15 +23,15 @@ const stats = {
 				checked: [true, true],
 			},
 			{
-				text: 'Replace one +1 card with one +2 Fire card',
+				text: 'Replace one +1 card with one +2 fire card',
 				checked: [false, false],
 			},
 			{
-				text: 'Replace one +1 card with one +2 Light card',
+				text: 'Replace one +1 card with one +2 light card',
 				checked: [false, false],
 			},
 			{
-				text: 'Add one +1 Fire & Light card',
+				text: 'Add one +1 fire & light card',
 				checked: [false, false],
 			},
 			{
@@ -43,7 +43,7 @@ const stats = {
 				checked: [false],
 			},
 			{
-				text: 'Replace one +0 card with one +1 Wound card',
+				text: 'Replace one +0 card with one +1 wound card',
 				checked: [true],
 			},
         ],
@@ -67,7 +67,7 @@ const stats = {
 				checked: [true, true],
 			},
 			{
-				text: 'Replace one +0 card with one +2 Muddle card',
+				text: 'Replace one +0 card with one +2 muddle card',
 				checked: [false],
 			},
 			{
@@ -75,7 +75,7 @@ const stats = {
 				checked: [false],
 			},
 			{
-				text: 'Replace one +0 card with one +1 Wound card',
+				text: 'Replace one +0 card with one +1 wound card',
 				checked: [false],
 			},
 			{
@@ -87,15 +87,15 @@ const stats = {
 				checked: [false],
 			},
 			{
-				text: 'Replace one +0 card with one +0 Stun card',
+				text: 'Replace one +0 card with one +0 stun card',
 				checked: [false],
 			},
 			{
-				text: 'Replace one +1 card with one +1 Stun card',
+				text: 'Replace one +1 card with one +1 stun card',
 				checked: [false],
 			},
 			{
-				text: 'Add one +2 Wind card',
+				text: 'Add one +2 air card',
 				checked: [true, false, false],
 			},
 			{
