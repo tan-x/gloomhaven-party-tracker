@@ -35,14 +35,15 @@ class Main extends React.Component {
 		// set userDB reference to get user data using current user id
 		const userRef = db.collection('users').doc(user.uid);
 		// get user data and main party name, set to state
+		console.log(statContext[4])
         db.collection('users').doc(user.uid).get().then(querySnapshot => {
-            if (statContext[4][0] !== 'template') {
-				console.log(statContext[4])
-				party = statContext[4];
+			console.log(querySnapshot.data().party[0])
+            if (querySnapshot.data().party[0] !== 'template') {
+				party = querySnapshot.data().party;
 				this.setState({party: party});
-				// statContext[5](party);
+				statContext[5](party);
 				// set statsDB ref using retrieved party name for collection
-                const statsRef = db.collection(party[this.state.partyIndex]);
+                const statsRef = db.collection(this.state.party[0]);
                 statsRef
                     .get()
                     .then((querySnapshot) => {

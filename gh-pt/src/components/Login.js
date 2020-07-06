@@ -30,13 +30,13 @@ export default class Login extends React.Component {
 		const statContext = this.context;
 		this.unregisterAuthObserver = firebase.auth().onAuthStateChanged((user) => {
 			this.setState({ isSignedIn: !!user });
-            statContext[3](!!user);
+			statContext[3](!!user);
             if (user != null) {
                 firebase.firestore().collection('users').get().then(querySnapshot => {
                     querySnapshot.forEach((doc) => {
                         if(doc.data().uid === user.uid) {
+							statContext[5](doc.data().party)
 							this.state = {...this.state, userExists: true};
-							statContext[5](user.party)
                         }
                     })
                 }).then(() => {

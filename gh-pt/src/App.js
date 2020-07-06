@@ -22,7 +22,7 @@ class App extends React.Component {
 			showAddChar: true,
 			isOpen: false,
 			isLoggedIn: false,
-			party: ['template']
+			party: ['']
 		};
 	}
 
