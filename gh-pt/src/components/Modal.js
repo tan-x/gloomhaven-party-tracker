@@ -8,7 +8,6 @@ import PartyMgr from './PartyMgr';
 import '../style/Card.css';
 
 export default class Modal extends React.Component {
-
 	renderSwitch(route) {
 		switch (route) {
 			case 'items':
@@ -20,9 +19,11 @@ export default class Modal extends React.Component {
 			case 'gold':
 				return <Gold stats={this.props.stats} route={this.props.charRoute} />;
 			case 'addChar':
-				return <AddChar onclose={this.props.onclose}/>;
+				return <AddChar onclose={this.props.onclose} />;
 			case 'partyMgr':
-				return <PartyMgr onclose={this.props.onclose}/>;
+				return <PartyMgr onclose={this.props.onclose} />;
+			default:
+				return <XP stats={this.props.stats} route={this.props.charRoute} />;
 		}
 	}
 	render() {
@@ -35,7 +36,7 @@ export default class Modal extends React.Component {
 					<button className='modal-close' onClick={this.props.onclose}>
 						&#10006;
 					</button>
-                    {this.renderSwitch(this.props.modalRoute)}
+					{this.renderSwitch(this.props.modalRoute)}
 				</div>
 			</div>
 		);

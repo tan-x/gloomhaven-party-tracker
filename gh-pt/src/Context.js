@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 const StatContext = React.createContext({
-    stats: {},
-    setStats: () => {}
+	stats: {},
+	setStats: () => {},
 });
 export default StatContext;

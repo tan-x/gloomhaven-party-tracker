@@ -6,8 +6,8 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 export default class Login extends React.Component {
 	static contextType = StatContext;
 	state = {
-        isSignedIn: false, // Local signed-in state.
-        userExists: false,
+		isSignedIn: false, // Local signed-in state.
+		userExists: false,
 	};
 
 	// Configure FirebaseUI.
@@ -16,8 +16,8 @@ export default class Login extends React.Component {
 		signInFlow: 'popup',
 		// We will display Google and Facebook as auth providers.
 		signInOptions: [
-            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-            firebase.auth.EmailAuthProvider.PROVIDER_ID
+			firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+			firebase.auth.EmailAuthProvider.PROVIDER_ID,
 		],
 		callbacks: {
 			// Avoid redirects after sign-in.
@@ -29,37 +29,45 @@ export default class Login extends React.Component {
 	componentDidMount() {
 		const statContext = this.context;
 		this.unregisterAuthObserver = firebase.auth().onAuthStateChanged((user) => {
-            if (user != null) {
-                firebase.firestore().collection('users').get().then(querySnapshot => {
-                    querySnapshot.forEach((doc) => {
-                        if(doc.data().uid === user.uid) {
-							statContext[5](doc.data().party)
-							this.setState({ userExists: true });
-                        }
-					})
-					this.setState({ isSignedIn: !!user });
-					statContext[3](!!user);
-                }).then(() => {
-                    if (!this.state.userExists) {
-                        let userData = {
-                            name: user.displayName,
-                            email: user.email,
-                            photoUrl: user.photoURL,
-                            emailVerified: user.emailVerified,
-							uid: user.uid,
-							party: ["template"]
-                        }
-						firebase.firestore().collection('users').doc(userData.uid).set(userData).then(() => {
-							statContext[5](userData.party);
-							this.setState({ userExists: true });
-							this.setState({ isSignedIn: !!user });
-							statContext[3](!!user);
+			if (user != null) {
+				firebase
+					.firestore()
+					.collection('users')
+					.get()
+					.then((querySnapshot) => {
+						querySnapshot.forEach((doc) => {
+							if (doc.data().uid === user.uid) {
+								statContext[5](doc.data().party);
+								this.setState({ userExists: true });
+							}
 						});
-                    }
-                })
-                
-            }
-            
+						this.setState({ isSignedIn: !!user });
+						statContext[3](!!user);
+					})
+					.then(() => {
+						if (!this.state.userExists) {
+							let userData = {
+								name: user.displayName,
+								email: user.email,
+								photoUrl: user.photoURL,
+								emailVerified: user.emailVerified,
+								uid: user.uid,
+								party: ['template'],
+							};
+							firebase
+								.firestore()
+								.collection('users')
+								.doc(userData.uid)
+								.set(userData)
+								.then(() => {
+									statContext[5](userData.party);
+									this.setState({ userExists: true });
+									this.setState({ isSignedIn: !!user });
+									statContext[3](!!user);
+								});
+						}
+					});
+			}
 		});
 	}
 
@@ -82,7 +90,7 @@ export default class Login extends React.Component {
 			<div>
 				<h1>My App</h1>
 				<p>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
-				<a onClick={() => firebase.auth().signOut()}>Sign-out</a>
+				<h6 onClick={() => firebase.auth().signOut()}>Sign-out</h6>
 			</div>
 		);
 	}

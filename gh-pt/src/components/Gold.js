@@ -1,5 +1,5 @@
 import React from 'react';
-import firebase from "../Firebase";
+import firebase from '../Firebase';
 import StatContext from '../Context';
 
 export default class Perks extends React.Component {
