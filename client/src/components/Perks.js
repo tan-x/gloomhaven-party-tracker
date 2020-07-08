@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import firebase from "../Firebase";
+import firebase from '../Firebase';
 import StatContext from '../Context';
 import Checks from './Checks';
 import reactStringReplace from 'react-string-replace';
@@ -21,32 +21,78 @@ import wound from '../assets/status-fx/wound.png';
 import shield from '../assets/status-fx/shield.png';
 import heal from '../assets/status-fx/heal.png';
 
-var req = require.context("../assets/Element Icons", false, /.*\.png$/);
-req.keys().forEach(function(key){
-    req(key);
+var req = require.context('../assets/Element Icons', false, /.*\.png$/);
+req.keys().forEach(function (key) {
+	req(key);
 });
 
 console.log();
 
 export default function Perks(props) {
-	const [statContext, setStatContext, loggedIn, setLoggedIn, party, setParty] = useContext(StatContext);
-	const [perks, setPerks] = useState(statContext[props.route].perks);
+	const [stats, setStats, loggedIn, setLoggedIn, party] = useContext(StatContext);
+	const [perks, setPerks] = useState(stats[props.route].perks);
 	const [checksVisible, setChecksVisible] = useState({ visible: false });
 
 	function replace(text) {
-		let placeholder = ['fire', 'air', 'dark', 'light', 'earth', 'ice', 'curse', 'disarm', 'immobilize', 'muddle', 'poison', 'pull', 'push', 'stun', 'wound', 'shield', 'heal'];
-		let src = [fire, air, dark, light, earth, ice, curse, disarm, immobilize, muddle, poison, pull, push, stun, wound, shield, heal];
+		let placeholder = [
+			'fire',
+			'air',
+			'dark',
+			'light',
+			'earth',
+			'ice',
+			'curse',
+			'disarm',
+			'immobilize',
+			'muddle',
+			'poison',
+			'pull',
+			'push',
+			'stun',
+			'wound',
+			'shield',
+			'heal',
+		];
+		let src = [
+			fire,
+			air,
+			dark,
+			light,
+			earth,
+			ice,
+			curse,
+			disarm,
+			immobilize,
+			muddle,
+			poison,
+			pull,
+			push,
+			stun,
+			wound,
+			shield,
+			heal,
+		];
 		placeholder.forEach((pholder, i) => {
 			text = reactStringReplace(text, pholder, (match) => {
 				if (match === 'Shield') {
-					return <><span>Shield</span><img src={src[i]} alt={pholder} className="perk-icon"/></>
+					return (
+						<>
+							<span>Shield</span>
+							<img src={src[i]} alt={pholder} className='perk-icon' />
+						</>
+					);
 				}
 				if (match === 'heal') {
-					return <><span>Heal</span><img src={src[i]} alt={pholder} className="perk-icon"/></>
+					return (
+						<>
+							<span>Heal</span>
+							<img src={src[i]} alt={pholder} className='perk-icon' />
+						</>
+					);
 				}
-				return <img src={src[i]} alt={pholder} className="perk-icon"/>
-			})
-		})
+				return <img src={src[i]} alt={pholder} className='perk-icon' />;
+			});
+		});
 		return text;
 	}
 
@@ -75,7 +121,11 @@ export default function Perks(props) {
 														];
 														return previousState;
 													});
-													firebase.firestore().collection(party[0]).doc(props.route).update({perks: perks});
+													firebase
+														.firestore()
+														.collection(party[0])
+														.doc(props.route)
+														.update({ perks: perks });
 												}}
 											/>
 										);
@@ -94,7 +144,11 @@ export default function Perks(props) {
 														];
 														return previousState;
 													});
-													firebase.firestore().collection(party[0]).doc(props.route).update({perks: perks});
+													firebase
+														.firestore()
+														.collection(party[0])
+														.doc(props.route)
+														.update({ perks: perks });
 												}}
 											/>
 										);
@@ -104,8 +158,9 @@ export default function Perks(props) {
 							{/* <p className='perk-text'>{perk.text = reactStringReplace(perk.text, 'Fire', (match, i) => {
 								return <img src={fire} alt={'fire'} className="perk-icon"/>
 							})}</p> */}
-							<p className='perk-text'><span>{replace(perk.text)}</span></p>
-							
+							<p className='perk-text'>
+								<span>{replace(perk.text)}</span>
+							</p>
 						</div>
 					);
 				})}
@@ -123,7 +178,7 @@ export default function Perks(props) {
 		return (
 			<div className='columnFlex'>
 				<Checks
-					checks={statContext[props.route].checks}
+					checks={stats[props.route].checks}
 					route={props.route}
 					save={() => {
 						setChecksVisible({ visible: false });

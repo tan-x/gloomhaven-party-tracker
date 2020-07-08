@@ -7,7 +7,7 @@ body {
 
 @font-face {
   font-family: 'PirataOne';
-  src: local('PirataOne-Gloomhaven.ttf'), url(./style/PirataOne-Gloomhaven.ttf) format('truetype');
+  src: local('PirataOne-Gloomhaven.ttf'), url(./PirataOne-Gloomhaven.ttf) format('truetype');
 }
 
 code {

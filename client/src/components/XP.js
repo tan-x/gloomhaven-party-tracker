@@ -1,15 +1,14 @@
 import React from 'react';
-import firebase from "../Firebase";
+import firebase from '../Firebase';
 import StatContext from '../Context';
-import xpicon from '../xpicon.svg';
+import xpicon from '../assets/xpicon.svg';
 
 export default class Perks extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { lvlup: 'lvlup-exit-active' };
 		this.inputRef = React.createRef();
-        this.lvlArray = [0, 45, 95, 150, 210, 275, 345, 420, 500];
-
+		this.lvlArray = [0, 45, 95, 150, 210, 275, 345, 420, 500];
 	}
 
 	static contextType = StatContext;
@@ -48,19 +47,16 @@ export default class Perks extends React.Component {
 												console.log(newLvl);
 												newStats[this.props.route].level = newLvl;
 												this.levelUp();
-												firebase.firestore().collection(party[0])
-												.doc(this.props.route)
-												.update({
-													xp: newXP, level: newLvl
-													});
+												firebase.firestore().collection(party[0]).doc(this.props.route).update({
+													xp: newXP,
+													level: newLvl,
+												});
 											} else {
-												firebase.firestore().collection(party[0])
-												.doc(this.props.route)
-												.update({
-													xp: newXP
-													});
+												firebase.firestore().collection(party[0]).doc(this.props.route).update({
+													xp: newXP,
+												});
 											}
-                                            setStats(newStats);
+											setStats(newStats);
 										}
 									}}
 								>

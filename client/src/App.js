@@ -1,15 +1,10 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
-import firebase, { config } from './Firebase';
-import MakeshiftDrawer from './components/MakeshiftDrawer';
+import React from 'react';
 import StatContext from './Context';
-import { GlobalStyles } from './global';
+import { GlobalStyles } from './style/global';
 import Header from './components/Header';
-import Card from './components/Card';
 import Main from './components/Main';
 import Login from './components/Login';
-import stats from './stats';
-import './App.css';
+import './style/App.css';
 
 class App extends React.Component {
 	constructor() {
@@ -97,57 +92,6 @@ class App extends React.Component {
 
 	hideDrawer = () => {
 		this.setState({ isOpen: false });
-	};
-
-	renderChars = () => {
-		const charCards = [];
-		const statsRef = this.state.stats;
-		for (const char in statsRef) {
-			if (statsRef[char].inParty) {
-				charCards.push(
-					<motion.div style={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
-						<Card
-							stats={statsRef}
-							key={char}
-							name={statsRef[char].name}
-							class={statsRef[char].class}
-							classimg={char}
-							onclick={(e) => {
-								this.showModal(e.target);
-							}}
-						></Card>
-					</motion.div>
-				);
-			}
-		}
-		charCards.reverse();
-		return charCards;
-	};
-
-	addCharButton = () => {
-		if (this.state.showAddChar) {
-			return (
-				<motion.div
-					style={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					transition={{ delay: 1, duration: 1 }}
-				>
-					<div
-						id='addChar'
-						className='addChar'
-						onClick={(e) => {
-							this.showModal(e.target);
-						}}
-					>
-						<h2 id='addChar'>+</h2>
-						<p id='addChar'>
-							Add
-							<br /> Character
-						</p>
-					</div>
-				</motion.div>
-			);
-		}
 	};
 
 	render() {
