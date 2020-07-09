@@ -57,11 +57,11 @@ inquirer.prompt([
         name: 'additem'
     }).then(res => {
         if(res.additem) {
-            let shopjson = fs.readFileSync(__dirname + '/../shop.json');
+            let shopjson = fs.readFileSync(__dirname + '/../data/shop.json');
             let shopCopy = JSON.parse(shopjson);
             shopCopy.push(response);
             let data = JSON.stringify(shopCopy, null, 2);
-            fs.writeFileSync('shop.json', data);
+            fs.writeFileSync(__dirname + '/../data/shop.json', data);
 			firebase.firestore().collection('template').doc('shop').set({shop: shopCopy});
         }
     })
