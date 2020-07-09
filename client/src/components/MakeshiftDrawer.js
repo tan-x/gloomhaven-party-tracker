@@ -32,11 +32,11 @@ export default function MakeshiftDrawer(props) {
 								Party Manager
 							</h3>
 						</ListItem>
-						<ListItem button id='charlist' onClick={(event) => handleListItemClick(event, 2)}>
-							<img id='charlist' src={xp} className='header-class-logo' alt='menu icon' />
-							<h3 id='charlist' className='menuItem'>
+						<ListItem button id='unlocks' onClick={(event) => handleListItemClick(event, 2)}>
+							<img id='unlocks' src={xp} className='header-class-logo' alt='menu icon' />
+							<h3 id='unlocks' className='menuItem'>
 								{' '}
-								Character List
+								Unlocks
 							</h3>
 						</ListItem>
 						<ListItem id='logout' button onClick={(event) => handleListItemClick(event, 3)}>

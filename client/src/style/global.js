@@ -624,6 +624,10 @@ export const GlobalStyles = createGlobalStyle`
     margin: 3px;
   }
 
+  .unlock-text {
+    filter: blur(10px);
+  }
+
   input {
     margin: 2px;
   }
