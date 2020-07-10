@@ -51,11 +51,9 @@ class Main extends React.Component {
 							let fireStats = {};
 							querySnapshot.forEach(function (doc) {
 								// set up local copy of character data from party and put in context
-								if (doc.data().class) {
 									let docId = doc.id;
 									let docData = doc.data();
 									fireStats = { ...fireStats, [docId]: docData };
-								}
 							});
 							statContext[1](fireStats);
 						})
@@ -71,11 +69,9 @@ class Main extends React.Component {
 						.then((querySnapshot) => {
 							let fireStats = {};
 							querySnapshot.forEach(function (doc) {
-								if (doc.data().class) {
 									let docId = doc.id;
 									let docData = doc.data();
 									fireStats = { ...fireStats, [docId]: docData };
-								}
 							});
 							statContext[1](fireStats);
 							this.setState({ show: true, modalRoute: 'partyMgr' });

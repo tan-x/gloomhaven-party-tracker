@@ -160,6 +160,54 @@
     "id": 19
   },
   {
+    "name": "Hawk Helm",
+    "type": "head",
+    "available": 0,
+    "total": 1,
+    "cost": 20,
+    "id": 20
+  },
+  {
+    "name": "Bladed Armor",
+    "type": "body",
+    "available": 0,
+    "total": 1,
+    "cost": 45,
+    "id": 21
+  },
+  {
+    "name": "Boots of Striding",
+    "type": "legs",
+    "available": 0,
+    "total": 1,
+    "cost": 30,
+    "id": 22
+  },
+  {
+    "name": "Volatile Bomb",
+    "type": "hand",
+    "available": 0,
+    "total": 1,
+    "cost": 40,
+    "id": 23
+  },
+  {
+    "name": "Barbed Chain",
+    "type": "hand",
+    "available": 0,
+    "total": 1,
+    "cost": 30,
+    "id": 24
+  },
+  {
+    "name": "Oak Charm",
+    "type": "small",
+    "available": 0,
+    "total": 2,
+    "cost": 30,
+    "id": 25
+  },
+  {
     "name": "Fatefull Compass",
     "type": "small",
     "available": 0,
@@ -176,6 +224,22 @@
     "id": 27
   },
   {
+    "name": "Tower Shield",
+    "type": "hand",
+    "available": 0,
+    "total": 1,
+    "cost": 40,
+    "id": 28
+  },
+  {
+    "name": "Ring of Haste",
+    "type": "small",
+    "available": 0,
+    "total": 1,
+    "cost": 40,
+    "id": 29
+  },
+  {
     "name": "Ring of Strength",
     "type": "small",
     "available": 1,
@@ -184,11 +248,43 @@
     "id": 30
   },
   {
+    "name": "Ring of Restoration",
+    "type": "small",
+    "available": 0,
+    "total": 1,
+    "cost": 40,
+    "id": 31
+  },
+  {
     "name": "Steel Ring",
     "type": "small",
     "available": 1,
     "total": 1,
     "cost": 30,
     "id": 32
+  },
+  {
+    "name": "Barbed Axe",
+    "type": "hand",
+    "available": 0,
+    "total": 1,
+    "cost": 40,
+    "id": 33
+  },
+  {
+    "name": "Robes of Command",
+    "type": "body",
+    "available": 0,
+    "total": 1,
+    "cost": 40,
+    "id": 34
+  },
+  {
+    "name": "Jet Boots",
+    "type": "legs",
+    "available": 0,
+    "total": 1,
+    "cost": 30,
+    "id": 35
   }
 ]

@@ -624,8 +624,31 @@ export const GlobalStyles = createGlobalStyle`
     margin: 3px;
   }
 
+  .unlock-row {
+    display: flex;
+    justify-content: row;
+    align-items: center;
+    width: 100%;
+    margin-right: 10px;
+  }
+
   .unlock-text {
-    filter: blur(10px);
+    font-size: calc(16px + 1vw) !important;
+  }
+
+  .unlock-blur {
+    filter: blur(6px);
+  }
+
+  .unlock-num {
+    font-size: calc(16px + 1vw) !important;
+    margin: 2px;
+  }
+
+  #unlock-filter {
+    margin-bottom: 10px;
+    font-family: inherit;
+    font-size: calc(12px + .6vw);
   }
 
   input {

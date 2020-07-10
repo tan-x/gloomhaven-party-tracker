@@ -62,7 +62,7 @@ inquirer.prompt([
             shopCopy.push(response);
             let data = JSON.stringify(shopCopy, null, 2);
             fs.writeFileSync(__dirname + '/../data/shop.json', data);
-			firebase.firestore().collection('template').doc('shop').set({shop: shopCopy});
+			// firebase.firestore().collection('template').doc('shop').set({shop: shopCopy});
         }
     })
 })

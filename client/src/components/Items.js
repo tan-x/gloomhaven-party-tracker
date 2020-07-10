@@ -12,7 +12,7 @@ import small from '../assets/equip-slots/small.png';
 export default function Items(props) {
 	const statContext = useContext(StatContext);
 	const [items] = useState(statContext[0][props.route].items);
-	const [shop] = useState(shopJSON);
+	const [shop] = useState(statContext[0].shop.shop);
 	// const [total, setTotal] = useState({total: 0})
 	const [cart, setCart] = useState({ myCart: [], total: 0 });
 	const [shopVisible, setShopVisible] = useState({ visible: false, nsf: false });
