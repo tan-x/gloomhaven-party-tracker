@@ -144,6 +144,9 @@ export default function Unlocks(props) {
   });
 
   const addItemToChar = (char, itemNum) => {
+    if (char === 'red guard') {
+      char = 'redGuard'
+    }
     const newChar = Object.assign({}, statContext[0]);
     const itemRef = statContext[8].shop[itemNum - 1];
     newChar[char].items[itemRef.type].push(itemRef.name);

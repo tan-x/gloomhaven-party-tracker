@@ -558,6 +558,12 @@ export const GlobalStyles = createGlobalStyle`
     font-size: calc(12px + .6vw);
   }
 
+  #trade-filter {
+    margin-top: 10px;
+    font-family: inherit;
+    font-size: calc(12px + .6vw);
+  }
+
   .perk-row {
     display: flex;
     align-items: center;
@@ -596,7 +602,7 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-appearance: none;
     background-color: #fafafa;
     border: 1px solid #cacece;
-    // box-shadow: 0 1px 5px rgba(0,0,0,0.5), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 5px rgba(0,0,0,0.5);
     padding: 5.5px;
     border-radius: 3px;
     display: inline-block;

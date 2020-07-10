@@ -35,7 +35,10 @@ export default class Perks extends React.Component {
 	addCharacter(e) {
 		if (this.state.selectValue && this.state.selectValue !== 'None') {
 			const statContext = this.context;
-			const lowerCase = this.state.selectValue.toLowerCase();
+			let lowerCase = this.state.selectValue.toLowerCase();
+			if (lowerCase === 'red guard') {
+				lowerCase = 'redGuard'
+			}
 			const newStats = Object.assign({}, statContext[0]);
 			newStats[lowerCase].name = this.state.newName;
 			newStats[lowerCase].inParty = true;
