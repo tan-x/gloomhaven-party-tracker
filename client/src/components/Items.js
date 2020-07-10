@@ -135,6 +135,25 @@ export default function Items(props) {
 	}
 
 	if (!shopVisible.visible) {
+		let totalItems = headItems.length + bodyItems.length + legItems.length + handItems.length + smallItems.length;
+		if (totalItems === 0){
+			return (
+				<>
+				<h2 className='modal-header'>Items</h2>
+				<div>
+					<p>No Items in inventory!</p>
+					<button
+						className='additem'
+						onClick={() => {
+							setShopVisible({ visible: true });
+						}}
+					>
+						Add Item
+					</button>
+				</div>
+				</>
+			)
+		}
 		return (
 			<>
 				<h2 className='modal-header'>Items</h2>
@@ -214,14 +233,14 @@ export default function Items(props) {
 				>
 					<option value='head'>Head Items</option>
 					<option value='body'>Body Items</option>
-					<option value='legs'>Legs Items</option>
+					<option value='legs'>Leg Items</option>
 					<option value='hand'>Hand Items</option>
 					<option value='small'>Small Items</option>
 				</select>
 				<div>
-					{itemType.selectValue === 'head' && headItemsShop.length > 0 && (
+					{itemType.selectValue === 'head' && (headItemsShop.length > 0 ? 
 						<img src={head} className='item-logo' alt='head' />
-					)}
+					 : <p>No head items available!</p>)}
 					{itemType.selectValue === 'head' &&
 						headItemsShop.map((item, key) => {
 							return (
@@ -238,9 +257,9 @@ export default function Items(props) {
 								</div>
 							);
 						})}
-					{itemType.selectValue === 'body' && bodyItemsShop.length > 0 && (
+					{itemType.selectValue === 'body' && (bodyItemsShop.length > 0 ? 
 						<img src={body} className='item-logo' alt='body' />
-					)}
+					 : <p>No body items available!</p>)}
 					{itemType.selectValue === 'body' &&
 						bodyItemsShop.map((item, key) => {
 							return (
@@ -257,13 +276,13 @@ export default function Items(props) {
 								</div>
 							);
 						})}
-					{itemType.selectValue === 'legs' && legItemsShop.length > 0 && (
+					{itemType.selectValue === 'legs' && (legItemsShop.length > 0 ? 
 						<img src={legs} className='item-logo' alt='legs' />
-					)}
+					 : <p>No leg items available!</p>)}
 					{itemType.selectValue === 'legs' &&
 						legItemsShop.map((item, key) => {
 							return (
-								<div className='shop-row'>
+								<div key={key} className='shop-row'>
 									<input
 										type='checkbox'
 										className='checkbox'
@@ -276,9 +295,9 @@ export default function Items(props) {
 								</div>
 							);
 						})}
-					{itemType.selectValue === 'hand' && handItemsShop.length > 0 && (
+					{itemType.selectValue === 'hand' && (handItemsShop.length > 0 ? 
 						<img src={hand} className='item-logo' alt='hand' />
-					)}
+					 : <p>No hand items available!</p>)}
 					{itemType.selectValue === 'hand' &&
 						handItemsShop.map((item, key) => {
 							return (
@@ -295,9 +314,9 @@ export default function Items(props) {
 								</div>
 							);
 						})}
-					{itemType.selectValue === 'small' && smallItemsShop.length > 0 && (
+					{itemType.selectValue === 'small' && (smallItemsShop.length > 0 ? 
 						<img src={small} className='item-logo' alt='small' />
-					)}
+					 : <p>No small items available!</p>)}
 					{itemType.selectValue === 'small' &&
 						smallItemsShop.map((item, key) => {
 							return (
