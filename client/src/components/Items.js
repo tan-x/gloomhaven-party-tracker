@@ -13,8 +13,8 @@ export default function Items(props) {
 	const [items] = useState(statContext[0][props.route].items);
 	const [shop] = useState(statContext[8].shop);
 	// const [total, setTotal] = useState({total: 0})
-	const [cart, setCart] = useState({ myCart: [], total: 0 });
-	const [shopVisible, setShopVisible] = useState({ visible: false, nsf: false });
+	const [cart, setCart] = useState({ myCart: [], total: 0, nsf: false });
+	const [shopVisible, setShopVisible] = useState({ visible: false });
 	const [itemType, setItemType] = useState({ selectValue: 'head' });
 	let headItems = [],
 		bodyItems = [],
@@ -85,26 +85,46 @@ export default function Items(props) {
 	}
 
 	function addItem(e) {
-		if (e.target.checked) {
-			// update total of cart
-			setCart({ ...cart, cart: (cart.total += shop[e.target.id].cost) });
-			// create new cart copy
-			let newItem = cart.myCart;
-			// push item to cart array
-			newItem.push(shop[e.target.id]);
-			// change id of item
-			// newItem[newItem.length - 1] = {...newItem[newItem.length - 1], id: newItem[newItem.length - 1].id};
-			// setCart to new copy of cart with added item
-			setCart({ ...cart, myCart: newItem });
-		} else {
-			// update total of cart when unchecking
-			setCart({ ...cart, total: (cart.total -= shop[e.target.id].cost) });
-			// create new cart copy
-			let deleteItem = cart.myCart;
-			// splice item from cart, finding matching name to event target name attr
-			let spliceIndex = deleteItem.findIndex((el) => shop[e.target.id].name == el.name);
-			deleteItem.splice(spliceIndex, 1);
+		if (shopVisible.visible === 'buy') {
+			if (e.target.checked) {
+				// update total of cart
+				setCart({ ...cart, total: (cart.total += shop[e.target.id].cost) });
+				// create new cart copy
+				let newItem = cart.myCart;
+				// push item to cart array
+				newItem.push(shop[e.target.id]);
+				// change id of item
+				// newItem[newItem.length - 1] = {...newItem[newItem.length - 1], id: newItem[newItem.length - 1].id};
+				// setCart to new copy of cart with added item
+				setCart({ ...cart, myCart: newItem });
+			} else {
+				// update total of cart when unchecking
+				setCart({ ...cart, total: (cart.total -= shop[e.target.id].cost) });
+				// create new cart copy
+				let deleteItem = cart.myCart;
+				// splice item from cart, finding matching name to event target name attr
+				let spliceIndex = deleteItem.findIndex((el) => shop[e.target.id].name == el.name);
+				deleteItem.splice(spliceIndex, 1);
+			}
+		} else if (shopVisible.visible = 'trade') {
+			if (e.target.checked) {
+				// create new cart copy
+				let newItem = cart.myCart;
+				// push item to cart array
+				newItem.push({name: e.target.id, type: e.target.name });
+				console.log(newItem)
+				// setCart to new copy of cart with added item
+				setCart({ ...cart, myCart: newItem });
+			} else {
+				// create new cart copy
+				let deleteItem = cart.myCart;
+				// splice item from cart, finding matching name to event target name attr
+				let spliceIndex = deleteItem.findIndex((el) => e.target.id == el.name);
+				deleteItem.splice(spliceIndex, 1);
+				setCart({ ...cart, myCart: deleteItem });
+			}
 		}
+		
 	}
 
 	function buyItems() {
@@ -126,12 +146,19 @@ export default function Items(props) {
 				.collection(statContext[4][0])
 				.doc(props.route)
 				.update(newStats[props.route]);
-			setShopVisible({ ...shopVisible, visible: false });
+			setShopVisible({ visible: false });
 		} else {
 			// if cart total is greater than player's gold, alert them
-			setShopVisible({ ...shopVisible, nsf: true });
-			setTimeout(() => setShopVisible({ ...shopVisible, nsf: false }), 2000);
+			setCart({ nsf: true });
+			setTimeout(() => setCart({ nsf: false }), 2000);
 		}
+	}
+
+	const tradeItem = () => {
+		if (cart.myCart !== []) {
+
+		}
+		setShopVisible({ visible: false });
 	}
 
 	if (!shopVisible.visible) {
@@ -145,10 +172,10 @@ export default function Items(props) {
 					<button
 						className='additem'
 						onClick={() => {
-							setShopVisible({ visible: true });
+							setShopVisible({ visible: 'buy' });
 						}}
 					>
-						Add Item
+						Shop
 					</button>
 				</div>
 				</>
@@ -211,15 +238,23 @@ export default function Items(props) {
 					<button
 						className='additem'
 						onClick={() => {
-							setShopVisible({ visible: true });
+							setShopVisible({ visible: 'buy' });
 						}}
 					>
-						Add Item
+						Shop
+					</button>
+					<button
+						className='additem'
+						onClick={() => {
+							setShopVisible({ visible: 'trade' });
+						}}
+					>
+						Trade
 					</button>
 				</div>
 			</>
 		);
-	} else {
+	} else if (shopVisible.visible === 'buy') {
 		return (
 			<>
 				<h2 className='modal-header'>Items</h2>
@@ -334,7 +369,7 @@ export default function Items(props) {
 							);
 						})}
 					<div className='lvlbox'>
-						{shopVisible.nsf === true && (
+						{cart.nsf === true && (
 							<Jump>
 								<h3>Not enough gold!</h3>
 							</Jump>
@@ -347,10 +382,120 @@ export default function Items(props) {
 							buyItems();
 						}}
 					>
-						Add Items
+						Buy
 					</button>
 				</div>
 			</>
 		);
+	} else if (shopVisible.visible === 'trade') {
+		return (
+			<>
+				<h2 className='modal-header'>Items</h2>
+				<div>
+					{headItems.length > 0 && <img src={head} className='item-logo' alt='head' />}
+					{headItems.map((item, key) => {
+						return (
+							<>
+							<div key={key} className='shop-row'>
+								<input
+										type='checkbox'
+										className='checkbox'
+										name='head'
+										id={item}
+										onChange={(e) => addItem(e)}
+									/>
+								<p key={key}>{item}</p>
+								{key < headItems.length - 1}
+								</div>
+							</>
+						);
+					})}
+					{headItems.length > 0 && <hr />}
+					{bodyItems.length > 0 && <img src={body} className='item-logo' alt='body' />}
+					{bodyItems.map((item, key) => {
+						return (
+							<>
+							<div key={key} className='shop-row'>
+								<input
+											type='checkbox'
+											className='checkbox'
+											id={item}
+											name='body'
+											onChange={(e) => addItem(e)}
+										/>
+								<p key={10 + key}>{item}</p>
+								{key < bodyItems.length - 1}
+								</div>
+							</>
+						);
+					})}
+					{bodyItems.length > 0 && <hr />}
+					{legItems.length > 0 && <img src={legs} className='item-logo' alt='legs' />}
+					{legItems.map((item, key) => {
+						return (
+							<>
+							<div key={key} className='shop-row'>
+							<input
+										type='checkbox'
+										className='checkbox'
+										id={item}
+										name='legs'
+										onChange={(e) => addItem(e)}
+									/>
+								<p key={20 + key}>{item}</p>
+								{key < legItems.length - 1}
+								</div>
+							</>
+						);
+					})}
+					{legItems.length > 0 && <hr />}
+					{handItems.length > 0 && <img src={hand} className='item-logo' alt='hand' />}
+					{handItems.map((item, key) => {
+						return (
+							<>
+							<div key={key} className='shop-row'>
+							<input
+										type='checkbox'
+										className='checkbox'
+										id={item}
+										name='hand'
+										onChange={(e) => addItem(e)}
+									/>
+								<p key={30 + key}>{item}</p>
+								{key < handItems.length - 1}
+								</div>
+							</>
+						);
+					})}
+					{handItems.length > 0 && <hr />}
+					{smallItems.length > 0 && <img src={small} className='item-logo' alt='small' />}
+					{smallItems.map((item, key) => {
+						return (
+							<>
+							<div key={key} className='shop-row'>
+							<input
+										type='checkbox'
+										className='checkbox'
+										id={item}
+										name='small'
+										onChange={(e) => addItem(e)}
+									/>
+								<p key={40 + key}>{item}</p>
+								{key < smallItems.length - 1}
+								</div>
+							</>
+						);
+					})}
+					<button
+						className='additem'
+						onClick={() => {
+							tradeItem();
+						}}
+					>
+						Trade
+					</button>
+				</div>
+			</>
+		)
 	}
 }
