@@ -79,7 +79,6 @@ class Main extends React.Component {
 										fireStats = { ...fireStats, [docId]: docData };
 									} else {
 										statContext[9](docData);
-										console.log(statContext[8])
 									}
 							});
 							statContext[1](fireStats);
