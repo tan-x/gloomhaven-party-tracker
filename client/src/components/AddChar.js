@@ -13,11 +13,10 @@ export default class Perks extends React.Component {
 	componentDidMount() {
 		const statContext = this.context;
 		const statsRef = statContext[0];
-		console.log(statContext[0]);
 		const newAvailChars = [];
 		const newOptions = [];
 		for (const char in statsRef) {
-			if (!statsRef[char].inParty) {
+			if (statsRef[char].inParty === false) {
 				newAvailChars.push(statsRef[char].class);
 				newOptions.push(<option>{statsRef[char].class}</option>);
 			}

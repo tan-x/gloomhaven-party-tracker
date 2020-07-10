@@ -19,6 +19,7 @@ class App extends React.Component {
 			isLoggedIn: false,
 			party: [''],
 			userData: {},
+			items: {}
 		};
 	}
 
@@ -72,6 +73,10 @@ class App extends React.Component {
 		this.setState({ ...this.state, userData: data });
 	};
 
+	setItems = (data) => {
+		this.setState({ ...this.state, items: data });
+	};
+
 	showModal = (e) => {
 		if (e.id !== 'logout') {
 			this.setState({ show: !this.state.show, modalRoute: e.id, charRoute: e.name, isOpen: false });
@@ -105,8 +110,10 @@ class App extends React.Component {
 						this.setLoggedIn,
 						this.state.party,
 						this.setParty,
-						this.userData,
+						this.state.userData,
 						this.setUserData,
+						this.state.items,
+						this.setItems,
 					]}
 				>
 					<GlobalStyles />

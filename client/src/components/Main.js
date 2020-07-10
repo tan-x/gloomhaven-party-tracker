@@ -38,7 +38,6 @@ class Main extends React.Component {
 			.doc(user.uid)
 			.get()
 			.then((querySnapshot) => {
-				console.log(querySnapshot.data().party[0]);
 				if (querySnapshot.data().party[0] !== 'template') {
 					party = querySnapshot.data().party;
 					this.setState({ party: party });
@@ -49,13 +48,16 @@ class Main extends React.Component {
 						.get()
 						.then((querySnapshot) => {
 							let fireStats = {};
+							let fireItems = {};
 							querySnapshot.forEach(function (doc) {
 								// set up local copy of character data from party and put in context
-								if (doc.data().class) {
 									let docId = doc.id;
 									let docData = doc.data();
-									fireStats = { ...fireStats, [docId]: docData };
-								}
+									if (docId !== 'items') {
+										fireStats = { ...fireStats, [docId]: docData };
+									} else {
+										statContext[9](docData);
+									}
 							});
 							statContext[1](fireStats);
 						})
@@ -71,11 +73,14 @@ class Main extends React.Component {
 						.then((querySnapshot) => {
 							let fireStats = {};
 							querySnapshot.forEach(function (doc) {
-								if (doc.data().class) {
 									let docId = doc.id;
 									let docData = doc.data();
-									fireStats = { ...fireStats, [docId]: docData };
-								}
+									if (docId !== 'items') {
+										fireStats = { ...fireStats, [docId]: docData };
+									} else {
+										statContext[9](docData);
+										console.log(statContext[8])
+									}
 							});
 							statContext[1](fireStats);
 							this.setState({ show: true, modalRoute: 'partyMgr' });

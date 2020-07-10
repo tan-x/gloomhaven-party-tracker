@@ -23,7 +23,7 @@ export default class Perks extends React.Component {
 		const newAvailChars = [];
 		const newOptions = [];
 		for (const char in statsRef) {
-			if (!statsRef[char].inParty) {
+			if (statsRef[char].inParty === false) {
 				newAvailChars.push(statsRef[char].class);
 				newOptions.push(<option>{statsRef[char].class}</option>);
 			}
@@ -55,6 +55,7 @@ export default class Perks extends React.Component {
 				console.log(statContext[0][obj]);
 				firebase.firestore().collection(this.state.newParty).doc(obj).set(statContext[0][obj]);
 			}
+			firebase.firestore().collection(this.state.newParty).doc('items').set(statContext[8]);
 
 			console.log(user.uid);
 			firebase
