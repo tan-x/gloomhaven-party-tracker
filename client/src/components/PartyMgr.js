@@ -55,6 +55,7 @@ export default class Perks extends React.Component {
 				console.log(statContext[0][obj]);
 				firebase.firestore().collection(this.state.newParty).doc(obj).set(statContext[0][obj]);
 			}
+			firebase.firestore().collection(this.state.newParty).doc('items').set(statContext[8]);
 
 			console.log(user.uid);
 			firebase

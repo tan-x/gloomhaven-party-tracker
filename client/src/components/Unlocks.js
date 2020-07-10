@@ -4,7 +4,8 @@ import StatContext from '../Context';
 
 export default function Unlocks(props) {
 	const statContext = useContext(StatContext);
-    const [unlockView, setUnlockView] = useState('scenario');
+	const [unlockView, setUnlockView] = useState('scenario');
+	console.log(statContext[8])
     const unlocks = statContext[8].unlocks;
     useEffect(() => {
         firebase.firestore().collection(statContext[4][0]).doc('items').get().then((res) => {
@@ -44,19 +45,19 @@ export default function Unlocks(props) {
                 newItems.shop[itemRef.itemNum - 1].available -= 1;
             }
         }
-		// statContext[9](newItems);
-		// firebase
-		// 	.firestore()
-		// 	.collection(statContext[4][0])
-		// 	.doc('items')
-		// 	.update(newItems);
+		statContext[9](newItems);
+		firebase
+			.firestore()
+			.collection(statContext[4][0])
+			.doc('items')
+			.update(newItems);
 	};
 
 	unlocks.scenario.forEach((item, i) => {
 		if (!item.unlocked) {
 			scenarioArray.push(
 				<div className='unlock-row' key={i}>
-					<input type='checkbox' id={i} name='scenario' onChange={handleUnlock} defaultChecked={false}/>
+					<input type='checkbox' id={i} name='scenario' onChange={handleUnlock} checked={false}/>
 					<span className='unlock-num'>{item.scenario}. </span>
 					<p className='unlock-blur unlock-text'>{item.info}</p>
 				</div>
@@ -76,7 +77,7 @@ export default function Unlocks(props) {
 		if (!item.unlocked) {
 			treasureArray.push(
 				<div className='unlock-row' key={i}>
-					<input type='checkbox' id={i} name='treasure' onChange={handleUnlock} defaultChecked={false}/>
+					<input type='checkbox' id={i} name='treasure' onChange={handleUnlock} checked={false}/>
 					<span className='unlock-num'>{item.treasure}. </span>
 					<p className='unlock-blur unlock-text'>{item.info}</p>
 				</div>
@@ -96,7 +97,7 @@ export default function Unlocks(props) {
 		if (!item.unlocked) {
 			eventArray.push(
 				<div className='unlock-row' key={i}>
-					<input type='checkbox' id={i} name='event' onChange={handleUnlock} defaultChecked={false}/>
+					<input type='checkbox' id={i} name='event' onChange={handleUnlock} checked={false}/>
 					<span className='unlock-num'>{item.event}. </span>
 					<p className='unlock-blur unlock-text'>{item.info}</p>
 				</div>
