@@ -26,7 +26,7 @@ inquirer
 		{
 			type: 'list',
             message: 'Document:',
-            choices: ['demolitionist', 'hatchet', 'redGuard', 'voidwarden', 'shop'],
+            choices: ['demolitionist', 'hatchet', 'redGuard', 'voidwarden', 'items'],
             name: 'doc',
         },
         {
@@ -38,7 +38,8 @@ inquirer
 	])
 	.then((res) => {
         firebase.firestore().collection(res.collection).doc(res.doc).get().then((querySnapshot) => {
-            const stats = JSON.stringify(querySnapshot.data(), null, 2);
+			const stats = JSON.stringify(querySnapshot.data(), null, 2);
+			// console.log(stats);
             fs.appendFileSync(__dirname + 'dataPull1.js', stats)
         })
         // let shopjson = fs.readFileSync(__dirname + '/../shop.json');

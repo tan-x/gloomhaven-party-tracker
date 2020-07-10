@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import firebase from '../Firebase';
 import StatContext from '../Context';
 import Jump from 'react-reveal/Jump';
-import shopJSON from '../data/shop.json';
 import head from '../assets/equip-slots/head.png';
 import body from '../assets/equip-slots/body.png';
 import legs from '../assets/equip-slots/legs.png';
@@ -12,7 +11,7 @@ import small from '../assets/equip-slots/small.png';
 export default function Items(props) {
 	const statContext = useContext(StatContext);
 	const [items] = useState(statContext[0][props.route].items);
-	const [shop] = useState(statContext[0].shop.shop);
+	const [shop] = useState(statContext[0].items.shop);
 	// const [total, setTotal] = useState({total: 0})
 	const [cart, setCart] = useState({ myCart: [], total: 0 });
 	const [shopVisible, setShopVisible] = useState({ visible: false, nsf: false });

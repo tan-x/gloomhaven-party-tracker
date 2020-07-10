@@ -235,6 +235,11 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+firebase.firestore().collection('template').doc('items').get().then((response) => {
+	console.log(response.data());
+	firebase.firestore().collection('starstreak').doc('items').set(response.data());
+});
+
 inquirer
 	.prompt([
 		{

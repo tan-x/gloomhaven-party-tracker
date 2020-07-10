@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const firebase = require('firebase/app');
 require('firebase/firestore');
+const unlocks = require('../data/unlocks');
 
 const firebaseConfig = {
     apiKey: "process.env.FIREBASE_KEY",
@@ -57,12 +58,13 @@ inquirer.prompt([
         name: 'additem'
     }).then(res => {
         if(res.additem) {
-            let shopjson = fs.readFileSync(__dirname + '/../data/shop.json');
+            let shopjson = fs.readFileSync(__dirname + '/../data/items.json');
             let shopCopy = JSON.parse(shopjson);
-            shopCopy.push(response);
-            let data = JSON.stringify(shopCopy, null, 2);
-            fs.writeFileSync(__dirname + '/../data/shop.json', data);
-			// firebase.firestore().collection('template').doc('shop').set({shop: shopCopy});
+            // console.log(unlocks);
+            // shopCopy.push(response);
+            let data = JSON.stringify(shopCopy.shop, null, 2);
+            // fs.writeFileSync(__dirname + '/../data/shop.json', data);
+			firebase.firestore().collection('template').doc('items').update({shop: shopCopy.shop});
         }
     })
 })
