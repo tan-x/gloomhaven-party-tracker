@@ -34,14 +34,16 @@ export default function Items(props) {
 		const tradeOptions = [];
 		const statsRef = statContext[0];
 		for (const char in statsRef) {
-			if (tradeOptions.length === 0) {
+			if (char !== props.route && tradeOptions.length === 0) {
 				setTarget(char);
+				console.log(char);
 			}
 			if (char !== props.route && statsRef[char].inParty === true) {
 				tradeOptions.push(<option>{statsRef[char].class}</option>);
 			}
 		}
 		if (tradeOptions.length === 0) {
+			setTarget('');
 			tradeOptions.push(<option>None</option>);
 		}
 		setOptions(tradeOptions);
@@ -52,19 +54,19 @@ export default function Items(props) {
 	for (const item in items) {
 		switch (item) {
 			case 'head':
-				headItems = headItems.concat(items[item]);
+				items[item].forEach(el => headItems.push(el));
 				break;
 			case 'body':
-				bodyItems = bodyItems.concat(items[item]);
+				items[item].forEach(el => bodyItems.push(el));
 				break;
 			case 'legs':
-				legItems = legItems.concat(items[item]);
+				items[item].forEach(el => legItems.push(el));
 				break;
 			case 'hand':
-				handItems = handItems.concat(items[item]);
+				items[item].forEach(el => handItems.push(el));
 				break;
 			case 'small':
-				smallItems = smallItems.concat(items[item]);
+				items[item].forEach(el => smallItems.push(el));
 				break;
 			default:
 				console.log('uh oh');
@@ -74,27 +76,27 @@ export default function Items(props) {
 	for (let i = 0; i < shop.length; i++) {
 		switch (shop[i].type) {
 			case 'head':
-				if (!headItems.some((item) => item === shop[i].name) && shop[i].available > 0) {
+				if (!headItems.some((item) => item.name === shop[i].name) && shop[i].available > 0) {
 					headItemsShop.push(shop[i]);
 				}
 				break;
 			case 'body':
-				if (!bodyItems.some((item) => item === shop[i].name) && shop[i].available > 0) {
+				if (!bodyItems.some((item) => item.name === shop[i].name) && shop[i].available > 0) {
 					bodyItemsShop.push(shop[i]);
 				}
 				break;
 			case 'legs':
-				if (!legItems.some((item) => item === shop[i].name) && shop[i].available > 0) {
+				if (!legItems.some((item) => item.name === shop[i].name) && shop[i].available > 0) {
 					legItemsShop.push(shop[i]);
 				}
 				break;
 			case 'hand':
-				if (!handItems.some((item) => item === shop[i].name) && shop[i].available > 0) {
+				if (!handItems.some((item) => item.name === shop[i].name) && shop[i].available > 0) {
 					handItemsShop.push(shop[i]);
 				}
 				break;
 			case 'small':
-				if (!smallItems.some((item) => item === shop[i].name) && shop[i].available > 0) {
+				if (!smallItems.some((item) => item.name === shop[i].name) && shop[i].available > 0) {
 					smallItemsShop.push(shop[i]);
 				}
 				break;
@@ -125,21 +127,42 @@ export default function Items(props) {
 				let spliceIndex = deleteItem.findIndex((el) => shop[e.target.id].name == el.name);
 				deleteItem.splice(spliceIndex, 1);
 			}
-		} else if ((shopVisible.visible = 'trade')) {
+		} else if (shopVisible.visible === 'trade') {
 			if (e.target.checked) {
 				// create new cart copy
 				let newItem = cart.myCart;
 				// push item to cart array
-				newItem.push({ name: e.target.id, type: e.target.name });
+				newItem.push(shop[e.target.id]);
 				// setCart to new copy of cart with added item
 				setCart({ ...cart, myCart: newItem });
 			} else {
 				// create new cart copy
 				let deleteItem = cart.myCart;
 				// splice item from cart, finding matching name to event target name attr
-				let spliceIndex = deleteItem.findIndex((el) => e.target.id == el.name);
+				let spliceIndex = deleteItem.findIndex((el) => shop[e.target.id].name == el.name);
 				deleteItem.splice(spliceIndex, 1);
 				setCart({ ...cart, myCart: deleteItem });
+			}
+		} else if (shopVisible.visible === 'sell') {
+			if (e.target.checked) {
+				// update total of cart
+				setCart({ ...cart, total: (cart.total += (Math.round(shop[e.target.id].cost / 2))) });
+				// create new cart copy
+				let newItem = cart.myCart;
+				// push item to cart array
+				newItem.push(shop[e.target.id]);
+				// change id of item
+				// newItem[newItem.length - 1] = {...newItem[newItem.length - 1], id: newItem[newItem.length - 1].id};
+				// setCart to new copy of cart with added item
+				setCart({ ...cart, myCart: newItem });
+			} else {
+				// update total of cart when unchecking
+				setCart({ ...cart, total: (cart.total -= (Math.round(shop[e.target.id].cost / 2))) });
+				// create new cart copy
+				let deleteItem = cart.myCart;
+				// splice item from cart, finding matching name to event target name attr
+				let spliceIndex = deleteItem.findIndex((el) => shop[e.target.id].name == el.name);
+				deleteItem.splice(spliceIndex, 1);
 			}
 		}
 	}
@@ -148,14 +171,18 @@ export default function Items(props) {
 		// if cart total is less than player's gold
 		if (cart.total <= statContext[0][props.route].gold) {
 			// create new copy of stats
-			console.log(statContext[0][props.route].gold);
 			const newStats = Object.assign({}, statContext[0]);
+			const newItems = Object.assign({}, statContext[8]);
 			// for each item in cart, push it's name(string) to player's item object in the corresponding type array
-			cart.myCart.forEach((item) => newStats[props.route].items[item.type].push(item.name));
+			cart.myCart.forEach((item) => {
+				newStats[props.route].items[item.type].push(item);
+				newItems.shop[item.id].available -= 1;
+			})
 			// subtract cart total from player's gold
 			newStats[props.route].gold -= cart.total;
 			// set context to new stats
 			statContext[1](newStats);
+			statContext[9](newItems);
 			// reset cart to empty array
 			setCart({ ...cart, myCart: [], total: 0 });
 			firebase
@@ -163,6 +190,11 @@ export default function Items(props) {
 				.collection(statContext[4][0])
 				.doc(props.route)
 				.update(newStats[props.route]);
+			firebase
+				.firestore()
+				.collection(statContext[4][0])
+				.doc('items')
+				.update({shop: newItems.shop});
 			setShopVisible({ visible: false });
 		} else {
 			// if cart total is greater than player's gold, alert them
@@ -172,15 +204,13 @@ export default function Items(props) {
 	}
 
 	const tradeItem = () => {
-		if (cart.myCart !== []) {
-			
+		if (cart.myCart !== [] && target !== '') {
 			const targetItems = statContext[0][target];
 			const traderItems = statContext[0][props.route];
 			cart.myCart.forEach(item => {
-				console.log(targetItems.items[item.type]);
-				if (targetItems.items[item.type].some(i => i !== item.name) || targetItems.items[item.type].length === 0) {
-					targetItems.items[item.type].push(item.name);
-					let removeIndex = traderItems.items[item.type].findIndex((el) => el === item.name);
+				if (targetItems.items[item.type].some(i => i.name !== item.name) || targetItems.items[item.type].length === 0) {
+					targetItems.items[item.type].push(item);
+					let removeIndex = traderItems.items[item.type].findIndex((el) => el.name === item.name);
 					traderItems.items[item.type].splice(removeIndex, 1);
 				} else {
 					window.alert(`${target.charAt(0).toUpperCase() + target.slice(1)} already has ${item.name}`)
@@ -201,6 +231,36 @@ export default function Items(props) {
 		}
 		setShopVisible({ visible: false });
 	};
+
+	const sellItem = () => {
+			// create new copy of stats
+			const newStats = Object.assign({}, statContext[0]);
+			const newItems = Object.assign({}, statContext[8]);
+			// for each item in cart, push it's name(string) to player's item object in the corresponding type array
+			cart.myCart.forEach((item) => {
+				let deleteIndex = newStats[props.route].items[item.type].findIndex((el) => el.name === item.name);
+				newStats[props.route].items[item.type].splice(deleteIndex, 1);
+				newItems.shop[item.id].available += 1;
+			})
+			// subtract cart total from player's gold
+			newStats[props.route].gold += cart.total;
+			// set context to new stats
+			statContext[1](newStats);
+			statContext[9](newItems);
+			// reset cart to empty array
+			setCart({ ...cart, myCart: [], total: 0 });
+			firebase
+				.firestore()
+				.collection(statContext[4][0])
+				.doc(props.route)
+				.update(newStats[props.route]);
+			firebase
+				.firestore()
+				.collection(statContext[4][0])
+				.doc('items')
+				.update({shop: newItems.shop});
+			setShopVisible({ visible: false });
+	}
 
 	if (!shopVisible.visible) {
 		let totalItems =
@@ -231,8 +291,7 @@ export default function Items(props) {
 					{headItems.map((item, key) => {
 						return (
 							<div key={key} className='shop-row'>
-								<p key={key}>{item}</p>
-								{key < headItems.length - 1}
+								<p key={key}>{item.name}</p>
 							</div>
 						);
 					})}
@@ -241,8 +300,7 @@ export default function Items(props) {
 					{bodyItems.map((item, key) => {
 						return (
 							<div key={key} className='shop-row'>
-								<p key={10 + key}>{item}</p>
-								{key < bodyItems.length - 1}
+								<p key={key}>{item.name}</p>
 							</div>
 						);
 					})}
@@ -251,8 +309,7 @@ export default function Items(props) {
 					{legItems.map((item, key) => {
 						return (
 							<div key={key} className='shop-row'>
-								<p key={20 + key}>{item}</p>
-								{key < legItems.length - 1}
+								<p key={key}>{item.name}</p>
 							</div>
 						);
 					})}
@@ -261,8 +318,7 @@ export default function Items(props) {
 					{handItems.map((item, key) => {
 						return (
 							<div key={key} className='shop-row'>
-								<p key={30 + key}>{item}</p>
-								{key < handItems.length - 1}
+								<p key={key}>{item.name}</p>
 							</div>
 						);
 					})}
@@ -271,8 +327,7 @@ export default function Items(props) {
 					{smallItems.map((item, key) => {
 						return (
 							<div key={key} className='shop-row'>
-								<p key={40 + key}>{item}</p>
-								{key < smallItems.length - 1}
+								<p key={key}>{item.name}</p>
 							</div>
 						);
 					})}
@@ -285,14 +340,22 @@ export default function Items(props) {
 					>
 						Shop
 					</button>
-					<button
+					{target && <button
 						className='additem'
 						onClick={() => {
 							setShopVisible({ visible: 'trade' });
 						}}
 					>
 						Trade
-					</button>
+					</button>}
+					{totalItems > 0 && <button
+						className='additem'
+						onClick={() => {
+							setShopVisible({ visible: 'sell' });
+						}}
+					>
+						Sell
+					</button>}
 				</div>
 			</>
 		);
@@ -459,12 +522,11 @@ export default function Items(props) {
 											type='checkbox'
 											className='checkbox'
 											name='head'
-											id={item}
+											id={item.id}
 											onChange={(e) => addItem(e)}
 										/>
 									</Fade>
-									<p key={key}>{item}</p>
-									{key < headItems.length - 1}
+									<p key={key}>{item.name}</p>
 								</div>
 							</>
 						);
@@ -479,13 +541,12 @@ export default function Items(props) {
 										<input
 											type='checkbox'
 											className='checkbox'
-											id={item}
+											id={item.id}
 											name='body'
 											onChange={(e) => addItem(e)}
 										/>
 									</Fade>
-									<p key={10 + key}>{item}</p>
-									{key < bodyItems.length - 1}
+									<p key={10 + key}>{item.name}</p>
 								</div>
 							</>
 						);
@@ -500,13 +561,12 @@ export default function Items(props) {
 										<input
 											type='checkbox'
 											className='checkbox'
-											id={item}
+											id={item.id}
 											name='legs'
 											onChange={(e) => addItem(e)}
 										/>
 									</Fade>
-									<p key={20 + key}>{item}</p>
-									{key < legItems.length - 1}
+									<p key={20 + key}>{item.name}</p>
 								</div>
 							</>
 						);
@@ -521,13 +581,12 @@ export default function Items(props) {
 										<input
 											type='checkbox'
 											className='checkbox'
-											id={item}
+											id={item.id}
 											name='hand'
 											onChange={(e) => addItem(e)}
 										/>
 									</Fade>
-									<p key={30 + key}>{item}</p>
-									{key < handItems.length - 1}
+									<p key={30 + key}>{item.name}</p>
 								</div>
 							</>
 						);
@@ -542,13 +601,12 @@ export default function Items(props) {
 										<input
 											type='checkbox'
 											className='checkbox'
-											id={item}
+											id={item.id}
 											name='small'
 											onChange={(e) => addItem(e)}
 										/>
 									</Fade>
-									<p key={40 + key}>{item}</p>
-									{key < smallItems.length - 1}
+									<p key={40 + key}>{item.name}</p>
 								</div>
 							</>
 						);
@@ -574,6 +632,122 @@ export default function Items(props) {
 						}}
 					>
 						Trade
+					</button>
+				</div>
+			</>
+		);
+	} else if (shopVisible.visible === 'sell') {
+		return (
+			<>
+				<h2 className='modal-header'>Items</h2>
+				<div>
+					{headItems.length > 0 && <img src={head} className='item-logo' alt='head' />}
+					{headItems.map((item, key) => {
+						return (
+							<>
+								<div key={key} className='shop-row'>
+									<Fade left>
+										<input
+											type='checkbox'
+											className='checkbox'
+											name='head'
+											id={item.id}
+											onChange={(e) => addItem(e)}
+										/>
+									</Fade>
+									<p key={key}>{item.name} - {Math.round(item.cost / 2)}</p>
+								</div>
+							</>
+						);
+					})}
+					{headItems.length > 0 && <hr />}
+					{bodyItems.length > 0 && <img src={body} className='item-logo' alt='body' />}
+					{bodyItems.map((item, key) => {
+						console.log(item);
+						return (
+							<>
+								<div key={key} className='shop-row'>
+									<Fade left>
+										<input
+											type='checkbox'
+											className='checkbox'
+											id={item.id}
+											name='body'
+											onChange={(e) => addItem(e)}
+										/>
+									</Fade>
+									<p key={10 + key}>{item.name} - {item.cost}</p>
+								</div>
+							</>
+						);
+					})}
+					{bodyItems.length > 0 && <hr />}
+					{legItems.length > 0 && <img src={legs} className='item-logo' alt='legs' />}
+					{legItems.map((item, key) => {
+						return (
+							<>
+								<div key={key} className='shop-row'>
+									<Fade left>
+										<input
+											type='checkbox'
+											className='checkbox'
+											id={item.id}
+											name='legs'
+											onChange={(e) => addItem(e)}
+										/>
+									</Fade>
+									<p key={20 + key}>{item.name} - {Math.round(item.cost / 2)}</p>
+								</div>
+							</>
+						);
+					})}
+					{legItems.length > 0 && <hr />}
+					{handItems.length > 0 && <img src={hand} className='item-logo' alt='hand' />}
+					{handItems.map((item, key) => {
+						return (
+							<>
+								<div key={key} className='shop-row'>
+									<Fade left>
+										<input
+											type='checkbox'
+											className='checkbox'
+											id={item.id}
+											name='hand'
+											onChange={(e) => addItem(e)}
+										/>
+									</Fade>
+									<p key={30 + key}>{item.name} - {Math.round(item.cost / 2)}</p>
+								</div>
+							</>
+						);
+					})}
+					{handItems.length > 0 && <hr />}
+					{smallItems.length > 0 && <img src={small} className='item-logo' alt='small' />}
+					{smallItems.map((item, key) => {
+						return (
+							<>
+								<div key={key} className='shop-row'>
+									<Fade left>
+										<input
+											type='checkbox'
+											className='checkbox'
+											id={item.id}
+											name='small'
+											onChange={(e) => addItem(e)}
+										/>
+									</Fade>
+									<p key={40 + key}>{item.name} - {Math.round(item.cost / 2)}</p>
+								</div>
+							</>
+						);
+					})}
+					<button
+						className='additem'
+						onClick={() => {
+							sellItem();
+						}}
+					>
+						Sell
 					</button>
 				</div>
 			</>
