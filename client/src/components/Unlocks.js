@@ -149,7 +149,7 @@ export default function Unlocks(props) {
     }
     const newChar = Object.assign({}, statContext[0]);
     const itemRef = statContext[8].shop[itemNum - 1];
-    newChar[char].items[itemRef.type].push(itemRef.name);
+    newChar[char].items[itemRef.type].push(itemRef);
     statContext[1](newChar);
     firebase
       .firestore()

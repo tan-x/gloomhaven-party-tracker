@@ -52,7 +52,7 @@ export default class Login extends React.Component {
 								photoUrl: user.photoURL,
 								emailVerified: user.emailVerified,
 								uid: user.uid,
-								party: ['template'],
+								party: [''],
 							};
 							firebase
 								.firestore()

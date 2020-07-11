@@ -38,7 +38,7 @@ class Main extends React.Component {
 			.doc(user.uid)
 			.get()
 			.then((querySnapshot) => {
-				if (querySnapshot.data().party[0] !== 'template') {
+				if (querySnapshot.data().party[0] !== '') {
 					party = querySnapshot.data().party;
 					this.setState({ party: party });
 					statContext[5](party);
@@ -48,7 +48,6 @@ class Main extends React.Component {
 						.get()
 						.then((querySnapshot) => {
 							let fireStats = {};
-							let fireItems = {};
 							querySnapshot.forEach(function (doc) {
 								// set up local copy of character data from party and put in context
 									let docId = doc.id;
@@ -56,7 +55,7 @@ class Main extends React.Component {
 									if (docId !== 'items') {
 										fireStats = { ...fireStats, [docId]: docData };
 									} else {
-										statContext[9](docData);
+										statContext[9](doc.data())
 									}
 							});
 							statContext[1](fireStats);
@@ -66,27 +65,27 @@ class Main extends React.Component {
 						});
 				} else {
 					// if user has no party set up yet, use the template data set and put in context
-					const statsRef = db.collection('template');
-					this.setState({ party: 'template' });
-					statsRef
-						.get()
-						.then((querySnapshot) => {
-							let fireStats = {};
-							querySnapshot.forEach(function (doc) {
-									let docId = doc.id;
-									let docData = doc.data();
-									if (docId !== 'items') {
-										fireStats = { ...fireStats, [docId]: docData };
-									} else {
-										statContext[9](docData);
-									}
-							});
-							statContext[1](fireStats);
+					// const statsRef = db.collection('template');
+					// this.setState({ party: 'template' });
+					// statsRef
+					// 	.get()
+					// 	.then((querySnapshot) => {
+					// 		let fireStats = {};
+					// 		querySnapshot.forEach(function (doc) {
+					// 				let docId = doc.id;
+					// 				let docData = doc.data();
+					// 				if (docId !== 'items') {
+					// 					fireStats = { ...fireStats, [docId]: docData };
+					// 				} else {
+					// 					statContext[9](docData);
+					// 				}
+					// 		});
+					// 		statContext[1](fireStats);
 							this.setState({ show: true, modalRoute: 'partyMgr' });
-						})
-						.catch(function (error) {
-							console.log('Error getting documents: ', error);
-						});
+						// })
+						// .catch(function (error) {
+						// 	console.log('Error getting documents: ', error);
+						// });
 				}
 			});
 	}

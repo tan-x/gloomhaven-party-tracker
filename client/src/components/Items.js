@@ -31,6 +31,7 @@ export default function Items(props) {
 		smallItemsShop = [];
 	
 	useEffect(() => {
+		console.log(items);
 		const tradeOptions = [];
 		const statsRef = statContext[0];
 		for (const char in statsRef) {
