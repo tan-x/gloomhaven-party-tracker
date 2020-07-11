@@ -677,7 +677,7 @@ export default function Items(props) {
 											onChange={(e) => addItem(e)}
 										/>
 									</Fade>
-									<p key={10 + key}>{item.name} - {item.cost}</p>
+									<p key={10 + key}>{item.name} - {Math.round(item.cost / 2)}</p>
 								</div>
 							</>
 						);
