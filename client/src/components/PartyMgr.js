@@ -1,6 +1,9 @@
 import React from 'react';
 import firebase from '../Firebase';
 import StatContext from '../Context';
+import itemsData from '../data/items';
+import statData from '../data/statsOG';
+
 
 export default class Perks extends React.Component {
 	constructor(props) {
@@ -18,14 +21,18 @@ export default class Perks extends React.Component {
 
 	componentDidMount() {
 		const statContext = this.context;
+		console.log(statData)
+		statContext[9](itemsData);
+		statContext[1](statData);
 		const statsRef = statContext[0];
 		console.log(statContext[0]);
 		const newAvailChars = [];
 		const newOptions = [];
-		for (const char in statsRef) {
-			if (statsRef[char].inParty === false) {
-				newAvailChars.push(statsRef[char].class);
-				newOptions.push(<option>{statsRef[char].class}</option>);
+		for (const char in statData) {
+			console.log(statData[char].class)
+			if (statData[char].inParty === false) {
+				newAvailChars.push(statData[char].class);
+				newOptions.push(<option>{statData[char].class}</option>);
 			}
 		}
 		if (newOptions.length == 0) {
@@ -40,6 +47,7 @@ export default class Perks extends React.Component {
 	};
 
 	addParty(e) {
+		const statContext = this.context;
 		const user = firebase.auth().currentUser;
 		if (this.state.selectValue && this.state.selectValue !== 'None' && this.state.newParty !== '') {
 			const statContext = this.context;
@@ -51,18 +59,17 @@ export default class Perks extends React.Component {
 			newStats[lowerCase].name = this.state.newName;
 			newStats[lowerCase].inParty = true;
 			statContext[1](newStats);
-			for (const obj in statContext[0]) {
-				console.log(statContext[0][obj]);
-				firebase.firestore().collection(this.state.newParty).doc(obj).set(statContext[0][obj]);
+			for (const obj in statData) {
+				firebase.firestore().collection(this.state.newParty).doc(obj).set(statData[obj]);
 			}
-			firebase.firestore().collection(this.state.newParty).doc('items').set(statContext[8]);
-
-			console.log(user.uid);
+			firebase.firestore().collection(this.state.newParty).doc('items').set(itemsData);
 			firebase
 				.firestore()
 				.collection('users')
 				.doc(user.uid)
 				.update({ party: [this.state.newParty] });
+			statContext[5](this.state.newParty);
+			
 			// firebase.firestore().collection(statContext[4]).doc(lowerCase).update(newStats[lowerCase]);
 		}
 		this.props.onclose();
@@ -85,7 +92,7 @@ export default class Perks extends React.Component {
 					name='type'
 					id='shop-filter'
 					onChange={(e) => {
-						this.setState({ selectValue: e.target.value.toLowerCase() });
+						this.setState({...this.state, selectValue: e.target.value.toLowerCase() });
 					}}
 				>
 					{this.state.options}
@@ -96,7 +103,7 @@ export default class Perks extends React.Component {
 					name='goldAdd'
 					placeholder='Character Name'
 					onChange={(e) => {
-						this.setState({ newName: e.target.value });
+						this.setState({...this.state, newName: e.target.value });
 					}}
 				/>
 				<button

@@ -31,6 +31,7 @@ export default function Items(props) {
 		smallItemsShop = [];
 	
 	useEffect(() => {
+		console.log(items);
 		const tradeOptions = [];
 		const statsRef = statContext[0];
 		for (const char in statsRef) {
@@ -676,7 +677,7 @@ export default function Items(props) {
 											onChange={(e) => addItem(e)}
 										/>
 									</Fade>
-									<p key={10 + key}>{item.name} - {item.cost}</p>
+									<p key={10 + key}>{item.name} - {Math.round(item.cost / 2)}</p>
 								</div>
 							</>
 						);
