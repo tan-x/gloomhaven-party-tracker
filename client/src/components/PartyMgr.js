@@ -14,6 +14,7 @@ export default class Perks extends React.Component {
 			newParty: '',
 			availChars: [],
 			options: [],
+			rng: 0,
 		};
 	}
 
@@ -21,13 +22,11 @@ export default class Perks extends React.Component {
 
 	componentDidMount() {
 		const statContext = this.context;
-		console.log(statData)
 		statContext[9](itemsData);
 		statContext[1](statData);
-		const statsRef = statContext[0];
-		console.log(statContext[0]);
 		const newAvailChars = [];
 		const newOptions = [];
+		const rng = Math.floor(Math.random() * (99999 - 10000) + 10000);
 		for (const char in statData) {
 			console.log(statData[char].class)
 			if (statData[char].inParty === false) {
@@ -42,6 +41,7 @@ export default class Perks extends React.Component {
 			selectValue: newAvailChars[0],
 			availChars: newAvailChars,
 			options: newOptions,
+			rng: rng,
 		});
 		return this.state.options;
 	};
@@ -60,15 +60,15 @@ export default class Perks extends React.Component {
 			newStats[lowerCase].inParty = true;
 			statContext[1](newStats);
 			for (const obj in statData) {
-				firebase.firestore().collection(this.state.newParty).doc(obj).set(statData[obj]);
+				firebase.firestore().collection(`${this.state.newParty}-${this.state.rng}`).doc(obj).set(statData[obj]);
 			}
-			firebase.firestore().collection(this.state.newParty).doc('items').set(itemsData);
+			firebase.firestore().collection(`${this.state.newParty}-${this.state.rng}`).doc('items').set(itemsData);
 			firebase
 				.firestore()
 				.collection('users')
 				.doc(user.uid)
-				.update({ party: [this.state.newParty] });
-			statContext[5](this.state.newParty);
+				.update({ party: [`${this.state.newParty}-${this.state.rng}`] });
+			statContext[5](`${this.state.newParty}-${this.state.rng}`);
 			
 			// firebase.firestore().collection(statContext[4]).doc(lowerCase).update(newStats[lowerCase]);
 		}

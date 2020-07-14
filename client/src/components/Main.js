@@ -46,9 +46,10 @@ class Main extends React.Component {
 					const statsRef = db.collection(this.state.party[0]);
 					statsRef
 						.get()
-						.then((querySnapshot) => {
+						.then((query) => {
 							let fireStats = {};
-							querySnapshot.forEach(function (doc) {
+							query.forEach(function (doc) {
+								console.log(doc.id)
 								// set up local copy of character data from party and put in context
 									let docId = doc.id;
 									let docData = doc.data();
@@ -87,6 +88,7 @@ class Main extends React.Component {
 						// 	console.log('Error getting documents: ', error);
 						// });
 				}
+console.log(statContext)
 			});
 	}
 
@@ -150,7 +152,7 @@ class Main extends React.Component {
 	render() {
 		return (
 			<StatContext.Consumer>
-				{([stats, setStats, isLoggedIn, setLoggedIn, party, setParty]) => {
+				{([stats, setStats, isLoggedIn, setLoggedIn, party, setParty, items, setItems]) => {
 					return (
 						<>
 							<Header onclick={this.showDrawer} open={this.state.isOpen} />

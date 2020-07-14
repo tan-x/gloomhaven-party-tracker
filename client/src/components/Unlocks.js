@@ -12,7 +12,7 @@ export default function Unlocks(props) {
   const unlocks = statContext[8].unlocks;
   
   useEffect(() => {
-	  console.log('test')
+	  console.log(statContext[8])
     firebase
       .firestore()
       .collection(statContext[4][0])

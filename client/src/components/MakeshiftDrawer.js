@@ -21,7 +21,7 @@ export default function MakeshiftDrawer(props) {
 				test++;
 			}
 		}
-		setPartySize(test)
+		setPartySize(test);
 	}, [statContext[0]]);
 
 	const renderAddChar = () => {
