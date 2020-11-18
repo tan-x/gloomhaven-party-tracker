@@ -29,6 +29,10 @@
   font-family: PirataOne;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
