@@ -35,20 +35,20 @@ export default function (props) {
 					Lvl. {props.stats[props.classimg].level} {props.class}
 				</h4>
 				<div className='stats'>
-					<button onClick={props.onclick} id='xp' name={props.classimg}>
+					<button onClick={props.onclick} id='xp' className="clickable" name={props.classimg}>
 						XP: {props.stats[props.classimg].xp}
 					</button>
 					<img src={ruleline} alt='rule line' className='ruleline' />
-					<button onClick={props.onclick} id='gold' name={props.classimg}>
+					<button onClick={props.onclick} id='gold' className="clickable" name={props.classimg}>
 						Gold: {props.stats[props.classimg].gold}
 					</button>
 				</div>
 				<div className='options'>
 					{/* <img src={ruleline} alt="rule line" className="ruleline-bottom"/> */}
-					<button onClick={props.onclick} id='items' name={props.classimg}>
+					<button onClick={props.onclick} id='items' className="clickable" name={props.classimg}>
 						Items
 					</button>
-					<button onClick={props.onclick} id='perks' name={props.classimg}>
+					<button onClick={props.onclick} id='perks' className="clickable" name={props.classimg}>
 						Perks
 					</button>
 				</div>

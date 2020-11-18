@@ -29,6 +29,10 @@ export const GlobalStyles = createGlobalStyle`
     overflow: hidden;
   }
 
+  .clickable:hover {
+    cursor: pointer
+  }
+
   .scrollview {
     position: relative;
     top: 0;
@@ -500,6 +504,10 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 1.1rem;
   }
 
+  .additem:hover {
+    cursor:pointer;
+  }
+
   .modal {
     background-position: center center;
     width: fit-content;
@@ -607,6 +615,10 @@ export const GlobalStyles = createGlobalStyle`
     border-radius: 3px;
     display: inline-block;
     position: relative;
+  }
+
+  .checkbox:hover {
+    cursor:pointer;
   }
 
   .checks {

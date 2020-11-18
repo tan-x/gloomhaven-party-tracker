@@ -209,6 +209,13 @@ export default function Items(props) {
 			const targetItems = statContext[0][target];
 			const traderItems = statContext[0][props.route];
 			cart.myCart.forEach(item => {
+				console.log(item.id)
+				targetItems.items[item.type].forEach(el => {
+					console.log(el.id)
+				})
+				console.log(targetItems.items[item.type].some(i => i.id !== item.id))
+				console.log(targetItems.items[item.type].length === 0)
+				// check to see if target already has chosen item
 				if (targetItems.items[item.type].some(i => i.name !== item.name) || targetItems.items[item.type].length === 0) {
 					targetItems.items[item.type].push(item);
 					let removeIndex = traderItems.items[item.type].findIndex((el) => el.name === item.name);

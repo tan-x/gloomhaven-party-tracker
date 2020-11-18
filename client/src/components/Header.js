@@ -27,7 +27,7 @@ export default function Header(props) {
 
 	return (
 		<>
-			<header className='header' onClick={props.onclick}>
+			<header className='header clickable' onClick={props.onclick}>
 				<div className='dimmer'>
 					<img src={icon1} className='header-class-logo' alt='brute' />
 					<img src={icon2} className='header-class-logo' alt='scoundrel' />
